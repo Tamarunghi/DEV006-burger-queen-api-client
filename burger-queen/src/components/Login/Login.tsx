@@ -49,7 +49,8 @@ const Login: React.FC = () => {
 
   return (
     <article id={styles.loginContainer}>
-      <section className={styles.logo} style={{background:`url(${burgerQueen})`}}></section>
+      <section  className={`${styles.logo} ${styles.background}`}
+        style={{ backgroundImage: `url(${burgerQueen})` }}></section>
       <input className={styles.inputText} type="email" placeholder="email" autoComplete="email" onChange={(e) => setUser(e.target.value)} />
       <input className={styles.inputText} type="password" placeholder="contraseña" autoComplete="current-password" onChange={(e) => setPassword(e.target.value)} />
       {error ? <p>{error}</p> : null}
