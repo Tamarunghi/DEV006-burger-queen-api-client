@@ -6,21 +6,29 @@ const Login: React.FC = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     setError("");
-    requestGet(user, password)
-      .then((token) => {
-        localStorage.setItem("token", token);
-        console.log("hasta aqui , todo bien");
-      })
-      .catch((error) => {
-        setError(error.message);
-      });
+    try {
+      const token = await requestGet(user, password);
+      localStorage.setItem("token", token);
+      console.log("hasta aqui , todo bien");
+    } catch (error :any) {
+      setError(error.message);
+    }
   };
+
   return (
     <div>
-      <input type="email" placeholder="email" onChange={(e)=>setUser(e.target.value)}/>
-      <input type="password" placeholder="contraseña" onChange={(e)=>setPassword(e.target.value)}/>
+      <input
+        type="email"
+        placeholder="email"
+        onChange={(e) => setUser(e.target.value)}
+      />
+      <input
+        type="password"
+        placeholder="contraseña"
+        onChange={(e) => setPassword(e.target.value)}
+      />
       {error ? <p>{error}</p> : null}
       <button onClick={handleLogin}>Enviar</button>
     </div>
