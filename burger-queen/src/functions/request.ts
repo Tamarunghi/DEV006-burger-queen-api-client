@@ -3,6 +3,7 @@ async function requestGet(user: string, password: string): Promise<string> {
     email: user,
     password: password,
   };
+
   try {
     const response = await fetch("http://localhost:8080/login", {
       method: "POST",
@@ -14,7 +15,8 @@ async function requestGet(user: string, password: string): Promise<string> {
 
     if (response.ok) {
       const data = await response.json();
-      return data.token;
+      //return data.token;
+      return data;
     } else {
       throw new Error("Error en la solicitud de inicio de sesión");
     }
