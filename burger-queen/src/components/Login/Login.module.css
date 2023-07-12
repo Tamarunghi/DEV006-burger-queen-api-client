@@ -1,0 +1,13 @@
+#loginContainer {
+    background-color: rgba(198, 141, 98, 0.475);
+    height: 100vh;
+    width: 100vw;
+}
+
+.logo{
+    width: 50vw;
+    height: 50vh;
+}
+.burgerQueen{
+    height: 50%;
+}
