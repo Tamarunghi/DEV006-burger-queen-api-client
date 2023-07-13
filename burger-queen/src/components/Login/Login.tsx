@@ -13,7 +13,8 @@ const Login: React.FC = () => {
 
   const navigate = useNavigate();
 
-  const handleLogin = async () => {
+  const handleLogin: React.FormEventHandler<HTMLFormElement> = async (e) => {
+    e.preventDefault();
     setError("");
     try {
       const data = await requestGet(user, password);
@@ -26,15 +27,15 @@ const Login: React.FC = () => {
       switch (role) {
         case "mesero":
           navigate("/Waiter");
-          console.log("mesero");
-          break;
+          console.log("se rutea para mesero");
+          break;  
         case "cocina":
           // navigate("/Cocina");
-          console.log("soy cocinero")
+          console.log("se rutea para  cocinero")
           break;
         case "administrador":
           // navigate("/administrador");
-          console.log("administrador");
+          console.log("Se rutea para administrador");
           // Código a ejecutar si el rol es "administrador"
           break;
         default:
@@ -48,13 +49,15 @@ const Login: React.FC = () => {
   };
 
   return (
-    <article id={styles.loginContainer}>
-      <section  className={`${styles.logo} ${styles.background}`}
+    <article className="bg-bgLogin">
+      <section  className={`${styles.logo}`}
         style={{ backgroundImage: `url(${burgerQueen})` }}></section>
+        <form onSubmit={handleLogin}>
       <input className={styles.inputText} type="email" placeholder="email" autoComplete="email" onChange={(e) => setUser(e.target.value)} />
       <input className={styles.inputText} type="password" placeholder="contraseña" autoComplete="current-password" onChange={(e) => setPassword(e.target.value)} />
       {error ? <p>{error}</p> : null}
-      <button onClick={handleLogin}>Enviar</button>
+      <button type="submit">Enviar</button>
+      </form>
     </article>
   );
 };

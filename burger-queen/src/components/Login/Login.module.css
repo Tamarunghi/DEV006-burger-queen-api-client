@@ -7,11 +7,9 @@
 .logo {
   width: 50vw;
   height: 50vh;
-}
-
-.background {
   background-color: #fff5e0;
   border-radius: 40vh;
   background-size: cover;
   background-repeat: no-repeat;
+  transform: rotate(-8.23deg);
 }

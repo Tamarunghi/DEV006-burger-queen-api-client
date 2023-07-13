@@ -1,4 +1,15 @@
-async function requestGet(user: string, password: string): Promise<string> {
+type Role = "administrador" | "mesero" | "cocina"
+
+type User ={
+  email: string
+  id: number
+  role: Role
+}
+type LoginResponse = {
+  accessToken: string
+  user: User 
+}
+async function requestGet(user: string, password: string): Promise<LoginResponse> {
   const loginData = {
     email: user,
     password: password,
