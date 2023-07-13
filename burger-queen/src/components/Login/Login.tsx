@@ -51,7 +51,10 @@ const Login: React.FC = () => {
   return (
     <article className="bg-bgLogin">
       <section  className={`${styles.logo}`}
-        style={{ backgroundImage: `url(${burgerQueen})` }}></section>
+       style={{ backgroundImage: `url(${burgerQueen})` }}></section>
+       <h1 className="text-3xl font-bold underline text-blue-600">
+      Hello world!
+    </h1>
         <form onSubmit={handleLogin}>
       <input className={styles.inputText} type="email" placeholder="email" autoComplete="email" onChange={(e) => setUser(e.target.value)} />
       <input className={styles.inputText} type="password" placeholder="contraseña" autoComplete="current-password" onChange={(e) => setPassword(e.target.value)} />
