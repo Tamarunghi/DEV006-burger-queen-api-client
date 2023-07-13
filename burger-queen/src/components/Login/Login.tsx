@@ -50,7 +50,6 @@ const Login: React.FC = () => {
 
   return (
     <article className="bg-fondo">
-      <h1 className= " text-white">hello workd</h1>
       <section className={`${styles.logo}`}
         style={{ backgroundImage: `url(${burgerQueen})` }}></section>
       <form onSubmit={handleLogin}>
