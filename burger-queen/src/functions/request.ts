@@ -1,7 +1,15 @@
-/* tsx se usa para los componentes q se van arenderizar*/
-/* ts se usa para los archivos de lógica*/
+type Role = "administrador" | "mesero" | "cocina"
 
-async function requestGet(user: string, password: string): Promise<any> {
+type User ={
+  email: string
+  id: number
+  role: Role
+}
+type LoginResponse = {
+  accessToken: string
+  user: User 
+}
+async function requestGet(user: string, password: string): Promise<LoginResponse> {
   const loginData = {
     email: user,
     password: password,
