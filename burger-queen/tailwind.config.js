@@ -7,11 +7,15 @@ export default {
     extend: {
       colors: {
         fondo: '#C68E62',
-        gunMetal: '#1D2939',
-        blackInput: '#252D37',
+        fondoLogo: '#FFF5E0',
+        colorButton: '#69FF78',
+        brownText: '#65362A',
         strokeInput: '#D4C5C5',
         errorRed: '#E63946',
       },
+      rotate: {
+        '135': '135deg',
+      }
     },
   },
   plugins: [],
