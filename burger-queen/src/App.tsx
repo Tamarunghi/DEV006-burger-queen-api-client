@@ -17,5 +17,4 @@ const App = () => {
 
 export default App;
 
-  // email: grace.hopper@systers.xyz,
-  // password: "123456"
+  

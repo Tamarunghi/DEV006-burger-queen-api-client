@@ -56,7 +56,7 @@ const Login: React.FC = () => {
         <input className={styles.inputText} type="email" placeholder="email" autoComplete="email" onChange={(e) => setUser(e.target.value)} />
         <input className={styles.inputText} type="password" placeholder="contraseña" autoComplete="current-password" onChange={(e) => setPassword(e.target.value)} />
         {error ? <p>{error}</p> : null}
-        <button type="submit">Enviar</button>
+        <button type="submit" className="bg-white-700">Enviar</button>
       </form>
     </article>
   );

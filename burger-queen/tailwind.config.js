@@ -8,6 +8,7 @@ export default {
     extend: {
       colors: {
         fondo: '#C68E62',
+        colorButton: '#69FF78',
         gunMetal: '#1D2939',
         blackInput: '#252D37',
         strokeInput: '#D4C5C5',
