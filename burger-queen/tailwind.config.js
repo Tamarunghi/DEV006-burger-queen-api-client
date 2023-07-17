@@ -7,14 +7,30 @@ export default {
     extend: {
       colors: {
         fondo: '#C68E62',
-        fondoLogo: '#FFF5E0',
+        crema: '#FFF5E0',
         colorButton: '#69FF78',
         brownText: '#65362A',
-        strokeInput: '#D4C5C5',
-        errorRed: '#E63946',
+        skin: '#D9C5B3',
+        notPress: '#FDDE99',
+        press: '#82B83E',
+        borderNotPress: '#A47D26',
+        borderPress: '#5B812C',
       },
+      borderRadius: {
+        '5': '5px',
+        '25': '25px',
+      },
+      dropShadow: {
+          'productUnpress': '7px 4px 6px 0px rgba(70, 33, 23, 0.90)',
+        },
       rotate: {
         '135': '135deg',
+      },
+      zIndex: {
+       '0': 0,
+       '1': 1,
+       '2': 2,
+        'auto': 'auto',
       }
     },
   },
