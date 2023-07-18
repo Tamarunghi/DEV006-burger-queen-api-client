@@ -15,6 +15,9 @@ export default {
         press: '#82B83E',
         borderNotPress: '#A47D26',
         borderPress: '#5B812C',
+        yellow: '#F9B317',
+        plusButtom:'#C1D78F',
+        minusButtom:'#FF8C8C',
       },
       borderRadius: {
         '5': '5px',
