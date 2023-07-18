@@ -50,29 +50,25 @@ const Login: React.FC = () => {
 
   return (
     <article className="w-[97vw] h-[97vh] flex flex-col justify-start">
-      <section className="w-1/2 h-1/2 p-2 justify-start items-start relative">
+      <section className="z-1 w-1/2 h-1/2 p-2 justify-start items-start relative">
         <img src={burgerQueen} alt="burgerQueenLogo" className="absolute top-0 left-0" />
       </section>
-      <form onSubmit={handleLogin} className="mr-[10%] flex flex-col justify-end items-end p-2">
-        <div className="mb-4">
-          <label className="block text-gray-700  text-sm font-bold mb-2">
+      <form onSubmit={handleLogin} className="z-1 ml-[40%] flex flex-col justify-center items-center p-2">
+          <label className="mb-4 text-center block text-gray-700  text-[3rem] font-bold mb-[1%]">
             Usuario
           </label>
-          <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-center" type="email" placeholder="example@gmail.com" autoComplete="email" onChange={(e) => setUser(e.target.value)} />
-        </div>
-        <div className="mb-6">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
+          <input className="shadow appearance-none border rounded w-[240px] h-[40px] text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline text-center z-1" type="email" placeholder="example@gmail.com" autoComplete="email" onChange={(e) => setUser(e.target.value)} />
+          <label className="mb-6 text-center block text-gray-700 text-[3rem] font-bold mb-[1%]">
             Contraseña
           </label>
-          <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline text-center" type="password" placeholder="******************" autoComplete="current-password" onChange={(e) => setPassword(e.target.value)} />
-          {error ? <p className="text-red-500 text-xs italic">{error}</p> : null}
-        </div>
-        <button type="submit" className="bg-colorButton hover:bg-emerald-300 text-brownText font-bold py-2 px-4 rounded-full w-40 h-15">Iniciar sesión</button>
+          <input className="shadow appearance-none border rounded w-[240px] h-[40px] text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-center z-1" type="password" placeholder="******************" autoComplete="current-password" onChange={(e) => setPassword(e.target.value)} />
+          {error ? <p className="text-red-500 text-2xl italic">{error}</p> : null}
+        <button type="submit" className="text-[3rem] bg-colorButton hover:bg-emerald-300 text-brownText font-bold mt-[8%] rounded-full w-[365px] h-[70px] z-1">Iniciar sesión</button>
       </form>
-      <section>
-      <img src={burger} alt="burger" className=" h-auto	w-9/12 absolute top-[-34px] right-[-127px] -rotate-135 -z-1 opacity-50	"/>
-      <img src={burger} alt="burger" className="h-auto	w-9/12 absolute bottom-[68px] left-[-180px] rotate-45 -z-1 opacity-50	"/>
-      </section>
+      <section className="z-0">
+      <img src={burger} alt="burger" className=" h-auto	w-9/12 absolute top-[-34px] right-[-196px] -rotate-135 opacity-50	"/>
+      <img src={burger} alt="burger" className="h-auto	w-9/12 absolute bottom-[-71px] left-[-180px] rotate-45 opacity-50	"/>
+      </section> 
     </article>
   );
 };
