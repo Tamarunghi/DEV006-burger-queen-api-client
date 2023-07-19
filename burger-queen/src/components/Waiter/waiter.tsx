@@ -1,8 +1,41 @@
+import React, { useEffect, useState } from 'react';
 import burgerQueen from "../../Images/logoWithBG.gif";
 import burger from "../../Images/burger.png";
 import trash from "../../Images/trash.png";
+import {GetProducts} from "../../functions/GetProduct"
 
-export const Waiter = () => {
+// GetProducts()
+// .then((data: any)=>{
+//   console.log(data)
+//   //return OrderSelection(data)
+// })
+// .catch((error: any)=>{
+//   console.error("An error has ocurred", error)
+// })
+
+const OrderSelectionItem= ({name, price}) => {
+  return (
+    
+    <div id="buttom1" className="bg-notPress h-[90px] w-[200px] rounded-25 flex flex-row border-2 border-borderNotPress drop-shadow-productUnpress">        
+    <div id="product" className="bg-notPress h-[90px] w-[140px] rounded-tl-25 rounded-bl-25">{name}</div>
+      <div id="price" className="bg-crema h-[90px] w-[60px] rounded-tr-25 rounded-br-25"> {price}</div>
+    </div>
+  )
+}
+
+export const Waiter: React.FC = () => {
+  const [products, setProducts] = useState<any[]>([]);
+  
+  useEffect(()=>{
+    GetProducts()
+    .then((data)=>{
+      setProducts(data);
+    })
+    .catch((error)=>{
+      console.error("Error fetching products", error);
+    })
+  },[])
+
   return (
     <article className="h-[97vh] flex flex-col m-[20px]">
 
@@ -30,29 +63,19 @@ export const Waiter = () => {
 
           {/* ---Name + Table--- */}
           <div id="nameAndTable" className="bg-green-200 h-[10%] w-[100%] p-[1%] flex flex-row justify-evenly items-center gap-1">
-            <lable>Nombre:</lable>
+            <label>Nombre:</label>
             <input type="text" className="bg-skin h-[50%] w-[40%] rounded-5" ></input>
-            <lable>Mesa:</lable>
+            <label>Mesa:</label>
             <input type="text" className="bg-skin h-[50%] w-[40%] rounded-5" ></input>
           </div>
-
+       
           {/* ---Order Selection--- */}
           <div id="orderSelection" className="bg-green-600 h-auto w-[100%] p-[1%] flex flex-wrap justify-center justify-evenly text-center gap-y-4">
-            {/* ---Buttom 1--- */}
-            <div id="buttom1" className="bg-notPress h-[90px] w-[200px] rounded-25 flex flex-row border-2 border-borderNotPress drop-shadow-productUnpress">
-              <div id="product" className="bg-notPress h-[90px] w-[140px] rounded-tl-25 rounded-bl-25">Café Americano</div>
-              <div id="price" className="bg-crema h-[90px] w-[60px] rounded-tr-25 rounded-br-25">5%</div>
-            </div>
-            {/* ---Buttom 2--- */}
-            <div id="buttom2" className="bg-press h-[90px] w-[200px] rounded-25 flex flex-row border-2 border-borderPress drop-shadow-productUnpress">
-              <div id="product" className="bg-press h-[90px] w-[140px] rounded-tl-25 rounded-bl-25">Café Americano</div>
-              <div id="price" className="bg-crema h-[90px] w-[60px] rounded-tr-25 rounded-br-25">5%</div>
-            </div>
-            {/* ---More Buttoms--- */}
-            <div className="bg-notPress h-[90px] w-[200px]">Café con leche</div>
-            <div className="bg-orange-200 h-[90px] w-[200px]">Jugo de frutas natural</div>
-            <div className="bg-orange-200 h-[90px] w-[200px]">Sandwich de jamón y queso</div>
-          </div>
+            {/* ---Buttoms--- */}
+            {products.map((product)=>(
+              <OrderSelectionItem key={product.id} name={product.name} price={product.price}/>
+            ))}
+             </div>
 
           {/* ---Shopping Cart--- */}
 
