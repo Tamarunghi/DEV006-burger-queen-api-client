@@ -3,15 +3,7 @@ import burgerQueen from "../../Images/logoWithBG.gif";
 import burger from "../../Images/burger.png";
 import trash from "../../Images/trash.png";
 import {GetProducts} from "../../functions/GetProduct"
-
-// GetProducts()
-// .then((data: any)=>{
-//   console.log(data)
-//   //return OrderSelection(data)
-// })
-// .catch((error: any)=>{
-//   console.error("An error has ocurred", error)
-// })
+import {toCart} from "../../functions/toCart"
 
 const OrderSelectionItem= ({name, price}) => {
   return (
@@ -26,6 +18,7 @@ const OrderSelectionItem= ({name, price}) => {
 export const Waiter: React.FC = () => {
   const [products, setProducts] = useState<any[]>([]);
   const [productType, setProductType] = useState("Desayuno");
+  const [cartItems, setCartItems] = useState<Product[]>([]);
   
   useEffect(()=>{
     GetProducts()
@@ -41,12 +34,15 @@ export const Waiter: React.FC = () => {
   const handleSelectProductType = (type: string) => {
     setProductType(type);
   };
+  const handleAddToCart = (product:Product)=>{
+    setCartItems((prevCartItems)=>[...prevCartItems, product]);
+  };
  
   return (
     <article className="h-[97vh] flex flex-col m-[20px]">
 
       {/* ---Header(LOGO + MESERO)--- */}
-      <header className=" z-1 w-[100%] h-[25%] bg-colorButton mb-[20px]">
+      <header className=" z-1 w-[100%] h-[25%] bg-colorButton mb-[20px] flex flex-">
         <img id="logo" src={burgerQueen} alt="burgerQueenLogo" className="w-auto h-[25%] absolute top-0 left-0 z-1" />
         <label id="waiterPg" className="text-[100px] text-crema border-[brownText] font-bold">MESERO</label>
       </header>
@@ -57,7 +53,7 @@ export const Waiter: React.FC = () => {
         {/* ---Desayuno - Almuerzo/Cena--- */}
         <section id="desayunoOalmuerzoCena" className=" h-[10%] w-[100%] flex flex-row justify-end">
           <div className={`h-[100%] w-[250px] bg-crema rounded-tl-[25px] text-3xl font-bold flex items-center justify-center ${
-            productType === "Desayuno" ? "bg-yellow flex items-center justify-center textTransform: uppercase" : "" // Aplicamos estilo con bg-yellow si es el tipo de producto seleccionado
+            productType === "Desayuno" ? "textTransform: uppercase" : "bg-yellow" // Aplicamos estilo con bg-yellow si es el tipo de producto seleccionado
           }`}
           onClick={() => handleSelectProductType("Desayuno")} // Manejador para seleccionar desayuno
         >
@@ -65,7 +61,7 @@ export const Waiter: React.FC = () => {
         </div>
         <div
           className={`h-[100%] w-[250px] bg-crema rounded-tr-[25px] text-3xl font-bold flex items-center justify-center ${
-            productType === "Almuerzo" ? "bg-yellow flex items-center justify-center textTransform: uppercase" : "" // Aplicamos estilo con bg-yellow si es el tipo de producto seleccionado
+            productType === "Almuerzo" ? "textTransform: uppercase" : "bg-yellow" // Aplicamos estilo con bg-yellow si es el tipo de producto seleccionado
           }`}
           onClick={() => handleSelectProductType("Almuerzo")} // Manejador para seleccionar Almuerzo
         >
@@ -85,9 +81,10 @@ export const Waiter: React.FC = () => {
           </div>
        
           {/* ---Order Selection--- */}
-          <div id="orderSelection" className="bg-green-600 h-auto w-[100%] p-[1%] flex flex-wrap justify-center justify-evenly text-center gap-y-4">
+          <div id="orderSelection" className="h-auto w-[100%] p-[1%] flex flex-wrap justify-center justify-evenly text-center gap-y-4">
             {/* ---Buttoms--- */}
-            {products.filter((product)=> product.type === productType) .map((product) => (
+            {products.filter((product)=> product.type === productType)
+            .map((product) => (
                 <OrderSelectionItem key={product.id} name={product.name} price={product.price} />
               ))}
              </div>
