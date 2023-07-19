@@ -15,3 +15,4 @@ export function GetProducts(){
     })
   )
 }
+console.log(GetProducts)
