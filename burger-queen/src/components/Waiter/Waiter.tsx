@@ -25,6 +25,7 @@ const OrderSelectionItem= ({name, price}) => {
 
 export const Waiter: React.FC = () => {
   const [products, setProducts] = useState<any[]>([]);
+  const [productType, setProductType] = useState("Desayuno");
   
   useEffect(()=>{
     GetProducts()
@@ -36,6 +37,11 @@ export const Waiter: React.FC = () => {
     })
   },[])
 
+
+  const handleSelectProductType = (type: string) => {
+    setProductType(type);
+  };
+ 
   return (
     <article className="h-[97vh] flex flex-col m-[20px]">
 
@@ -50,11 +56,20 @@ export const Waiter: React.FC = () => {
 
         {/* ---Desayuno - Almuerzo/Cena--- */}
         <section id="desayunoOalmuerzoCena" className=" h-[10%] w-[100%] flex flex-row justify-end">
-          <div className=" h-[100%] w-[250px] bg-crema rounded-tl-[25px] text-3xl font-bold flex items-center justify-center">
-            <label>DESAYUNO</label>
-          </div>
-          <div className=" h-[100%] w-[250px] bg-crema rounded-tr-[25px] text-3xl font-bold flex items-center justify-center">
-            <label>Almuerzo y Cena</label>
+          <div className={`h-[100%] w-[250px] bg-crema rounded-tl-[25px] text-3xl font-bold flex items-center justify-center ${
+            productType === "Desayuno" ? "bg-yellow flex items-center justify-center textTransform: uppercase" : "" // Aplicamos estilo con bg-yellow si es el tipo de producto seleccionado
+          }`}
+          onClick={() => handleSelectProductType("Desayuno")} // Manejador para seleccionar desayuno
+        >
+          <label>Desayuno</label>
+        </div>
+        <div
+          className={`h-[100%] w-[250px] bg-crema rounded-tr-[25px] text-3xl font-bold flex items-center justify-center ${
+            productType === "Almuerzo" ? "bg-yellow flex items-center justify-center textTransform: uppercase" : "" // Aplicamos estilo con bg-yellow si es el tipo de producto seleccionado
+          }`}
+          onClick={() => handleSelectProductType("Almuerzo")} // Manejador para seleccionar Almuerzo
+        >
+            <label>Almuerzo/Cena</label>
           </div>
         </section>
 
@@ -72,9 +87,9 @@ export const Waiter: React.FC = () => {
           {/* ---Order Selection--- */}
           <div id="orderSelection" className="bg-green-600 h-auto w-[100%] p-[1%] flex flex-wrap justify-center justify-evenly text-center gap-y-4">
             {/* ---Buttoms--- */}
-            {products.map((product)=>(
-              <OrderSelectionItem key={product.id} name={product.name} price={product.price}/>
-            ))}
+            {products.filter((product)=> product.type === productType) .map((product) => (
+                <OrderSelectionItem key={product.id} name={product.name} price={product.price} />
+              ))}
              </div>
 
           {/* ---Shopping Cart--- */}

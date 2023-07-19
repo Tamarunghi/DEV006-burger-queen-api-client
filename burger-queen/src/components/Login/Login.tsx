@@ -26,7 +26,7 @@ const Login: React.FC = () => {
       localStorage.setItem("token", token);
       switch (role) {
         case "mesero":
-          navigate("/Waiter");
+          navigate("/waiter");
           console.log("se rutea para mesero");
           break;
         case "cocina":
@@ -50,18 +50,21 @@ const Login: React.FC = () => {
 
   return (
     <article className="w-[97vw] h-[97vh] flex flex-col justify-start">
-      <section className="z-1 w-1/2 h-1/2 p-2 justify-start items-start relative">
-        <img src={burgerQueen} alt="burgerQueenLogo" className="absolute top-0 left-0" />
+
+      <section className="z-1 w-[45vw] h-[45vh] p-1 justify-start items-start relative">
+        <img src={burgerQueen} alt="burgerQueenLogo" className="absolute top-0 left-0 w-full h-full" />
       </section>
-      <form onSubmit={handleLogin} className="z-1 ml-[40%] flex flex-col justify-center items-center p-2">
+      <form onSubmit={handleLogin} className="z-1 ml-[10%] flex flex-col justify-center items-center p-1 mt-[-9px]">
           <label className="mb-4 text-center block text-gray-700  text-[3rem] font-bold mb-[1%]">
             Usuario
           </label>
-          <input className="shadow appearance-none border rounded w-[240px] h-[40px] text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline text-center z-1" type="email" placeholder="example@gmail.com" autoComplete="email" onChange={(e) => setUser(e.target.value)} />
+          <input className="shadow appearance-none border rounded w-[325px] h-[50px] text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline text-center z-1 " type="email"  placeholder="example@gmail.com" autoComplete="email" onChange={(e) => setUser(e.target.value)} style={{ fontSize: '1.5rem' }}/>
           <label className="mb-6 text-center block text-gray-700 text-[3rem] font-bold mb-[1%]">
             Contraseña
           </label>
-          <input className="shadow appearance-none border rounded w-[240px] h-[40px] text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-center z-1" type="password" placeholder="******************" autoComplete="current-password" onChange={(e) => setPassword(e.target.value)} />
+          <input className="shadow appearance-none border rounded w-[325px] h-[50px] text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-center z-1 " type="password" placeholder="******************" autoComplete="current-password" onChange={(e) => setPassword(e.target.value)}style={{ fontSize: '1.5rem' }} />
+
+      
           {error ? <p className="text-red-500 text-2xl italic">{error}</p> : null}
         <button type="submit" className="text-[3rem] bg-colorButton hover:bg-emerald-300 text-brownText font-bold mt-[8%] rounded-full w-[365px] h-[70px] z-1">Iniciar sesión</button>
       </form>
