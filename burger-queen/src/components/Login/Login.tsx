@@ -50,6 +50,7 @@ const Login: React.FC = () => {
 
   return (
     <article className="w-[97vw] h-[97vh] flex flex-col justify-start">
+
       <section className="z-1 w-[45vw] h-[45vh] p-1 justify-start items-start relative">
         <img src={burgerQueen} alt="burgerQueenLogo" className="absolute top-0 left-0 w-full h-full" />
       </section>
@@ -62,6 +63,8 @@ const Login: React.FC = () => {
             Contraseña
           </label>
           <input className="shadow appearance-none border rounded w-[325px] h-[50px] text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-center z-1 " type="password" placeholder="******************" autoComplete="current-password" onChange={(e) => setPassword(e.target.value)}style={{ fontSize: '1.5rem' }} />
+
+      
           {error ? <p className="text-red-500 text-2xl italic">{error}</p> : null}
         <button type="submit" className="text-[3rem] bg-colorButton hover:bg-emerald-300 text-brownText font-bold mt-[8%] rounded-full w-[365px] h-[70px] z-1">Iniciar sesión</button>
       </form>
