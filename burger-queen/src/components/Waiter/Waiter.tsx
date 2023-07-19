@@ -59,7 +59,7 @@ export const Waiter: React.FC = () => {
           <div className={`h-[100%] w-[250px] bg-crema rounded-tl-[25px] text-3xl font-bold flex items-center justify-center ${
             productType === "Desayuno" ? "bg-yellow flex items-center justify-center textTransform: uppercase" : "" // Aplicamos estilo con bg-yellow si es el tipo de producto seleccionado
           }`}
-          onClick={() => handleSelectProductType("Desayuno")} // Manejador para seleccionar Desayuno
+          onClick={() => handleSelectProductType("Desayuno")} // Manejador para seleccionar desayuno
         >
           <label>Desayuno</label>
         </div>
