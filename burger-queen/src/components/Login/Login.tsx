@@ -26,7 +26,7 @@ const Login: React.FC = () => {
       localStorage.setItem("token", token);
       switch (role) {
         case "mesero":
-          navigate("/Waiter");
+          navigate("/waiter");
           console.log("se rutea para mesero");
           break;
         case "cocina":
