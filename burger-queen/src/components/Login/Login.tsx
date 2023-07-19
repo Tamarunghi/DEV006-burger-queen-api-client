@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { requestGet } from "../../functions/request";
 import { useNavigate } from 'react-router-dom';
 import styles from '../Login/Login.module.css';
-import burgerQueen from "../../Images/burgerQueen.gif";
-//import burguer from "../../Images/burguer"
+import burgerQueen from "../../Images/logoWithBG.gif";
+import burger from "../../Images/burger.png";
 
 
 const Login: React.FC = () => {
@@ -49,15 +49,26 @@ const Login: React.FC = () => {
   };
 
   return (
-    <article className="bg-fondo">
-      <section className={`${styles.logo}`}
-        style={{ backgroundImage: `url(${burgerQueen})` }}></section>
-      <form onSubmit={handleLogin}>
-        <input className={styles.inputText} type="email" placeholder="email" autoComplete="email" onChange={(e) => setUser(e.target.value)} />
-        <input className={styles.inputText} type="password" placeholder="contraseña" autoComplete="current-password" onChange={(e) => setPassword(e.target.value)} />
-        {error ? <p>{error}</p> : null}
-        <button type="submit" className="bg-white-700">Enviar</button>
+    <article className="w-[97vw] h-[97vh] flex flex-col justify-start">
+      <section className="z-1 w-[45vw] h-[45vh] p-1 justify-start items-start relative">
+        <img src={burgerQueen} alt="burgerQueenLogo" className="absolute top-0 left-0 w-full h-full" />
+      </section>
+      <form onSubmit={handleLogin} className="z-1 ml-[10%] flex flex-col justify-center items-center p-1 mt-[-9px]">
+          <label className="mb-4 text-center block text-gray-700  text-[3rem] font-bold mb-[1%]">
+            Usuario
+          </label>
+          <input className="shadow appearance-none border rounded w-[325px] h-[50px] text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline text-center z-1 " type="email"  placeholder="example@gmail.com" autoComplete="email" onChange={(e) => setUser(e.target.value)} style={{ fontSize: '1.5rem' }}/>
+          <label className="mb-6 text-center block text-gray-700 text-[3rem] font-bold mb-[1%]">
+            Contraseña
+          </label>
+          <input className="shadow appearance-none border rounded w-[325px] h-[50px] text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-center z-1 " type="password" placeholder="******************" autoComplete="current-password" onChange={(e) => setPassword(e.target.value)}style={{ fontSize: '1.5rem' }} />
+          {error ? <p className="text-red-500 text-2xl italic">{error}</p> : null}
+        <button type="submit" className="text-[3rem] bg-colorButton hover:bg-emerald-300 text-brownText font-bold mt-[8%] rounded-full w-[365px] h-[70px] z-1">Iniciar sesión</button>
       </form>
+      <section className="z-0">
+      <img src={burger} alt="burger" className=" h-auto	w-9/12 absolute top-[-34px] right-[-196px] -rotate-135 opacity-50	"/>
+      <img src={burger} alt="burger" className="h-auto	w-9/12 absolute bottom-[-71px] left-[-180px] rotate-45 opacity-50	"/>
+      </section> 
     </article>
   );
 };
