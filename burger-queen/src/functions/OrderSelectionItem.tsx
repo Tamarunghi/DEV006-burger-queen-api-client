@@ -6,7 +6,7 @@ interface OrderSelectionItemProps {
     name: string;
     price: number;
     onClick?: () => any;
-  }
+   }
 
 export const OrderSelectionItem:React.FC<OrderSelectionItemProps> = ({name, price, onClick}) => {
     return (
@@ -15,5 +15,5 @@ export const OrderSelectionItem:React.FC<OrderSelectionItemProps> = ({name, pric
       <div id="product" className="bg-notPress h-[90px] w-[140px] rounded-tl-25 rounded-bl-25">{name}</div>
         <div id="price" className="bg-crema h-[90px] w-[60px] rounded-tr-25 rounded-br-25"> {price}</div>
       </div>
-    )
+       )
   }

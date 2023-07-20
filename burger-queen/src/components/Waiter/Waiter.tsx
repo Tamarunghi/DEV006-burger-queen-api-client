@@ -10,12 +10,13 @@ export const Waiter: React.FC = () => {
   const [products, setProducts] = useState<any[]>([]);
   const [productType, setProductType] = useState("Desayuno");
   const [cartItems, setCartItems] = useState<any[]>([]);
-  const [infoCart, setinfoCart] = useState("carItems");
+ 
 
   useEffect(() => {
     GetProducts()
       .then((data) => {
-        setProducts(data);
+        const productsWithClick = data.map((product:any)=>({...product, clicks:0}));
+        setProducts(productsWithClick);
       })
       .catch((error) => {
         console.error("Error fetching products", error);
@@ -26,8 +27,23 @@ export const Waiter: React.FC = () => {
     setProductType(type);
   };
   const handleAddToCart = (product: any) => {
-    setCartItems((prevCartItems) => [...prevCartItems, { ...product }]);
+    // Verificar si el producto ya está en el carrito
+    const existingProduct = cartItems.find((item) => item.id === product.id);
+    
+    if (existingProduct) {
+      // Si el producto ya está en el carrito, incrementar su contador de clics
+      setCartItems((prevCartItems) => {
+       const updatedCartItems = prevCartItems.map((item) =>
+        item.id === product.id ? { ...item, clicks: item.clicks + 1 } : item
+      );
+        return updatedCartItems;
+      });
+    } else {
+      // Si el producto no está en el carrito, agregarlo con un contador de clics inicial de 1
+      setCartItems((prevCartItems) => [...prevCartItems, { ...product, clicks: 1 }]);
+    }
   };
+  
 
   return (
     <article className="h-[97vh] flex flex-col m-[20px]">
@@ -108,7 +124,7 @@ export const Waiter: React.FC = () => {
                   key={product.id}
                   name={product.name}
                   price={product.price}
-                  onClick={() => {
+                   onClick={() => {
                     console.log("sirveeee");
                     handleAddToCart(product);
                   }}
@@ -145,10 +161,11 @@ export const Waiter: React.FC = () => {
               <div id="delete" className="col-span-1"></div>
             </div>
             {/* ---Products added--- */}
-            {cartItems.map((product, index) => (
+            {cartItems.map((product, id) => (
               <AddedToCart
-                key={index}
+                key={id}
                 name={product.name}
+                quantity={product.clicks}
                 price={product.price}
               />
             ))}
