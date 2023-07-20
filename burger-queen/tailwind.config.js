@@ -10,6 +10,7 @@ export default {
         crema: '#FFF5E0',
         colorButton: '#69FF78',
         brownText: '#65362A',
+        red: '#E40909',
         skin: '#D9C5B3',
         notPress: '#FDDE99',
         press: '#82B83E',
