@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import burgerQueen from "../../Images/logoWithBG.gif";
 import burger from "../../Images/burger.png";
-import trash from "../../Images/trash.png";
-import { GetProducts } from "../../functions/GetProduct";
-import { OrderSelectionItem } from "../../functions/OrderSelectionItem";
-import { AddedToCart } from "../../functions/AddedToCart";
+import { GetProducts } from "../functions/GetProduct";
+import { OrderSelectionItem } from "../functions/OrderSelectionItem";
+import { AddedToCart, TotalAddedToCart } from "../functions/AddedToCart";
+import {LogoPng} from "../functions/logoComponent"
+import { Background } from "../functions/background";
+
 
 export const Waiter: React.FC = () => {
   const [products, setProducts] = useState<any[]>([]);
@@ -27,7 +29,7 @@ export const Waiter: React.FC = () => {
     setProductType(type);
   };
   const handleAddToCart = (product: any) => {
-    // Verificar si el producto ya está en el carrito
+    // Verifica si el producto ya está en el carrito
     const existingProduct = cartItems.find((item) => item.id === product.id);
     
     if (existingProduct) {
@@ -40,21 +42,31 @@ export const Waiter: React.FC = () => {
       });
     } else {
       // Si el producto no está en el carrito, agregarlo con un contador de clics inicial de 1
-      setCartItems((prevCartItems) => [...prevCartItems, { ...product, clicks: 1 }]);
+      setCartItems((prevCartItems) => [...prevCartItems, { ...product, clicks: 1, quantity:0 }]);
     }
   };
-  
+  const handleIncremetQuantity = (productId: string) =>{
+    setCartItems((prevCartItems)=>{
+      const updatedCartItems = prevCartItems.map((item)=>
+      item.id === productId ? {...item, clicks: Math.max(1,item.clicks+1)}:item
+      );
+      return updatedCartItems
+    });
+  }
+  const handleDecremetQuantity = (productId: string) =>{
+    setCartItems((prevCartItems)=>{
+      const updatedCartItems = prevCartItems.map((item)=>
+      item.id === productId ? {...item, clicks: Math.max(1,item.clicks-1)}:item
+      );
+      return updatedCartItems
+    });
+  }
 
   return (
     <article className="h-[97vh] flex flex-col m-[20px]">
       {/* ---Header(LOGO + MESERO)--- */}
       <header className=" z-1 w-[100%] h-[25%] bg-colorButton mb-[20px] flex flex-">
-        <img
-          id="logo"
-          src={burgerQueen}
-          alt="burgerQueenLogo"
-          className="w-auto h-[25%] absolute top-0 left-0 z-1"
-        />
+    <LogoPng/>
         <label
           id="waiterPg"
           className="text-[100px] text-crema border-[brownText] font-bold"
@@ -97,7 +109,7 @@ export const Waiter: React.FC = () => {
           {/* ---Name + Table--- */}
           <div
             id="nameAndTable"
-            className="bg-green-200 h-[10%] w-[100%] p-[1%] flex flex-row justify-evenly items-center gap-1"
+            className="h-[10%] w-[100%] p-[1%] flex flex-row justify-evenly items-center gap-1"
           >
             <label>Nombre:</label>
             <input
@@ -134,32 +146,21 @@ export const Waiter: React.FC = () => {
 
           {/* ---Shopping Cart--- */}
 
-          <div
-            id="cart"
-            className="h-auto w-[100%] p-[5%] text-[1.5rem] font-bold"
-          >
+          <div id="cart" className="h-auto w-[100%] p-[5%] text-[1.5rem] font-bold">
             {/* ---Titles--- */}
-            <div
-              id="titles"
-              className="h-[50px] w-[100%] grid grid-cols-10 gap-1 text-center"
-            >
-              <div
-                id="product"
-                className="bg-yellow col-span-3 rounded-tl-[15px]"
-              >
+            <div id="titles" className="h-[50px] w-[100%] grid grid-cols-10 gap-1 text-center">
+              <div id="product" className="bg-yellow col-span-3 rounded-tl-[15px]">
                 Producto
               </div>
               <div id="quantity" className="bg-yellow col-span-4">
                 Cantidad
               </div>
-              <div
-                id="price"
-                className="bg-yellow col-span-2 rounded-tr-[15px]"
-              >
+              <div id="price" className="bg-yellow col-span-2 rounded-tr-[15px]" >
                 Precio
               </div>
               <div id="delete" className="col-span-1"></div>
             </div>
+            
             {/* ---Products added--- */}
             {cartItems.map((product, id) => (
               <AddedToCart
@@ -167,21 +168,12 @@ export const Waiter: React.FC = () => {
                 name={product.name}
                 quantity={product.clicks}
                 price={product.price}
+                Increment={()=> handleIncremetQuantity(product.id)}
+                Decrement={()=> handleDecremetQuantity(product.id)}
               />
             ))}
             {/* ---Total--- */}
-            <div
-              id="total"
-              className=" h-[50px] mt-[25px] grid grid-cols-10 gap-1 text-center"
-            >
-              <div className="bg-skin col-span-3 rounded-tl-[15px] rounded-bl-[15px]">
-                Total
-              </div>
-              <div className="bg-skin col-span-6 rounded-tr-[15px] rounded-br-[15px]">
-                10$
-              </div>
-              <div className="col-span-1"></div>
-            </div>
+            <TotalAddedToCart cartItems={cartItems} /> {/* Pasamos la lista de productos como prop */}
           </div>
 
           {/* ---Send Buttom--- */}
@@ -200,18 +192,7 @@ export const Waiter: React.FC = () => {
       </main>
 
       {/* ---Background--- */}
-      <section id="background" className="z-0">
-        <img
-          src={burger}
-          alt="burger"
-          className=" h-auto	w-9/12 absolute top-[-34px] right-[-196px] -rotate-135 opacity-50	"
-        />
-        <img
-          src={burger}
-          alt="burger"
-          className="h-auto	w-9/12 absolute bottom-[-71px] left-[-180px] rotate-45 opacity-50	"
-        />
-      </section>
+            <Background/>
     </article>
   );
 };
