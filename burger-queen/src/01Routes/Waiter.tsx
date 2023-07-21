@@ -42,7 +42,7 @@ export const Waiter: React.FC = () => {
       });
     } else {
       // Si el producto no está en el carrito, agregarlo con un contador de clics inicial de 1
-      setCartItems((prevCartItems) => [...prevCartItems, { ...product, clicks: 1, quantity:0 }]);
+      setCartItems((prevCartItems) => [...prevCartItems, { ...product, clicks: 1}]);
     }
   };
   const handleIncremetQuantity = (productId: string) =>{
@@ -165,7 +165,7 @@ export const Waiter: React.FC = () => {
               <AddedToCart
                 key={id}
                 name={product.name}
-                quantity={product.clicks}
+                clicks={product.clicks}
                 price={product.price}
                 Increment={()=> handleIncremetQuantity(product.id)}
                 Decrement={()=> handleDecremetQuantity(product.id)}
