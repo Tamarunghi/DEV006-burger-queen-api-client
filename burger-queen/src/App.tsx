@@ -1,8 +1,8 @@
 
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Login from './components/Login';
-import {Waiter} from './components/Waiter';
+import Login from './01Routes/Login';
+import {Waiter} from './01Routes/Waiter';
 
 const App = () => {
   return (
