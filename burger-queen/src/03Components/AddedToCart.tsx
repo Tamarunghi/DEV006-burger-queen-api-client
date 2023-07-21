@@ -1,10 +1,12 @@
-import trashCan from "../Images/trashCan.png";
+import React, { useEffect, useState } from "react";
+import trashCan from "../04Images/trashCan.png";
 interface Product {
   name: string;
   price: number;
   quantity: number;
   Increment: () => void;
   Decrement: () => void;
+  clicks: number
 }
 export const AddedToCart: React.FC<Product> = ({
   name,
@@ -45,14 +47,12 @@ export const AddedToCart: React.FC<Product> = ({
 interface Total {
   cartItems: Product[];
 }
-export const TotalAddedToCart: React.FC<Total> = (props) => {
-  const { cartItems } = props; // Accede a cartItems desde las propiedades
-  console.log("cartItems:", cartItems);
-  const totalPrice = cartItems.reduce((total, product) => {
-    console.log("product:", product);
-    return total + product.price * product.quantity;
-  }, 0);
-  console.log("totalPrice:", totalPrice);
+export const TotalAddedToCart: React.FC<Total> = ({cartItems}) => {
+
+  const totalPrice= cartItems.reduce((total, product)=>{
+    return total + (product.price * product.clicks);
+   }, 0)
+
   return (
     <div
       id="total"
@@ -65,7 +65,7 @@ export const TotalAddedToCart: React.FC<Total> = (props) => {
         id="totalPrice"
         className="bg-skin col-span-6 rounded-tr-[15px] rounded-br-[15px]"
       >
-        ${totalPrice}
+      ${totalPrice}
       </div>
       <div className="col-span-1"></div>
     </div>

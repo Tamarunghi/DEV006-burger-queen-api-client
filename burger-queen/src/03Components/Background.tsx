@@ -1,4 +1,4 @@
-import burger from "../Images/burger.png";
+import burger from "../04Images/burger.png";
 
 export function Background(){
 return(<section className="z-0">

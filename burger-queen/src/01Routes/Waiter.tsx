@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import burgerQueen from "../../Images/logoWithBG.gif";
 import burger from "../../Images/burger.png";
-import { GetProducts } from "../functions/GetProduct";
-import { OrderSelectionItem } from "../functions/OrderSelectionItem";
-import { AddedToCart, TotalAddedToCart } from "../functions/AddedToCart";
-import {LogoPng} from "../functions/logoComponent"
-import { Background } from "../functions/background";
+import { GetProducts } from "../02App/getProduct";
+import { OrderSelectionItem } from "../03Components/OrderSelectionItem";
+import { AddedToCart, TotalAddedToCart } from "../03Components/AddedToCart";
+import {LogoPng} from "../03Components/logoComponent"
+import { Background } from "../03Components/background";
 
 
 export const Waiter: React.FC = () => {
@@ -48,7 +48,7 @@ export const Waiter: React.FC = () => {
   const handleIncremetQuantity = (productId: string) =>{
     setCartItems((prevCartItems)=>{
       const updatedCartItems = prevCartItems.map((item)=>
-      item.id === productId ? {...item, clicks: Math.max(1,item.clicks+1)}:item
+      item.id === productId ? {...item, clicks: item.clicks+1}:item
       );
       return updatedCartItems
     });
@@ -104,7 +104,7 @@ export const Waiter: React.FC = () => {
           </div>
         </section>
 
-        {/* ---Menu&Cart--- */}
+        {/* ---Order&Menu--- */}
         <section id="menuYCompra" className=" h-[90%] w-[100%] bg-crema p-[4%]">
           {/* ---Name + Table--- */}
           <div
@@ -128,7 +128,7 @@ export const Waiter: React.FC = () => {
             id="orderSelection"
             className="h-auto w-[100%] p-[1%] flex flex-wrap justify-center justify-evenly text-center gap-y-4"
           >
-            {/* ---Buttoms--- */}
+            {/* ---Menu/Cart--- */}
             {products
               .filter((product) => product.type === productType)
               .map((product) => (
@@ -137,7 +137,6 @@ export const Waiter: React.FC = () => {
                   name={product.name}
                   price={product.price}
                    onClick={() => {
-                    console.log("sirveeee");
                     handleAddToCart(product);
                   }}
                 />
@@ -173,7 +172,9 @@ export const Waiter: React.FC = () => {
               />
             ))}
             {/* ---Total--- */}
-            <TotalAddedToCart cartItems={cartItems} /> {/* Pasamos la lista de productos como prop */}
+            <TotalAddedToCart cartItems={cartItems}
+             
+            />
           </div>
 
           {/* ---Send Buttom--- */}

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { requestGet } from "../functions/request";
+import { requestGet } from "../03Components/request";
 import { useNavigate } from 'react-router-dom';
 // import burger from "../../Images/burger.png";
-import {LogoGif} from "../functions/logoComponent"
-import { Background } from "../functions/background";
+import {LogoGif} from "../03Components/logoComponent"
+import { Background } from "../03Components/background";
 
 
 const Login: React.FC = () => {
