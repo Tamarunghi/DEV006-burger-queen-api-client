@@ -23,6 +23,7 @@ const Login: React.FC = () => {
       console.log(token);
       const role = data.user.role;
       console.log(role);
+      const oli = localStorage.setItem("userEmail", data.user.email);
       localStorage.setItem("token", token);
       switch (role) {
         case "mesero":

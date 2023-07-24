@@ -10,6 +10,9 @@ export default {
         crema: '#FFF5E0',
         colorButton: '#69FF78',
         brownText: '#65362A',
+        darkBrown: '#40160C',
+        greenText: '#2A440B',
+        darkGreen: '#162503',
         red: '#E40909',
         skin: '#D9C5B3',
         notPress: '#FDDE99',
@@ -24,9 +27,10 @@ export default {
         '5': '5px',
         '25': '25px',
       },
-      dropShadow: {
-          'productUnpress': '7px 4px 6px 0px rgba(70, 33, 23, 0.90)',
-        },
+      boxShadow: {
+        'notPressShadow': '7px 7px 6px 0 rgba(70, 33, 23, 0.90) inset',
+        'pressShadow': '-7px -7px 6px 0px #506437 inset;'
+      },
       rotate: {
         '135': '135deg',
       },
