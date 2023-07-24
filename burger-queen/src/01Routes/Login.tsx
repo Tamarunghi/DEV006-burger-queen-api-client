@@ -3,7 +3,7 @@ import { requestGet } from "../03Components/request";
 import { useNavigate } from 'react-router-dom';
 // import burger from "../../Images/burger.png";
 import {LogoGif} from "../03Components/logoComponent"
-import { Background } from "../03Components/background";
+import { Background } from "../03Components/Background";
 
 
 const Login: React.FC = () => {
@@ -23,7 +23,7 @@ const Login: React.FC = () => {
       console.log(token);
       const role = data.user.role;
       console.log(role);
-      const oli = localStorage.setItem("userEmail", data.user.email);
+      localStorage.setItem("userEmail", data.user.email);
       localStorage.setItem("token", token);
       switch (role) {
         case "mesero":

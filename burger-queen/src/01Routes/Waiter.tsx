@@ -4,7 +4,7 @@ import { OrderSelectionItem } from "../03Components/OrderSelectionItem";
 import { AddedToCart, TotalAddedToCart } from "../03Components/AddedToCart";
 import { LoggedUserAndExist } from "../03Components/LoggedUserAndExist";
 import {LogoPng} from "../03Components/logoComponent"
-import { Background } from "../03Components/background";
+import { Background } from "../03Components/Background";
 
 
 export const Waiter: React.FC = () => {
