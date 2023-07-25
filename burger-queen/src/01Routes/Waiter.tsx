@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
-import burgerQueen from "../../Images/logoWithBG.gif";
-import burger from "../../Images/burger.png";
 import { GetProducts } from "../02App/getProduct";
 import { OrderSelectionItem } from "../03Components/OrderSelectionItem";
 import { AddedToCart, TotalAddedToCart } from "../03Components/AddedToCart";
+import { LoggedUserAndExist } from "../03Components/LoggedUserAndExist";
 import {LogoPng} from "../03Components/logoComponent"
-import { Background } from "../03Components/background";
+import { Background } from "../03Components/Background";
+import { DeletePopup } from "../03Components/DeletePopup";
 
 
 export const Waiter: React.FC = () => {
   const [products, setProducts] = useState<any[]>([]);
   const [productType, setProductType] = useState("Desayuno");
   const [cartItems, setCartItems] = useState<any[]>([]);
+  const [productDelete, setProductDelete] =useState (false);
  
 
   useEffect(() => {
@@ -42,7 +43,7 @@ export const Waiter: React.FC = () => {
       });
     } else {
       // Si el producto no está en el carrito, agregarlo con un contador de clics inicial de 1
-      setCartItems((prevCartItems) => [...prevCartItems, { ...product, clicks: 1, quantity:0 }]);
+      setCartItems((prevCartItems) => [...prevCartItems, { ...product, clicks: 1}]);
     }
   };
   const handleIncremetQuantity = (productId: string) =>{
@@ -56,23 +57,47 @@ export const Waiter: React.FC = () => {
   const handleDecremetQuantity = (productId: string) =>{
     setCartItems((prevCartItems)=>{
       const updatedCartItems = prevCartItems.map((item)=>
-      item.id === productId ? {...item, clicks: Math.max(1,item.clicks-1)}:item
+      item.id === productId ? {...item, clicks: Math.max(0,item.clicks-1)}:item
       );
       return updatedCartItems
     });
   }
 
+  const handleDeleteCartItem = (productId: string) => {
+    DeletePopup()
+    .then((result)=>{
+if (result.isConfirmed){
+  setCartItems((prevCartItems) => {
+    const updatedCartItems = prevCartItems.filter((item) => item.id !== productId);
+    return updatedCartItems;
+  });
+  setProductDelete(true); 
+}
+else if (result.isDenied) {
+  // El usuario hizo clic en el botón cancelar o cerró el SweetAlert
+  console.log('Eliminación cancelada');
+}
+ })
+    .catch((error)=>{
+      console.log(error)
+    })
+  
+  };
+
   return (
     <article className="h-[97vh] flex flex-col m-[20px]">
       {/* ---Header(LOGO + MESERO)--- */}
-      <header className=" z-1 w-[100%] h-[25%] bg-colorButton mb-[20px] flex flex-">
+      <header className=" z-1 w-[100%] h-[25%] mb-[20px] flex flex-row">
     <LogoPng/>
-        <label
+        <div className="absolute top-0 right-0">
+          <LoggedUserAndExist/>
+          <label
           id="waiterPg"
-          className="text-[100px] text-crema border-[brownText] font-bold"
+          className="font-bold text-[90px] text-crema border-brownText drop-shadow-[4px_4px_0.5px_#65362A]"
         >
           MESERO
         </label>
+        </div>
       </header>
 
       {/* ---Main section--- */}
@@ -132,7 +157,7 @@ export const Waiter: React.FC = () => {
             {products
               .filter((product) => product.type === productType)
               .map((product) => (
-                <OrderSelectionItem
+                <OrderSelectionItem 
                   key={product.id}
                   name={product.name}
                   price={product.price}
@@ -165,10 +190,11 @@ export const Waiter: React.FC = () => {
               <AddedToCart
                 key={id}
                 name={product.name}
-                quantity={product.clicks}
+                clicks={product.clicks}
                 price={product.price}
                 Increment={()=> handleIncremetQuantity(product.id)}
                 Decrement={()=> handleDecremetQuantity(product.id)}
+                Delete={()=> handleDeleteCartItem(product.id)}
               />
             ))}
             {/* ---Total--- */}
@@ -184,7 +210,7 @@ export const Waiter: React.FC = () => {
           >
             <button
               type="submit"
-              className="bg-colorButton h-[65px] w-[500px] items-center rounded-[45px]"
+              className="bg-colorButton h-[65px] w-[500px] items-center rounded-[45px]  font-bold text-brownText text-[1.5rem]"
             >
               Enviar a Cocina
             </button>

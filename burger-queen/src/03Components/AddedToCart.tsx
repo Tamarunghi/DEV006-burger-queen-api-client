@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from "react";
 import trashCan from "../04Images/trashCan.png";
 interface Product {
   name: string;
   price: number;
-  quantity: number;
   Increment: () => void;
   Decrement: () => void;
+  Delete: ()=> void,
   clicks: number
 }
 export const AddedToCart: React.FC<Product> = ({
   name,
   price,
-  quantity,
+  clicks,
   Increment,
   Decrement,
+  Delete,
 }) => {
   return (
     <div
@@ -27,19 +27,20 @@ export const AddedToCart: React.FC<Product> = ({
         <div id="minus" className="bg-minusButtom" onClick={Decrement}>
           -
         </div>
-        <div id="number">{quantity}</div>
+        <div id="number">{clicks}</div>
         <div id="plus" className="bg-plusButtom" onClick={Increment}>
           +
         </div>
       </div>
       <div id="price" className="bg-skin col-span-2 ">
-        ${price * quantity}
+        ${price * clicks}
       </div>
       <img
         id="delete"
         src={trashCan}
         alt="delete"
         className="w-[80%] col-span-1 object-fit"
+        onClick={Delete}
       />
     </div>
   );
