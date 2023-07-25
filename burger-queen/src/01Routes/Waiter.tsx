@@ -59,7 +59,12 @@ export const Waiter: React.FC = () => {
       const updatedCartItems = prevCartItems.map((item)=>
       item.id === productId ? {...item, clicks: Math.max(0,item.clicks-1)}:item
       );
-      return updatedCartItems
+      if(updatedCartItems.find((item) => item.id === productId)?.clicks === 0){
+        return updatedCartItems.filter((item) => item.id !== productId);
+      }else{
+        return updatedCartItems 
+      }
+      
     });
   }
 
