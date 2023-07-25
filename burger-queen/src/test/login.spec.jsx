@@ -1,5 +1,10 @@
-import {Login} from "../01Routes/Login.tsx"
+/**
+ * @jest-environment jsdom
+ */
+import React from 'react';
+import Login from "../01Routes/Login.tsx"
 import {render, screen} from '@testing-library/react'
+import '@testing-library/jest-dom'
 
 test('loads and displays greeting', async () => {
     // ARRANGE
