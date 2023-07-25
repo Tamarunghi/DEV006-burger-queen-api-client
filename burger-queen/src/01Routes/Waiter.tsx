@@ -12,7 +12,6 @@ export const Waiter: React.FC = () => {
   const [products, setProducts] = useState<any[]>([]);
   const [productType, setProductType] = useState("Desayuno");
   const [cartItems, setCartItems] = useState<any[]>([]);
-  const [productDelete, setProductDelete] =useState (false);
  
 
   useEffect(() => {
@@ -71,7 +70,6 @@ if (result.isConfirmed){
     const updatedCartItems = prevCartItems.filter((item) => item.id !== productId);
     return updatedCartItems;
   });
-  setProductDelete(true); 
 }
 else if (result.isDenied) {
   // El usuario hizo clic en el botón cancelar o cerró el SweetAlert
