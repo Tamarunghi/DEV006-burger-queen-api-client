@@ -4,6 +4,7 @@ interface Product {
   price: number;
   Increment: () => void;
   Decrement: () => void;
+  Delete: ()=> void,
   clicks: number
 }
 export const AddedToCart: React.FC<Product> = ({
@@ -12,6 +13,7 @@ export const AddedToCart: React.FC<Product> = ({
   clicks,
   Increment,
   Decrement,
+  Delete,
 }) => {
   return (
     <div
@@ -38,6 +40,7 @@ export const AddedToCart: React.FC<Product> = ({
         src={trashCan}
         alt="delete"
         className="w-[80%] col-span-1 object-fit"
+        onClick={Delete}
       />
     </div>
   );

@@ -5,12 +5,14 @@ import { AddedToCart, TotalAddedToCart } from "../03Components/AddedToCart";
 import { LoggedUserAndExist } from "../03Components/LoggedUserAndExist";
 import {LogoPng} from "../03Components/logoComponent"
 import { Background } from "../03Components/Background";
+import { DeletePopup } from "../03Components/DeletePopup";
 
 
 export const Waiter: React.FC = () => {
   const [products, setProducts] = useState<any[]>([]);
   const [productType, setProductType] = useState("Desayuno");
   const [cartItems, setCartItems] = useState<any[]>([]);
+  const [productDelete, setProductDelete] =useState (false);
  
 
   useEffect(() => {
@@ -60,14 +62,28 @@ export const Waiter: React.FC = () => {
       return updatedCartItems
     });
   }
-const handleDeleteCartItem = (productId: string )=>{
-  setCartItems((prevCartItems)=>{
-    const updatedCartItems = prevCartItems.filter((item)=>{
-     item.id !== productId 
-        })
+
+  const handleDeleteCartItem = (productId: string) => {
+    DeletePopup()
+    .then((result)=>{
+if (result.isConfirmed){
+  setCartItems((prevCartItems) => {
+    const updatedCartItems = prevCartItems.filter((item) => item.id !== productId);
     return updatedCartItems;
-  })
+  });
+  setProductDelete(true); 
 }
+else if (result.isDenied) {
+  // El usuario hizo clic en el botón cancelar o cerró el SweetAlert
+  console.log('Eliminación cancelada');
+}
+ })
+    .catch((error)=>{
+      console.log(error)
+    })
+  
+  };
+
   return (
     <article className="h-[97vh] flex flex-col m-[20px]">
       {/* ---Header(LOGO + MESERO)--- */}
@@ -178,6 +194,7 @@ const handleDeleteCartItem = (productId: string )=>{
                 price={product.price}
                 Increment={()=> handleIncremetQuantity(product.id)}
                 Decrement={()=> handleDecremetQuantity(product.id)}
+                Delete={()=> handleDeleteCartItem(product.id)}
               />
             ))}
             {/* ---Total--- */}
