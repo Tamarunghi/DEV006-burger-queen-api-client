@@ -12,7 +12,6 @@ export const Waiter: React.FC = () => {
   const [products, setProducts] = useState<any[]>([]);
   const [productType, setProductType] = useState("Desayuno");
   const [cartItems, setCartItems] = useState<any[]>([]);
- 
 
   useEffect(() => {
     GetProducts()
@@ -53,15 +52,16 @@ export const Waiter: React.FC = () => {
       return updatedCartItems
     });
   }
-  const handleDecremetQuantity = (productId: string) =>{
-    setCartItems((prevCartItems)=>{
-      const updatedCartItems = prevCartItems.map((item)=>
-      item.id === productId ? {...item, clicks: Math.max(0,item.clicks-1)}:item
+  const handleDecremetQuantity = (productId: string) => {
+    setCartItems((prevCartItems) => {
+      const updatedCartItems = prevCartItems.map((item) =>
+        item.id === productId
+          ? { ...item, clicks: Math.max(1, item.clicks - 1) }
+          : item
       );
-      return updatedCartItems
-    });
+      return updatedCartItems;
+    })
   }
-
   const handleDeleteCartItem = (productId: string) => {
     DeletePopup()
     .then((result)=>{
@@ -159,6 +159,7 @@ else if (result.isDenied) {
                   key={product.id}
                   name={product.name}
                   price={product.price}
+                  quantity={cartItems.find((item) => item.id === product.id)?.clicks || 0}
                    onClick={() => {
                     handleAddToCart(product);
                   }}
