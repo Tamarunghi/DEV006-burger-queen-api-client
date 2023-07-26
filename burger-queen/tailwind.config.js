@@ -8,7 +8,7 @@ export default {
       colors: {
         fondo: '#C68E62',
         crema: '#FFF5E0',
-        colorButton: '#69FF78',
+        colorButton: '#C1D78F',
         brownText: '#65362A',
         darkBrown: '#40160C',
         greenText: '#2A440B',
