@@ -12,8 +12,6 @@ export const Waiter: React.FC = () => {
   const [products, setProducts] = useState<any[]>([]);
   const [productType, setProductType] = useState("Desayuno");
   const [cartItems, setCartItems] = useState<any[]>([]);
-  const [productDelete, setProductDelete] =useState (false);
- 
 
   useEffect(() => {
     GetProducts()
@@ -54,20 +52,19 @@ export const Waiter: React.FC = () => {
       return updatedCartItems
     });
   }
-  const handleDecremetQuantity = (productId: string) =>{
-    setCartItems((prevCartItems)=>{
-      const updatedCartItems = prevCartItems.map((item)=>
-      item.id === productId ? {...item, clicks: Math.max(0,item.clicks-1)}:item
+  const handleDecremetQuantity = (productId: string) => {
+    setCartItems((prevCartItems) => {
+      const updatedCartItems = prevCartItems.map((item) =>
+        item.id === productId
+          ? { ...item, clicks: Math.max(1, item.clicks - 1) }
+          : item
       );
-      if(updatedCartItems.find((item) => item.id === productId)?.clicks === 0){
-        return updatedCartItems.filter((item) => item.id !== productId);
-      }else{
-        return updatedCartItems 
-      }
-      
-    });
-  }
 
+      return updatedCartItems;
+    })
+
+      
+  }
   const handleDeleteCartItem = (productId: string) => {
     DeletePopup()
     .then((result)=>{
@@ -76,7 +73,6 @@ if (result.isConfirmed){
     const updatedCartItems = prevCartItems.filter((item) => item.id !== productId);
     return updatedCartItems;
   });
-  setProductDelete(true); 
 }
 else if (result.isDenied) {
   // El usuario hizo clic en el botón cancelar o cerró el SweetAlert
@@ -166,6 +162,7 @@ else if (result.isDenied) {
                   key={product.id}
                   name={product.name}
                   price={product.price}
+                  quantity={cartItems.find((item) => item.id === product.id)?.clicks || 0}
                    onClick={() => {
                     handleAddToCart(product);
                   }}
@@ -177,7 +174,7 @@ else if (result.isDenied) {
 
           <div id="cart" className="h-auto w-[100%] p-[5%] text-[1.5rem] font-bold">
             {/* ---Titles--- */}
-            <div id="titles" className="h-[50px] w-[100%] grid grid-cols-10 gap-1 text-center">
+            <div id="titles" className="h-[50px] w-[100%] grid grid-cols-10 gap-1 text-center mb-[15px]">
               <div id="product" className="bg-yellow col-span-3 rounded-tl-[15px]">
                 Producto
               </div>
@@ -215,7 +212,7 @@ else if (result.isDenied) {
           >
             <button
               type="submit"
-              className="bg-colorButton h-[65px] w-[500px] items-center rounded-[45px]  font-bold text-brownText text-[1.5rem]"
+              className="bg-colorButton hover:bg-buttonHover h-[65px] w-[500px] items-center rounded-[45px]  font-bold text-brownText text-[1.5rem]"
             >
               Enviar a Cocina
             </button>

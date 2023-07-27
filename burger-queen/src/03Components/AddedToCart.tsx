@@ -18,21 +18,21 @@ export const AddedToCart: React.FC<Product> = ({
   return (
     <div
       id="productTable"
-      className="h-[65px] w-[100%] grid grid-cols-10 gap-1 text-center"
+      className="h-[65px] w-[100%] grid grid-cols-10 gap-1 text-center text-[1.3rem] mb-[5px]"
     >
       <div id="product" className="bg-skin col-span-3">
         {name}
       </div>
-      <div id="quantity" className="bg-skin col-span-4 grid grid-cols-3">
+      <div id="quantity" className="bg-skin col-span-4 grid grid-cols-3 text-[2.5rem]">
         <div id="minus" className="bg-minusButtom" onClick={Decrement}>
           -
         </div>
-        <div id="number">{clicks}</div>
-        <div id="plus" className="bg-plusButtom" onClick={Increment}>
+        <div id="number"  className="text-[1.5rem]">{clicks}</div>
+        <div id="plus" className="bg-plusButtom text-[2.5rem]" onClick={Increment}>
           +
         </div>
       </div>
-      <div id="price" className="bg-skin col-span-2 ">
+      <div id="price" className="bg-skin col-span-2 text-[1.5rem]">
         ${price * clicks}
       </div>
       <img
