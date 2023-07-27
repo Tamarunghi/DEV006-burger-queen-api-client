@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { GetProducts } from "../02App/getProduct";
+import { PostOrders } from "../02App/postOrders";
 import { OrderSelectionItem } from "../03Components/OrderSelectionItem";
 import { AddedToCart, TotalAddedToCart } from "../03Components/AddedToCart";
 import { LoggedUserAndExist } from "../03Components/LoggedUserAndExist";
@@ -85,16 +86,16 @@ else if (result.isDenied) {
   return (
     <article className="h-[97vh] flex flex-col m-[20px]">
       {/* ---Header(LOGO + MESERO)--- */}
-      <header className=" z-1 w-[100%] h-[25%] mb-[20px] flex flex-row">
-    <LogoPng/>
-        <div className="absolute top-0 right-0">
-          <LoggedUserAndExist/>
+      <header className=" z-1 w-[100%] h-[25%] mb-[20px] flex items-center justify-between">
+        <LogoPng/>
+        <div className="w-[100%] h-[100%] flex flex-col items-end">        
+          <LoggedUserAndExist />
           <label
-          id="waiterPg"
-          className="font-bold text-[90px] text-crema border-brownText drop-shadow-[4px_4px_0.5px_#65362A]"
-        >
-          MESERO
-        </label>
+            id="waiterPg"
+            className="font-bold text-[90px] text-crema border-brownText drop-shadow-[4px_4px_0.5px_#65362A]"
+          >
+            MESERO
+          </label>
         </div>
       </header>
 
