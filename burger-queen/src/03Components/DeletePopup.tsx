@@ -7,7 +7,7 @@ export const DeletePopup = (): Promise<SweetAlertResult<DeleteButton>> => {
     icon: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#d33',
-    cancelButtonColor: '#C1D78F',
+    cancelButtonColor: '#CDB98E',
     confirmButtonText: 'Eliminar!',
     cancelButtonText: 'Cancelar',
     background: '#FFF5E0',

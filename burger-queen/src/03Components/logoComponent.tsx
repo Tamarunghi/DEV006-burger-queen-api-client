@@ -6,5 +6,5 @@ export function LogoGif(){
 }
 
 export function LogoPng(){
-    return <img src={LogoImagePng} alt="burgerQueenLogo" />
+    return <img src={LogoImagePng} alt="burgerQueenLogo" className="h-[100%]"/>
  }

@@ -12,7 +12,6 @@ export const Waiter: React.FC = () => {
   const [products, setProducts] = useState<any[]>([]);
   const [productType, setProductType] = useState("Desayuno");
   const [cartItems, setCartItems] = useState<any[]>([]);
-  const [productDelete, setProductDelete] = useState(false);
 
   useEffect(() => {
     GetProducts()
@@ -60,41 +59,17 @@ export const Waiter: React.FC = () => {
       return updatedCartItems;
     });
   };
-  const handleDecremetQuantity = (productId: string) => {
-    setCartItems((prevCartItems) => {
-      const updatedCartItems = prevCartItems.map((item) =>
-        item.id === productId
-          ? { ...item, clicks: Math.max(0, item.clicks - 1) }
-          : item
+  const handleDecremetQuantity = (productId: string) =>{
+    setCartItems((prevCartItems)=>{
+      const updatedCartItems = prevCartItems.map((item)=>
+      item.id === productId ? {...item, clicks: Math.max(1,item.clicks-1)}:item
       );
-
-      if (
-        updatedCartItems.find((item) => item.id === productId)?.clicks === 0
-      ) {
-        DeletePopup()
-          .then((result) => {
-            if (result.isConfirmed) {
-              setCartItems((prevCartItems) => {
-                const updatedCartItems = prevCartItems.filter(
-                  (item) => item.id !== productId
-                );
-                return updatedCartItems;
-              });
-              setProductDelete(true);
-            } else if (result.isDenied) {
-              // El usuario hizo clic en el botón cancelar o cerró el SweetAlert
-              console.log("Eliminación cancelada");
-            } else {
-            }
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      }
-
-      return updatedCartItems;
+      return updatedCartItems
     });
-  };
+  }
+  
+  
+  
 
   const handleDeleteCartItem = (productId: string) => {
     DeletePopup()
@@ -120,9 +95,9 @@ export const Waiter: React.FC = () => {
   return (
     <article className="h-[97vh] flex flex-col m-[20px]">
       {/* ---Header(LOGO + MESERO)--- */}
-      <header className=" z-1 w-[100%] h-[25%] mb-[20px] flex flex-row">
-        <LogoPng />
-        <div className="absolute top-0 right-0">
+      <header className=" z-1 w-[100%] h-[25%] mb-[20px] flex items-center justify-between">
+        <LogoPng/>
+        <div className="w-[100%] h-[100%] flex flex-col items-end">        
           <LoggedUserAndExist />
           <label
             id="waiterPg"
@@ -168,7 +143,21 @@ export const Waiter: React.FC = () => {
           className=" h-[90%] w-[100%] bg-crema text-darkBrown font-bold p-[4%]"
         >
           {/* ---Name + Table--- */}
-          <NameAndTable />
+          <div
+            id="nameAndTable"
+            className="h-[10%] w-[100%] p-[1%] flex flex-row justify-evenly items-center gap-1"
+          >
+            <label>Nombre:</label>
+            <input
+              type="text"
+              className="bg-skin h-[50%] w-[40%] rounded-5"
+            ></input>
+            <label>Mesa:</label>
+            <input
+              type="text"
+              className="bg-skin h-[50%] w-[40%] rounded-5"
+            ></input>
+          </div>
 
           {/* ---Order Selection--- */}
           <div
@@ -198,26 +187,14 @@ export const Waiter: React.FC = () => {
             className="h-auto w-[100%] p-[5%] text-[1.5rem] font-bold"
           >
             {/* ---Titles--- */}
-            <div
-              id="titles"
-              className="h-[50px] w-[100%] grid grid-cols-10 gap-1 text-center"
-            >
-              <div
-                id="product"
-                className="col-span-3 rounded-tl-[15px] border-yellow border-[3px]"
-              >
+            <div id="titles" className="h-[50px] w-[100%] grid grid-cols-10 gap-1 text-center mb-[15px]">
+              <div id="product" className="bg-yellow col-span-3 rounded-tl-[15px]">
                 Producto
               </div>
-              <div
-                id="quantity"
-                className="col-span-4 border-yellow border-[3px]"
-              >
+              <div id="quantity" className="bg-yellow col-span-4">
                 Cantidad
               </div>
-              <div
-                id="price"
-                className="col-span-2 rounded-tr-[15px] border-yellow border-[3px]"
-              >
+              <div id="price" className="bg-yellow col-span-2 rounded-tr-[15px]" >
                 Precio
               </div>
               <div id="delete" className="col-span-1"></div>
