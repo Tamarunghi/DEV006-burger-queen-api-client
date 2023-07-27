@@ -8,20 +8,19 @@ export default {
       colors: {
         fondo: '#C68E62',
         crema: '#FFF5E0',
-        colorButton: '#69FF78',
+        colorButton: '#C1D78F',
         brownText: '#65362A',
         darkBrown: '#40160C',
         greenText: '#2A440B',
         darkGreen: '#162503',
         red: '#E40909',
         skin: '#D9C5B3',
-        notPress: '#FDDE99',
-        press: '#82B83E',
-        borderNotPress: '#A47D26',
-        borderPress: '#5B812C',
+        press: '#FDDE99',
+        borderPress: '#A47D26',
         yellow: '#F9B317',
         plusButtom:'#C1D78F',
         minusButtom:'#FF8C8C',
+        buttonHover: '#E0FCA1',
       },
       borderRadius: {
         '5': '5px',
@@ -29,7 +28,7 @@ export default {
       },
       boxShadow: {
         'notPressShadow': '7px 7px 6px 0 rgba(70, 33, 23, 0.90) inset',
-        'pressShadow': '-7px -7px 6px 0px #506437 inset;'
+        'pressShadow': '-7px -7px 6px 0px rgba(70, 33, 23, 0.90) inset;'
       },
       rotate: {
         '135': '135deg',

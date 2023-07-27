@@ -171,7 +171,7 @@ else if (result.isDenied) {
 
           <div id="cart" className="h-auto w-[100%] p-[5%] text-[1.5rem] font-bold">
             {/* ---Titles--- */}
-            <div id="titles" className="h-[50px] w-[100%] grid grid-cols-10 gap-1 text-center">
+            <div id="titles" className="h-[50px] w-[100%] grid grid-cols-10 gap-1 text-center mb-[15px]">
               <div id="product" className="bg-yellow col-span-3 rounded-tl-[15px]">
                 Producto
               </div>
@@ -209,7 +209,7 @@ else if (result.isDenied) {
           >
             <button
               type="submit"
-              className="bg-colorButton h-[65px] w-[500px] items-center rounded-[45px]  font-bold text-brownText text-[1.5rem]"
+              className="bg-colorButton hover:bg-buttonHover h-[65px] w-[500px] items-center rounded-[45px]  font-bold text-brownText text-[1.5rem]"
             >
               Enviar a Cocina
             </button>

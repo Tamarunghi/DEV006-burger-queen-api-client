@@ -18,7 +18,7 @@ export const AddedToCart: React.FC<Product> = ({
   return (
     <div
       id="productTable"
-      className="h-[65px] w-[100%] grid grid-cols-10 gap-1 text-center text-[1.3rem]"
+      className="h-[65px] w-[100%] grid grid-cols-10 gap-1 text-center text-[1.3rem] mb-[5px]"
     >
       <div id="product" className="bg-skin col-span-3">
         {name}
