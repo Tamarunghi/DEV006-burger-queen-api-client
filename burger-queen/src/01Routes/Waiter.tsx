@@ -60,8 +60,11 @@ export const Waiter: React.FC = () => {
           ? { ...item, clicks: Math.max(1, item.clicks - 1) }
           : item
       );
+
       return updatedCartItems;
     })
+
+      
   }
   const handleDeleteCartItem = (productId: string) => {
     DeletePopup()
