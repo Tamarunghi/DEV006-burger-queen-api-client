@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { GetProducts } from "../02App/getProduct";
-import { PostOrders } from "../02App/postOrders";
+// import { PostOrders } from "../02App/postOrders";
 import { OrderSelectionItem } from "../03Components/OrderSelectionItem";
 import { AddedToCart, TotalAddedToCart } from "../03Components/AddedToCart";
 import { LoggedUserAndExist } from "../03Components/LoggedUserAndExist";
@@ -88,8 +88,8 @@ else if (result.isDenied) {
 
   return (
     <article className="h-[97vh] flex flex-col m-[20px]">
-      {/* ---Header(LOGO + MESERO)--- */}
-      <header className=" z-1 w-[100%] h-[25%] mb-[20px] flex items-center justify-between">
+      {/* ---HEADER(LOGO + MESERO)--- */}
+      <header className=" z-1 w-[100%] h-[20%] mb-[20px] flex items-center justify-between">
         <LogoPng/>
         <div className="w-[100%] h-[100%] flex flex-col items-end">        
           <LoggedUserAndExist />
@@ -102,8 +102,8 @@ else if (result.isDenied) {
         </div>
       </header>
 
-      {/* ---Main section--- */}
-      <main id="content" className=" z-1 h-[100%] w-[100%]">
+      {/* ---MAIN SECTION--- */}
+      <main id="content" className=" z-1 h-[80%] w-[100%]">
         {/* ---Desayuno - Almuerzo/Cena--- */}
         <section
           id="desayunoOalmuerzoCena"
@@ -132,7 +132,7 @@ else if (result.isDenied) {
         </section>
 
         {/* ---Order&Menu--- */}
-        <section id="menuYCompra" className=" h-[90%] w-[100%] bg-crema p-[4%]">
+        <section id="menuYCompra" className=" h-[755px] w-[100%] bg-crema p-[20px] overflow-auto">
           {/* ---Name + Table--- */}
           <div
             id="nameAndTable"
