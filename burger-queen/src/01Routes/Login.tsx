@@ -67,7 +67,7 @@ const Login: React.FC = () => {
 
       
           {error ? <p className="text-red text-2xl font-bold italic">{error}</p> : null}
-        <button type="submit" className="text-[3rem] bg-colorButton hover:bg-emerald-300 text-brownText font-bold mt-[8%] rounded-full w-[365px] h-[70px] z-1">Iniciar sesión</button>
+        <button type="submit" className="text-[3rem] bg-colorButton hover:bg-buttonHover text-brownText font-bold mt-[8%] rounded-full w-[365px] h-[70px] z-1">Iniciar sesión</button>
       </form>
       <Background/>
     </article>

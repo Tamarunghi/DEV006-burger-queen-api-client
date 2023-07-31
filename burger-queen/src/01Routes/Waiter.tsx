@@ -223,7 +223,7 @@ export const Waiter: React.FC = () => {
           >
             <button
               type="submit"
-              className="bg-colorButton h-[65px] w-[500px] items-center rounded-[45px]  font-bold text-brownText text-[1.5rem]"
+              className="bg-colorButton hover:bg-buttonHover h-[65px] w-[500px] items-center rounded-[45px]  font-bold text-brownText text-[1.5rem]"
             >
               Enviar a Cocina
             </button>

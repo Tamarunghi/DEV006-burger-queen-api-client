@@ -21,8 +21,3 @@ interface DeleteButton {
   isConfirmed: boolean;
   isDenied: boolean;
 }
-
-
-
-
-
