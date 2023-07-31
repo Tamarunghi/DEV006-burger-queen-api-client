@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import { requestGet } from "../03Components/request";
-import { useNavigate } from 'react-router-dom';
-// import burger from "../../Images/burger.png";
 import {LogoGif} from "../03Components/logoComponent"
 import { Background } from "../03Components/Background";
 
+interface INavigate {
+  navigate: (route:string) => void;
+}
 
-const Login: React.FC = () => {
+const Login: React.FC <INavigate>= ({navigate}) => {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const navigate = useNavigate();
 
   const handleLogin: React.FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();

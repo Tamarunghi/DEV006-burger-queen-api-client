@@ -96,6 +96,7 @@ export const Waiter: React.FC = () => {
         console.log(error);
       });
   };
+
   const handleSetValue = (
     callback: (a: string) => void,
     event: React.ChangeEvent<HTMLInputElement>
@@ -109,14 +110,17 @@ export const Waiter: React.FC = () => {
     const table = { customerTable };
     console.log(table);
     interface orderItems {
-      productId: number;
-      productName: string;
-      quantity: number;
+      qty: number;
+      product: {
+        id: number;
+        name: string;
+        price: number;
+      };
     }
     interface orderData {
-      customerName: string;
-      customerTable: number;
-      items: number;
+      id: number;
+      client: string;
+      products: orderItems[];
     }
     const orderItems = cartItems.map((item) => ({
       qty: item.clicks,
@@ -127,7 +131,7 @@ export const Waiter: React.FC = () => {
       },
     }));
     const orderData = {
-      id: table,
+      // id: table,
       client: name,
       products: orderItems,
     };
