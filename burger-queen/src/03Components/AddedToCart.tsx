@@ -2,10 +2,10 @@ import trashCan from "../04Images/trashCan.png";
 interface Product {
   name: string;
   price: number;
+  clicks: number
   Increment: () => void;
   Decrement: () => void;
   Delete: ()=> void,
-  clicks: number
 }
 export const AddedToCart: React.FC<Product> = ({
   name,

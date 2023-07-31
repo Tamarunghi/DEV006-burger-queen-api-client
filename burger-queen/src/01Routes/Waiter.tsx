@@ -1,18 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { GetProducts } from "../02App/getProduct";
+import { PostOrders } from "../02App/postOrders";
 import { OrderSelectionItem } from "../03Components/OrderSelectionItem";
 import { AddedToCart, TotalAddedToCart } from "../03Components/AddedToCart";
 import { LoggedUserAndExist } from "../03Components/LoggedUserAndExist";
 import { LogoPng } from "../03Components/logoComponent";
 import { Background } from "../03Components/Background";
 import { DeletePopup } from "../03Components/DeletePopup";
-import { NameAndTable } from "../03Components/NameAndTable";
+
+export interface ICartItems {
+  id: number;
+  clicks: number;
+  name: string;
+  price: number;
+}
 
 export const Waiter: React.FC = () => {
   const [products, setProducts] = useState<any[]>([]);
   const [productType, setProductType] = useState("Desayuno");
-  const [cartItems, setCartItems] = useState<any[]>([]);
-
+  const [cartItems, setCartItems] = useState<ICartItems[]>([]);
+  const [customerName, setCustomerName] = useState("");
+  const [customerTable, setcustomerTable] = useState("");
   useEffect(() => {
     GetProducts()
       .then((data) => {
@@ -33,7 +41,6 @@ export const Waiter: React.FC = () => {
   const handleAddToCart = (product: any) => {
     // Verifica si el producto ya está en el carrito
     const existingProduct = cartItems.find((item) => item.id === product.id);
-    const quantity = existingProduct ? existingProduct.clicks : 0;
 
     if (existingProduct) {
       // Si el producto ya está en el carrito, incrementar su contador de clics
@@ -51,7 +58,7 @@ export const Waiter: React.FC = () => {
       ]);
     }
   };
-  const handleIncremetQuantity = (productId: string) => {
+  const handleIncremetQuantity = (productId: number) => {
     setCartItems((prevCartItems) => {
       const updatedCartItems = prevCartItems.map((item) =>
         item.id === productId ? { ...item, clicks: item.clicks + 1 } : item
@@ -59,19 +66,18 @@ export const Waiter: React.FC = () => {
       return updatedCartItems;
     });
   };
-  const handleDecremetQuantity = (productId: string) =>{
-    setCartItems((prevCartItems)=>{
-      const updatedCartItems = prevCartItems.map((item)=>
-      item.id === productId ? {...item, clicks: Math.max(1,item.clicks-1)}:item
+  const handleDecremetQuantity = (productId: number) => {
+    setCartItems((prevCartItems) => {
+      const updatedCartItems = prevCartItems.map((item) =>
+        item.id === productId
+          ? { ...item, clicks: Math.max(1, item.clicks - 1) }
+          : item
       );
-      return updatedCartItems
-    });
-  }
-  
-  
-  
 
-  const handleDeleteCartItem = (productId: string) => {
+      return updatedCartItems;
+    });
+  };
+  const handleDeleteCartItem = (productId: number) => {
     DeletePopup()
       .then((result) => {
         if (result.isConfirmed) {
@@ -81,7 +87,6 @@ export const Waiter: React.FC = () => {
             );
             return updatedCartItems;
           });
-          setProductDelete(true);
         } else if (result.isDenied) {
           // El usuario hizo clic en el botón cancelar o cerró el SweetAlert
           console.log("Eliminación cancelada");
@@ -91,13 +96,59 @@ export const Waiter: React.FC = () => {
         console.log(error);
       });
   };
+  const handleSetValue = (
+    callback: (a: string) => void,
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    callback(event.target.value);
+  };
+
+  const handleSendOrders = () => {
+    const name = { customerName };
+    console.log(name);
+    const table = { customerTable };
+    console.log(table);
+    interface orderItems {
+      productId: number;
+      productName: string;
+      quantity: number;
+    }
+    interface orderData {
+      customerName: string;
+      customerTable: number;
+      items: number;
+    }
+    const orderItems = cartItems.map((item) => ({
+      qty: item.clicks,
+      product: {
+        id: item.id,
+        name: item.name,
+        price: item.price,
+      },
+    }));
+    const orderData = {
+      id: table,
+      client: name,
+      products: orderItems,
+    };
+    console.log(orderData);
+    // el signo ! significa que no es null ni undefined(typeScript)
+    PostOrders(orderData)
+      .then((response) => {
+        console.log("se guardooo perro", response);
+        return response;
+      })
+      .catch((error) => {
+        console.error("error perro", error);
+      });
+  };
 
   return (
     <article className="h-[97vh] flex flex-col m-[20px]">
-      {/* ---Header(LOGO + MESERO)--- */}
-      <header className=" z-1 w-[100%] h-[25%] mb-[20px] flex items-center justify-between">
-        <LogoPng/>
-        <div className="w-[100%] h-[100%] flex flex-col items-end">        
+      {/* ---HEADER(LOGO + MESERO)--- */}
+      <header className=" z-1 w-[100%] h-[20%] mb-[20px] flex items-center justify-between">
+        <LogoPng />
+        <div className="w-[100%] h-[100%] flex flex-col items-end">
           <LoggedUserAndExist />
           <label
             id="waiterPg"
@@ -108,8 +159,8 @@ export const Waiter: React.FC = () => {
         </div>
       </header>
 
-      {/* ---Main section--- */}
-      <main id="content" className=" z-1 h-[100%] w-[100%]">
+      {/* ---MAIN SECTION--- */}
+      <main id="content" className=" z-1 h-[80%] w-[100%]">
         {/* ---Desayuno - Almuerzo/Cena--- */}
         <section
           id="desayunoOalmuerzoCena"
@@ -140,21 +191,25 @@ export const Waiter: React.FC = () => {
         {/* ---Order&Menu--- */}
         <section
           id="menuYCompra"
-          className=" h-[90%] w-[100%] bg-crema text-darkBrown font-bold p-[4%]"
+          className=" h-[755px] w-[100%] bg-crema p-[20px] overflow-auto"
         >
           {/* ---Name + Table--- */}
           <div
             id="nameAndTable"
             className="h-[10%] w-[100%] p-[1%] flex flex-row justify-evenly items-center gap-1"
           >
-            <label>Nombre:</label>
+            <label id="name">Nombre:</label>
             <input
               type="text"
+              value={customerName}
+              onChange={(e) => handleSetValue(setCustomerName, e)}
               className="bg-skin h-[50%] w-[40%] rounded-5"
             ></input>
-            <label>Mesa:</label>
+            <label id="table">Mesa:</label>
             <input
               type="text"
+              value={customerTable}
+              onChange={(e) => handleSetValue(setcustomerTable, e)}
               className="bg-skin h-[50%] w-[40%] rounded-5"
             ></input>
           </div>
@@ -172,7 +227,10 @@ export const Waiter: React.FC = () => {
                   key={product.id}
                   name={product.name}
                   price={product.price}
-                  quantity={cartItems.find((item) => item.id === product.id)?.clicks || 0}
+                  quantity={
+                    cartItems.find((item) => item.id === product.id)?.clicks ||
+                    0
+                  }
                   onClick={() => {
                     handleAddToCart(product);
                   }}
@@ -187,23 +245,32 @@ export const Waiter: React.FC = () => {
             className="h-auto w-[100%] p-[5%] text-[1.5rem] font-bold"
           >
             {/* ---Titles--- */}
-            <div id="titles" className="h-[50px] w-[100%] grid grid-cols-10 gap-1 text-center mb-[15px]">
-              <div id="product" className="bg-yellow col-span-3 rounded-tl-[15px]">
+            <div
+              id="titles"
+              className="h-[50px] w-[100%] grid grid-cols-10 gap-1 text-center mb-[15px]"
+            >
+              <div
+                id="product"
+                className="bg-yellow col-span-3 rounded-tl-[15px]"
+              >
                 Producto
               </div>
               <div id="quantity" className="bg-yellow col-span-4">
                 Cantidad
               </div>
-              <div id="price" className="bg-yellow col-span-2 rounded-tr-[15px]" >
+              <div
+                id="price"
+                className="bg-yellow col-span-2 rounded-tr-[15px]"
+              >
                 Precio
               </div>
               <div id="delete" className="col-span-1"></div>
             </div>
 
             {/* ---Products added--- */}
-            {cartItems.map((product, id) => (
+            {cartItems.map((product) => (
               <AddedToCart
-                key={id}
+                key={product.id}
                 name={product.name}
                 clicks={product.clicks}
                 price={product.price}
@@ -223,7 +290,8 @@ export const Waiter: React.FC = () => {
           >
             <button
               type="submit"
-              className="bg-colorButton h-[65px] w-[500px] items-center rounded-[45px]  font-bold text-brownText text-[1.5rem]"
+              className="bg-colorButton hover:bg-buttonHover h-[65px] w-[500px] items-center rounded-[45px]  font-bold text-brownText text-[1.5rem]"
+              onClick={handleSendOrders}
             >
               Enviar a Cocina
             </button>
