@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { GetProducts } from "../02App/getProduct";
-import { OrderSelectionItem } from "../03Components/OrderSelectionItem";
-import { AddedToCart, TotalAddedToCart } from "../03Components/AddedToCart";
-import { LoggedUserAndExist } from "../03Components/LoggedUserAndExist";
-import { LogoPng } from "../03Components/logoComponent";
-import { Background } from "../03Components/Background";
-import { DeletePopup } from "../03Components/DeletePopup";
 import { PostOrders } from "../02App/postOrders";
+import { OrderSelectionItem } from "../03Components/Waiter/OrderSelectionItem";
+import { AddedToCart, TotalAddedToCart } from "../03Components/Waiter/AddedToCart";
+import { LoggedUserAndExist } from "../03Components/LoggedUserAndExist";
+import { DeletePopup } from "../03Components/Waiter/DeletePopup";
+import { LogoPng } from "../03Components/logoComponent";
+import { Background} from "../03Components/Background";
+
 
 export interface ICartItems {
   id: number;
