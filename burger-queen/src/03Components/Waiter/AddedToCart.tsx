@@ -1,4 +1,4 @@
-import trashCan from "../04Images/trashCan.png";
+import trashCan from "../../04Images/trashCan.png";
 interface Product {
   name: string;
   price: number;

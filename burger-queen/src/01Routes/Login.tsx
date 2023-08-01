@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { requestGet } from "../03Components/request";
+import { requestGet } from "../03Components/Login/request";
 import {LogoGif} from "../03Components/logoComponent"
 import { Background } from "../03Components/Background";
 
@@ -31,7 +31,7 @@ const Login: React.FC <INavigate>= ({navigate}) => {
           console.log("se rutea para mesero");
           break;
         case "cocina":
-          // navigate("/Cocina");
+          navigate("/Chef");
           console.log("se rutea para  cocinero")
           break;
         case "administrador":

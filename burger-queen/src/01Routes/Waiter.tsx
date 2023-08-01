@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { GetProducts } from "../02App/getProduct";
 import { PostOrders } from "../02App/postOrders";
-import { OrderSelectionItem } from "../03Components/OrderSelectionItem";
-import { AddedToCart, TotalAddedToCart } from "../03Components/AddedToCart";
+import { OrderSelectionItem } from "../03Components/Waiter/OrderSelectionItem";
+import { AddedToCart, TotalAddedToCart } from "../03Components/Waiter/AddedToCart";
 import { LoggedUserAndExist } from "../03Components/LoggedUserAndExist";
 import { LogoPng } from "../03Components/logoComponent";
 import { Background } from "../03Components/Background";
-import { DeletePopup } from "../03Components/DeletePopup";
+import { DeletePopup } from "../03Components/Waiter/DeletePopup";
 
 export interface ICartItems {
   id: number;
@@ -110,8 +110,8 @@ export const Waiter: React.FC = () => {
     const table = { customerTable };
     console.log(table);
     interface orderItems {
-      qty: number;
       product: {
+      qty: number;
         id: number;
         name: string;
         price: number;
@@ -119,12 +119,15 @@ export const Waiter: React.FC = () => {
     }
     interface orderData {
       id: number;
+      UserId: number;
       client: string;
       products: orderItems[];
+      status: string;
+      dantaEntry: Date;
     }
     const orderItems = cartItems.map((item) => ({
-      qty: item.clicks,
       product: {
+        qty: item.clicks,
         id: item.id,
         name: item.name,
         price: item.price,
