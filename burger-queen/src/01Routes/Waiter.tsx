@@ -8,7 +8,6 @@ import { DeletePopup } from "../03Components/Waiter/DeletePopup";
 import { LogoPng } from "../03Components/logoComponent";
 import { Background} from "../03Components/Background";
 
-
 export interface ICartItems {
   id: number;
   clicks: number;

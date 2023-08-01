@@ -1,21 +1,25 @@
-const 
-
+export const AddedToList: React.FC=()=>{
+  
 return(
-    <div
-        id="buttom1"
-        className={`h-[90px] w-[220px] text-[1.1rem] p-4 text-darkBrown font-extrabold border-[0.1px] border-brownText rounded-25 flex flex-row shadow-notPressShadow opacity-70 ${
-          isClicked ? quantity > 0
-           ? "text-darkBrown border-brownText shadow-pressShadow opacity-100 bg-press"
-            : ""
-            : ""
-          }`}
-        onClick={handleClick}
-      >
-        <div id="product" className="h-[90px] w-[140px] rounded-tl-25 rounded-bl-25">
-          {name}
-        </div>
-        <div id="price" className="h-[90px] w-[60px] rounded-tr-25 rounded-br-25">
-          ${price}
-        </div>
-      </div>
+ 
+<section className= "h-[700px] w-[700px] text-[1.1rem] p-4 text-darkBrown font-extrabold border-[0.1px] border-brownText rounded-25 flex flex-row shadow-notPressShadow opacity-70">
+<div className="h-[90%] w-[90%] grid grid-cols-3 gap-4">
+  <div className="bg-green-500 col-start-1 col-end-4">01</div>
+  <div className="bg-yellow col-start-1 col-end-3">02</div>
+  <div className="bg-blue-500 col-end-3 col-end-4">03</div>
+ </div>
+</section>
+ 
 )
+}
+ // <div
+  //     id="pendingList"
+  //     className="h-[90px] w-[220px] text-[1.1rem] p-4 text-darkBrown font-extrabold border-[0.1px] border-brownText rounded-25 flex flex-row shadow-notPressShadow opacity-70"
+  //      >
+  //     <div className="h-[90px] w-[140px] rounded-tl-25 rounded-bl-25">
+       
+  //     </div>
+  //     <div className="h-[90px] w-[60px] rounded-tr-25 rounded-br-25">
+       
+  //     </div>
+  //   </div>
