@@ -4,9 +4,9 @@ import { PostOrders } from "../02App/postOrders";
 import { OrderSelectionItem } from "../03Components/Waiter/OrderSelectionItem";
 import { AddedToCart, TotalAddedToCart } from "../03Components/Waiter/AddedToCart";
 import { LoggedUserAndExist } from "../03Components/LoggedUserAndExist";
-import { LogoPng } from "../03Components/logoComponent";
-import { Background } from "../03Components/Background";
 import { DeletePopup } from "../03Components/Waiter/DeletePopup";
+import { LogoPng } from "../03Components/logoComponent";
+import { Background} from "../03Components/Background";
 
 export interface ICartItems {
   id: number;
@@ -110,8 +110,8 @@ export const Waiter: React.FC = () => {
     const table = { customerTable };
     console.log(table);
     interface orderItems {
-      product: {
       qty: number;
+      product: {
         id: number;
         name: string;
         price: number;
@@ -119,15 +119,12 @@ export const Waiter: React.FC = () => {
     }
     interface orderData {
       id: number;
-      UserId: number;
       client: string;
       products: orderItems[];
-      status: string;
-      dantaEntry: Date;
     }
     const orderItems = cartItems.map((item) => ({
+      qty: item.clicks,
       product: {
-        qty: item.clicks,
         id: item.id,
         name: item.name,
         price: item.price,
@@ -214,7 +211,7 @@ export const Waiter: React.FC = () => {
             ></input>
             <label id="table">Mesa:</label>
             <input
-              type="text"
+              type="number"
               value={customerTable}
               onChange={(e) => handleSetValue(setcustomerTable, e)}
               className="bg-skin h-[50%] w-[40%] rounded-5"

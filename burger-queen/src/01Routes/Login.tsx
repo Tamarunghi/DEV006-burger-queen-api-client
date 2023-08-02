@@ -6,7 +6,7 @@ import { Background } from "../03Components/Background";
 interface INavigate {
   navigate: (route:string) => void;
 }
-
+ 
 const Login: React.FC <INavigate>= ({navigate}) => {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
@@ -31,7 +31,7 @@ const Login: React.FC <INavigate>= ({navigate}) => {
           console.log("se rutea para mesero");
           break;
         case "cocina":
-          navigate("/Chef");
+          navigate("/chef");
           console.log("se rutea para  cocinero")
           break;
         case "administrador":
@@ -67,7 +67,7 @@ const Login: React.FC <INavigate>= ({navigate}) => {
 
       
           {error ? <p className="text-red text-2xl font-bold italic">{error}</p> : null}
-        <button type="submit" className="text-[3rem] bg-colorButton hover:bg-emerald-300 text-brownText font-bold mt-[8%] rounded-full w-[365px] h-[70px] z-1">Iniciar sesión</button>
+        <button type="submit" className="text-[3rem] bg-colorButton hover:bg-buttonHover text-brownText font-bold mt-[8%] rounded-full w-[365px] h-[70px] z-1">Iniciar sesión</button>
       </form>
       <Background/>
     </article>

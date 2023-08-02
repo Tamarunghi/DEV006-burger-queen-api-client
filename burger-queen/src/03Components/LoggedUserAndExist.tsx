@@ -13,8 +13,8 @@ export const LoggedUserAndExist = () => {
 
   return (
     <div className="flex flex-col items-end">
-      <h1 className=" text-[1.5rem] text-darkBrown font-extrabold">{userInfo}</h1>
-      <img src={exit} onClick={handleLogOut} className="w-[50px] h-auto"/>
-    </div>
+    <h1 className=" text-[1.5rem] text-darkBrown font-extrabold">{userInfo}</h1>
+    <img src={exit} onClick={handleLogOut} className="w-[50px] h-auto"/>
+  </div>
   );
 };

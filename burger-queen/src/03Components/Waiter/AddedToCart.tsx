@@ -2,10 +2,10 @@ import trashCan from "../../04Images/trashCan.png";
 interface Product {
   name: string;
   price: number;
-  clicks: number
   Increment: () => void;
   Decrement: () => void;
   Delete: ()=> void,
+  clicks: number
 }
 export const AddedToCart: React.FC<Product> = ({
   name,
@@ -23,11 +23,11 @@ export const AddedToCart: React.FC<Product> = ({
       <div id="product" className="bg-skin col-span-3">
         {name}
       </div>
-      <div id="quantity" className="bg-skin col-span-4 grid grid-cols-3">
-        <div id="minus" className="bg-minusButtom  text-[2.5rem]" onClick={Decrement}>
+      <div id="quantity" className="bg-skin col-span-4 grid grid-cols-3 text-[2.5rem]">
+        <div id="minus" className="bg-minusButtom" onClick={Decrement}>
           -
         </div>
-        <div id="number" className="text-[1.5rem]">{clicks}</div>
+        <div id="number"  className="text-[1.5rem]">{clicks}</div>
         <div id="plus" className="bg-plusButtom text-[2.5rem]" onClick={Increment}>
           +
         </div>

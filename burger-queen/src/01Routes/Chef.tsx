@@ -1,30 +1,23 @@
-import React, { useState, useEffect } from "react";
-import { GetOrders } from "../02App/getOrders";
+import React, { useEffect, useState } from "react";
 import { LogoPng } from "../03Components/logoComponent";
 import { Background } from "../03Components/Background";
 import { LoggedUserAndExist } from "../03Components/LoggedUserAndExist";
 import { AddedToList } from "../03Components/Chef/AddedToList";
+import { GetOrders } from "../02App/getOrders";
 
 export const Chef: React.FC = () => {
-    const [statusType, setStatusType] = useState("pendiente");
-    const [orders, setOrders] = useState<any[]>([]);
+  const [orders, setOrders] = useState<any[]>([]);
 
-    useEffect(() => {
-        // En el efecto, obten las órdenes utilizando la función GetOrders
-        GetOrders()
-          .then((data) => {
-            setOrders(data); // Guarda las órdenes en el estado 'orders'
-          })
-          .catch((error) => {
-            console.error("Error fetching orders", error);
-          });
-      }, []);
-
-    const handleSelectStatusType = (type: string) => {
-        setStatusType(type);
-      };
-
-
+  useEffect(() => {
+    // En el efecto, obten las órdenes utilizando la función GetOrders
+    GetOrders()
+      .then((data) => {
+        setOrders(data); // Guarda las órdenes en el estado 'orders'
+      })
+      .catch((error) => {
+        console.error("Error fetching orders", error);
+      });
+  }, []);
 
   return (
     <article className="h-[97vh] flex flex-col m-[20px]">
@@ -47,42 +40,24 @@ export const Chef: React.FC = () => {
           id="list"
           className=" h-[10%] w-[100%] flex flex-row justify-end"
         >
-          <div
-            className={`h-[100%] w-[250px] bg-crema rounded-tl-[25px] text-3xl font-bold flex items-center justify-center ${
-              statusType === "pendiente"
-                ? "textTransform: uppercase"
-                : "bg-yellow" // Aplicamos estilo con bg-yellow si es el tipo de producto seleccionado
-            }`}
-            onClick={() => handleSelectStatusType("pendiente")} // Manejador para seleccionar desayuno
+          <h1
+            className={`h-[100%] w-[250px] bg-crema rounded-t-[25px] text-3xl font-bold flex items-center justify-center`}
           >
-            <label>Pendiente</label>
-          </div>
-          <div
-            className={`h-[100%] w-[250px] bg-crema rounded-tr-[25px] text-3xl font-bold flex items-center justify-center ${
-              statusType === "entregado"
-                ? "textTransform: uppercase"
-                : "bg-yellow" // Aplicamos estilo con bg-yellow si es el tipo de producto seleccionado
-            }`}
-            onClick={() => handleSelectStatusType("entregado")} // Manejador para seleccionar desayuno
-             >
-            <label>Entregado</label>
-          </div>
+            Pedidos
+          </h1>
         </section>
 
         <section
           id="listado"
           className=" h-[755px] w-[100%] bg-crema p-[20px] overflow-auto"
         >
-        {orders.map((order)=>(
-        <AddedToList
-        key={order.id}
-        client={order.client}
-        products={order.products.map((product:any)=> ({
-            productName: product.name,
-            quantity: product.qty,
-        }))}
-        />
-        ))}
+          {orders.map((order) => (
+            <AddedToList
+              key={order.id}
+              client={order.client}
+              products={order.products}
+            />
+          ))}
         </section>
       </main>
 
