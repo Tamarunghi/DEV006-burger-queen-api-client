@@ -202,14 +202,14 @@ export const Waiter: React.FC = () => {
             id="nameAndTable"
             className="h-[10%] w-[100%] p-[1%] flex flex-row justify-evenly items-center gap-1"
           >
-            <label>Nombre:</label>
+            <label id="name">Nombre:</label>
             <input
               type="text"
               value={customerName}
               onChange={(e) => handleSetValue(setCustomerName, e)}
               className="bg-skin h-[50%] w-[40%] rounded-5"
             ></input>
-            <label>Mesa:</label>
+            <label id="table">Mesa:</label>
             <input
               type="number"
               value={customerTable}
@@ -272,9 +272,9 @@ export const Waiter: React.FC = () => {
             </div>
 
             {/* ---Products added--- */}
-            {cartItems.map((product, id) => (
+            {cartItems.map((product) => (
               <AddedToCart
-                key={id}
+                key={product.id}
                 name={product.name}
                 clicks={product.clicks}
                 price={product.price}
