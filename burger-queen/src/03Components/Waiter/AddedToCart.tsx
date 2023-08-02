@@ -1,5 +1,5 @@
 import trashCan from "../../04Images/trashCan.png";
-interface Product {
+interface IAddedToCartProps {
   name: string;
   price: number;
   Increment: () => void;
@@ -7,7 +7,7 @@ interface Product {
   Delete: ()=> void,
   clicks: number
 }
-export const AddedToCart: React.FC<Product> = ({
+export const AddedToCart: React.FC<IAddedToCartProps> = ({
   name,
   price,
   clicks,
@@ -46,7 +46,7 @@ export const AddedToCart: React.FC<Product> = ({
   );
 };
 interface Total {
-  cartItems: Product[];
+  cartItems: IAddedToCartProps[];
 }
 export const TotalAddedToCart: React.FC<Total> = ({cartItems}) => {
 

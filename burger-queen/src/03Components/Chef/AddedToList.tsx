@@ -1,18 +1,16 @@
-interface IProduct {
-  qty: number;
-  product: {
-    id: number;
-    name: string;
-    price: number;
-    image: string;
-    type: string;
-    dateEntry: string;
-  };
+import { orderItems } from "../../01Routes/Waiter";
+
+export interface IProduct {
+  id: number;
+  name: string;
+  price: number;
+  type: string;
+  dateEntry: string;
 }
 
 interface IAddedToList {
   client: string;
-  products: IProduct[];
+  products: orderItems[];
 }
 
 export const AddedToList: React.FC<IAddedToList> = ({ client, products }) => {
@@ -29,8 +27,15 @@ export const AddedToList: React.FC<IAddedToList> = ({ client, products }) => {
         </div>
         <form className="col-start-1 col-end-3 flex flex-col">
           {products.map((product) => (
-            <label key={product.product.id} htmlFor={`checkbox-${product.product.id}`}>
-              <input type="checkbox" id={`checkbox-${product.product.id}`} className="w-[1.2rem] h-auto" />
+            <label
+              key={product.product.id}
+              htmlFor={`checkbox-${product.product.id}`}
+            >
+              <input
+                type="checkbox"
+                id={`checkbox-${product.product.id}`}
+                className="w-[1.2rem] h-auto"
+              />
               {`${product.qty}  ${product.product.name}`}
             </label>
           ))}

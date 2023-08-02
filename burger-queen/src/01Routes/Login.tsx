@@ -24,6 +24,7 @@ const Login: React.FC <INavigate>= ({navigate}) => {
       const role = data.user.role;
       console.log(role);
       localStorage.setItem("userEmail", data.user.email);
+      localStorage.setItem("userId", data.user.id.toString());
       localStorage.setItem("token", token);
       switch (role) {
         case "mesero":

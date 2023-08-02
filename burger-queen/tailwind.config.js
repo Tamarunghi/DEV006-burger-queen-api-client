@@ -21,6 +21,7 @@ export default {
         plusButtom:'#C1D78F',
         minusButtom:'#FF8C8C',
         buttonHover: '#E0FCA1',
+        anotherYellow:'#FBC959',
       },
       borderRadius: {
         '5': '5px',
