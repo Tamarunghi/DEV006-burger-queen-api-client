@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import dayjs from "dayjs";
 import { GetProducts } from "../02App/getProduct";
 import { PostOrders } from "../02App/postOrders";
 import { OrderSelectionItem } from "../03Components/Waiter/OrderSelectionItem";
@@ -7,13 +8,8 @@ import { LoggedUserAndExist } from "../03Components/LoggedUserAndExist";
 import { DeletePopup } from "../03Components/Waiter/DeletePopup";
 import { LogoPng } from "../03Components/logoComponent";
 import { Background} from "../03Components/Background";
+import { ICartItems, orderItems, orderData } from "../03Components/Interfaces";
 
-export interface ICartItems {
-  id: number;
-  clicks: number;
-  name: string;
-  price: number;
-}
 
 export const Waiter: React.FC = () => {
   const [products, setProducts] = useState<any[]>([]);
@@ -28,6 +24,7 @@ export const Waiter: React.FC = () => {
           ...product,
           clicks: 0,
         }));
+        console.log(data);
         setProducts(productsWithClick);
       })
       .catch((error) => {
@@ -109,40 +106,32 @@ export const Waiter: React.FC = () => {
     console.log(name);
     const table = { customerTable };
     console.log(table);
-    interface orderItems {
-      qty: number;
-      product: {
-        id: number;
-        name: string;
-        price: number;
-      };
-    }
-    interface orderData {
-      id: number;
-      client: string;
-      products: orderItems[];
-    }
-    const orderItems = cartItems.map((item) => ({
+   
+    const orderItems: orderItems[] = cartItems.map((item) => ({
       qty: item.clicks,
       product: {
         id: item.id,
         name: item.name,
         price: item.price,
-      },
+        type: item.type,
+        dateEntry: item.dateEntry,
+        // imagen: item.image,
+         },
     }));
-    const orderData = {
-      // id: table,
-      client: name,
+    const orderData: orderData = {
+      userId: localStorage.getItem("userId"),
+      client: name.customerName,
       products: orderItems,
+      status: "pendiente",
+      dateEntry: new Date().toISOString(),
     };
     console.log(orderData);
-    // el signo ! significa que no es null ni undefined(typeScript)
-    PostOrders(orderData)
+      PostOrders(orderData)
       .then((response) => {
         console.log("se guardooo perro", response);
         return response;
       })
-      .catch((error) => {
+      .catch((error) => {7
         console.error("error perro", error);
       });
   };
@@ -171,50 +160,60 @@ export const Waiter: React.FC = () => {
           className=" h-[10%] w-[100%] flex flex-row justify-end"
         >
           <div
-            className={`h-[100%] w-[250px] bg-crema rounded-tl-[25px] text-3xl font-bold flex items-center justify-center ${
+            className={`h-[100%] w-[220px] bg-crema text-brownText rounded-t-[25px] text-3xl font-bold flex items-center justify-center ${
               productType === "Desayuno"
                 ? "textTransform: uppercase"
                 : "bg-yellow" // Aplicamos estilo con bg-yellow si es el tipo de producto seleccionado
             }`}
             onClick={() => handleSelectProductType("Desayuno")} // Manejador para seleccionar desayuno
           >
-            <label>Desayuno</label>
+            <h1>Desayuno</h1>
           </div>
           <div
-            className={`h-[100%] w-[250px] bg-crema rounded-tr-[25px] text-3xl font-bold flex items-center justify-center ${
+            className={`h-[100%] w-[280px] bg-crema text-brownText rounded-t-[25px] text-3xl font-bold flex items-center justify-center ${
               productType === "Almuerzo"
                 ? "textTransform: uppercase"
                 : "bg-yellow" // Aplicamos estilo con bg-yellow si es el tipo de producto seleccionado
             }`}
             onClick={() => handleSelectProductType("Almuerzo")} // Manejador para seleccionar Almuerzo
           >
-            <label>Almuerzo/Cena</label>
+            <h1>Almuerzo/Cena</h1>
+          </div>
+          <div
+            className={`h-[100%] w-[220px] bg-crema text-brownText rounded-t-[25px] text-3xl font-bold flex items-center justify-center ${
+              productType === "Pedidos"
+                ? "textTransform: uppercase"
+                : "bg-yellow" // Aplicamos estilo con bg-yellow si es el tipo de producto seleccionado
+            }`}
+            onClick={() => handleSelectProductType("Pedidos")} // Manejador para seleccionar Almuerzo
+          >
+            <h1>pedidos</h1>
           </div>
         </section>
 
         {/* ---Order&Menu--- */}
         <section
           id="menuYCompra"
-          className=" h-[755px] w-[100%] bg-crema p-[20px] overflow-auto"
+          className=" h-[755px] w-[100%] bg-crema p-[20px] rounded-b-[25px] rounded-tl-[25px] overflow-auto"
         >
           {/* ---Name + Table--- */}
           <div
             id="nameAndTable"
-            className="h-[10%] w-[100%] p-[1%] flex flex-row justify-evenly items-center gap-1"
+            className="h-[10%] w-[100%] p-[1%] text-brownText text-[1.2rem] font-bold flex flex-row justify-evenly items-center gap-1"
           >
-            <label id="name">Nombre:</label>
+            <h1>Nombre:</h1>
             <input
               type="text"
               value={customerName}
               onChange={(e) => handleSetValue(setCustomerName, e)}
               className="bg-skin h-[50%] w-[40%] rounded-5"
             ></input>
-            <label id="table">Mesa:</label>
+            <h1>Mesa:</h1>
             <input
               type="number"
               value={customerTable}
               onChange={(e) => handleSetValue(setcustomerTable, e)}
-              className="bg-skin h-[50%] w-[40%] rounded-5"
+              className="bg-skin h-[50%] w-[20%] rounded-5"
             ></input>
           </div>
 
@@ -231,6 +230,7 @@ export const Waiter: React.FC = () => {
                   key={product.id}
                   name={product.name}
                   price={product.price}
+                  // image={product.image}
                   quantity={
                     cartItems.find((item) => item.id === product.id)?.clicks ||
                     0

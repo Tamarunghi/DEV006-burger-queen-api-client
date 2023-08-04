@@ -49,7 +49,7 @@ export const Chef: React.FC = () => {
 
         <section
           id="listado"
-          className=" h-[755px] w-[100%] bg-crema p-[20px] overflow-auto"
+          className=" h-[755px] w-[100%] bg-crema p-[20px] rounded-b-[25px] rounded-tl-[25px] overflow-auto"
         >
           {orders.map((order) => (
             <AddedToList

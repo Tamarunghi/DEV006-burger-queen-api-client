@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import { requestGet } from "../03Components/Login/request";
 import {LogoGif} from "../03Components/logoComponent"
 import { Background } from "../03Components/Background";
+import { INavigate } from "../03Components/Interfaces";
 
-interface INavigate {
-  navigate: (route:string) => void;
-}
+
  
 const Login: React.FC <INavigate>= ({navigate}) => {
   const [user, setUser] = useState("");
@@ -24,6 +23,7 @@ const Login: React.FC <INavigate>= ({navigate}) => {
       const role = data.user.role;
       console.log(role);
       localStorage.setItem("userEmail", data.user.email);
+      localStorage.setItem("userId", data.user.id.toString());
       localStorage.setItem("token", token);
       switch (role) {
         case "mesero":
