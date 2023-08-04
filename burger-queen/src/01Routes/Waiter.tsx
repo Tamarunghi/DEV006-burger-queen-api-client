@@ -10,7 +10,6 @@ import { LogoPng } from "../03Components/logoComponent";
 import { Background} from "../03Components/Background";
 import { ICartItems, orderItems, orderData } from "../03Components/Interfaces";
 
-
 export const Waiter: React.FC = () => {
   const [products, setProducts] = useState<any[]>([]);
   const [productType, setProductType] = useState("Desayuno");
@@ -106,6 +105,8 @@ export const Waiter: React.FC = () => {
     console.log(name);
     const table = { customerTable };
     console.log(table);
+  //   const currentDateFormatted = dayjs().format("YYYY-MM-DD HH:mm:ss");
+  // console.log("Current Date:", currentDateFormatted);
    
     const orderItems: orderItems[] = cartItems.map((item) => ({
       qty: item.clicks,
@@ -123,7 +124,7 @@ export const Waiter: React.FC = () => {
       client: name.customerName,
       products: orderItems,
       status: "pendiente",
-      dateEntry: new Date().toISOString(),
+      dateEntry: dayjs().format("YYYY-MM-DD HH:mm:ss"),
     };
     console.log(orderData);
       PostOrders(orderData)

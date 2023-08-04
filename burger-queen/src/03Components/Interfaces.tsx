@@ -34,7 +34,7 @@ export interface orderData {
   client: string;
   products: orderItems[];
   status: string;
-  dateEntry: string;
+  dateEntry: any;
   
 }
 export interface TimeCounterProps {

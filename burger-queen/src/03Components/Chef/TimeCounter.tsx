@@ -30,8 +30,7 @@ export const TimeCounter: React.FC<TimeCounterProps> = ({dateEntry}) => {
 
   return (
     <div>
-      <h1>Cronómetro</h1>
-      <div>{calcularTiempoTranscurrido()}</div>
+      <p>{calcularTiempoTranscurrido()}</p>
     </div>
   );
 };
