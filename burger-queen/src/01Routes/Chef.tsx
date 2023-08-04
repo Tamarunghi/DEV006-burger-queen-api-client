@@ -56,6 +56,7 @@ export const Chef: React.FC = () => {
               key={order.id}
               client={order.client}
               products={order.products}
+              dateEntry={order.dateEntry}
             />
           ))}
         </section>
