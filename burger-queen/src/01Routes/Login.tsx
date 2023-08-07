@@ -52,15 +52,15 @@ const Login: React.FC <INavigate>= ({navigate}) => {
   return (
     <article className="w-[97vw] h-[97vh] flex flex-col justify-start">
 
-      <section className="z-1 w-[45vw] h-[45vh] p-1 justify-start items-start relative">
+      <section className="z-1 w-[45vw] h-[45vh] p-1 justify-start items-start">
         <LogoGif/>
       </section>
-      <form onSubmit={handleLogin} className="z-1 ml-[10%] flex flex-col justify-center items-center p-1 mt-[-9px]">
-          <label className="mb-4 text-center block text-gray-700  text-[3rem] font-bold mb-[1%]">
+      <form onSubmit={handleLogin} className="z-1 ml-[10%] flex flex-col justify-center items-center text-ce p-1 mt-[-9px]">
+          <label className="text-crema border-brownText mb-6 text-center block text-[3rem] font-bold mb-[1%] drop-shadow-[4px_4px_0.5px_#65362A]">
             Usuario
           </label>
           <input className="shadow appearance-none border rounded w-[325px] h-[50px] text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline text-center z-1 " type="email"  placeholder="example@gmail.com" autoComplete="email" onChange={(e) => setUser(e.target.value)} style={{ fontSize: '1.5rem' }}/>
-          <label className="mb-6 text-center block text-gray-700 text-[3rem] font-bold mb-[1%]">
+          <label className="text-crema border-brownText mb-6 text-center block text-[3rem] font-bold mb-[1%] drop-shadow-[4px_4px_0.5px_#65362A]">
             Contraseña
           </label>
           <input className="shadow appearance-none border rounded w-[325px] h-[50px] text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-center z-1 " type="password" placeholder="******************" autoComplete="current-password" onChange={(e) => setPassword(e.target.value)}style={{ fontSize: '1.5rem' }} />

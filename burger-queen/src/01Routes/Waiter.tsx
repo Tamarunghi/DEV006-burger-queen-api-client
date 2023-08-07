@@ -144,12 +144,12 @@ export const Waiter: React.FC = () => {
         <LogoPng />
         <div className="w-[100%] h-[100%] flex flex-col items-end">
           <LoggedUserAndExist />
-          <label
+          <h1
             id="waiterPg"
             className="font-bold text-[90px] text-crema border-brownText drop-shadow-[4px_4px_0.5px_#65362A]"
           >
             MESERO
-          </label>
+          </h1>
         </div>
       </header>
 

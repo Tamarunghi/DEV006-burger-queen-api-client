@@ -13,6 +13,7 @@ export const AddedToList: React.FC<orderData> = ({
 
   const handleSendButton = (type: string) => {
     setSendButton(type);
+    console.log(SendButton)
   };
 
   return (
@@ -60,10 +61,10 @@ export const AddedToList: React.FC<orderData> = ({
         {/* ---BUTTON--- */}
         <div className="col-end-3 col-end-4 flex justify-end items-center">
           <button
-            className={`bg-plusButtom h-[50px] w-[80%] text-greenText rounded-r-[25px] border-[1.5px] border-greenText ${
+            className={`h-[50px] w-[80%] text-greenText rounded-r-[25px] border-[1.5px] border-greenText ${
               SendButton === "Pendiente"
-                ? "bg-lightRed text-redText border-redText"
-                : "" // No necesitas agregar ninguna clase si no es "Pendiente"
+                ? "bg-lRed text-redText border-redText"
+                : "bg-plusButtom" // No necesitas agregar ninguna clase si no es "Pendiente"
             }`}
             onClick={() => {
               if (SendButton === "Pendiente") {
