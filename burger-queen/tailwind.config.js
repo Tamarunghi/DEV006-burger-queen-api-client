@@ -15,7 +15,6 @@ export default {
         redText: '#7A322E',
         darkGreen: '#162503',
         red: '#E40909',
-        lRed: '#FF8A8A',
         skin: '#D9C5B3',
         press: '#FDDE99',
         borderPress: '#A47D26',

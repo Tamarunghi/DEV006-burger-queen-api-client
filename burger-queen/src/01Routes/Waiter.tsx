@@ -10,12 +10,14 @@ import { LogoPng } from "../03Components/logoComponent";
 import { Background} from "../03Components/Background";
 import { ICartItems, orderItems, orderData } from "../03Components/Interfaces";
 
+
 export const Waiter: React.FC = () => {
   const [products, setProducts] = useState<any[]>([]);
   const [productType, setProductType] = useState("Desayuno");
   const [cartItems, setCartItems] = useState<ICartItems[]>([]);
   const [customerName, setCustomerName] = useState("");
   const [customerTable, setcustomerTable] = useState("");
+  
   useEffect(() => {
     GetProducts()
       .then((data) => {
@@ -121,7 +123,7 @@ export const Waiter: React.FC = () => {
     }));
     const orderData: orderData = {
       userId: localStorage.getItem("userId"),
-      client: name.customerName,
+      client: customerName,
       products: orderItems,
       status: "pendiente",
       dateEntry: dayjs().format("YYYY-MM-DD HH:mm:ss"),
