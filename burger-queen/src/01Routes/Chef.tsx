@@ -53,12 +53,13 @@ export const Chef: React.FC = () => {
         >
           {orders.map((order) => (
             <AddedToList
+              id={order.id}
               key={order.id}
               client={order.client}
               products={order.products}
               dateEntry={order.dateEntry}
-              userId={undefined}
-              status={""}
+              userId={order.userId}
+              status={order.status}
             />
           ))}
         </section>

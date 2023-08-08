@@ -1,16 +1,26 @@
-import { orderData } from "../Interfaces";
+import { IAddedToList } from "../Interfaces";
 import React, { useState } from "react";
 import { TimeCounter } from "./TimeCounter";
+import { completeOrder } from "../../02App/patchOrders";
 
-export const AddedToList: React.FC<orderData> = ({
+export const AddedToList: React.FC<IAddedToList> = ({
   client,
+  id,
   products,
   dateEntry,
 }) => {
   const [SendButton, setSendButton] = useState("Pendiente");
 
   const handleSendButton = (type: string) => {
-    setSendButton(type);
+    completeOrder(id)
+      .then((response) => {
+        setSendButton(type);
+        console.log("logrado");
+        return response;
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (
