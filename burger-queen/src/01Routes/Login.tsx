@@ -54,12 +54,12 @@ const Login: React.FC<INavigate> = ({ navigate }) => {
 
   return (
     <article className="w-[97vw] h-[97vh] flex flex-col justify-start">
-      <section className="z-1 w-[45vw] h-[45vh] p-1 justify-start items-start">
+      <section className="z-1 w-[45vw] h-[45vh] p-1 justify-start items-start hm:mt-[-18px]">
         <LogoGif />
       </section>
       <form
         onSubmit={handleLogin}
-        className="z-1 ml-[10%] flex flex-col justify-center items-center text-ce p-1 mt-[-9px]"
+        className="z-1 h-[382px] w-[500px] ml-[39%] flex flex-col justify-center items-center text-ce p-1 hm:mt-[-9px] hm:ml-[50%]"
       >
         <label className="text-crema border-brownText mb-6 text-center block text-[3rem] font-bold mb-[1%] drop-shadow-[4px_4px_0.5px_#65362A]">
           Usuario

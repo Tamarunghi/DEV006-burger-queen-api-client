@@ -24,14 +24,14 @@ const Myroute = () => {
     <Routes>
       <Route path="/" element={<Login navigate={navigate} />} />
       <Route path="/waiter" element={
-        <ProtectedRoute logged={logged} allowedRoles={['mesero']}>
+        // <ProtectedRoute logged={logged} allowedRoles={['mesero']}>
           <Waiter />
-        </ProtectedRoute>
+        // </ProtectedRoute>
       } />
       <Route path="/chef" element={
-        <ProtectedRoute logged={logged} allowedRoles={['cocina']}>
+        // <ProtectedRoute logged={logged} allowedRoles={['cocina']}>
           <Chef />
-        </ProtectedRoute>
+        // </ProtectedRoute>
       } />
       {/* Ruta comodín para redirigir a Login en caso de ruta incorrecta */}
       <Route path="*" element={<NotFound />} />

@@ -6,5 +6,5 @@ export function LogoGif(){
 }
 
 export function LogoPng(){
-    return <img src={LogoImagePng} alt="burgerQueenLogo" className="h-[270px]"/>
+    return <img src={LogoImagePng} alt="burgerQueenLogo" className="h-[270px] hm:h-[180%] hm:mb-[-80px]"/>
  }

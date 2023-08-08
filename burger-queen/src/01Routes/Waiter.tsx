@@ -140,15 +140,15 @@ export const Waiter: React.FC = () => {
   };
 
   return (
-    <article className="h-[97vh] flex flex-col m-[20px]">
+    <article className="h-[97vh] hm:vw-[97vw] flex flex-col m-[20px]">
       {/* ---HEADER(LOGO + MESERO)--- */}
-      <header className=" z-1 w-[100%] h-[20%] mb-[20px] flex items-center justify-between">
+      <header className=" z-2 w-[100%] h-[20%] hm:[10%] mb-[20px] flex items-center justify-between">
         <LogoPng />
         <div className="w-[100%] h-[100%] flex flex-col items-end">
           <LoggedUserAndExist />
           <h1
             id="waiterPg"
-            className="font-bold text-[90px] text-crema border-brownText drop-shadow-[4px_4px_0.5px_#65362A]"
+            className="font-bold text-[90px] text-crema border-brownText drop-shadow-[4px_4px_0.5px_#65362A] hm:text-[75px] hm:mt-[-17px]"
           >
             MESERO
           </h1>
@@ -157,7 +157,7 @@ export const Waiter: React.FC = () => {
 
       {/* ---MAIN SECTION--- */}
       <main id="content" className=" z-1 h-[80%] w-[100%]">
-        {/* ---Desayuno - Almuerzo/Cena--- */}
+        {/* ---Desayuno - Almuerzo/Cena - Pedidos --- */}
         <section
           id="desayunoOalmuerzoCena"
           className=" h-[10%] w-[100%] flex flex-row justify-end"
@@ -190,19 +190,19 @@ export const Waiter: React.FC = () => {
             }`}
             onClick={() => handleSelectProductType("Pedidos")} // Manejador para seleccionar Almuerzo
           >
-            <h1>pedidos</h1>
+            <h1>Pedidos</h1>
           </div>
         </section>
 
         {/* ---Order&Menu--- */}
         <section
           id="menuYCompra"
-          className=" h-[755px] w-[100%] bg-crema p-[20px] rounded-b-[25px] rounded-tl-[25px] overflow-auto"
+          className=" h-[755px] w-[100%] bg-crema p-[20px] rounded-b-[25px] rounded-tl-[25px] overflow-auto hm:h-[545px]"
         >
           {/* ---Name + Table--- */}
           <div
             id="nameAndTable"
-            className="h-[10%] w-[100%] p-[1%] text-brownText text-[1.2rem] font-bold flex flex-row justify-evenly items-center gap-1"
+            className="h-[10%] w-[100%] p-[1%] text-brownText text-[1.2rem] font-bold flex flex-row justify-evenly items-center gap-1 hm:h-[15%]"
           >
             <h1>Nombre:</h1>
             <input
