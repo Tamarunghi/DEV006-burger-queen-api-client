@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
-export function completeOrder(id: number) {
+
+export function completeOrder(id: number){
     const token: string = localStorage.getItem("token")!;
     console.log(token);
     return (fetch(`http://localhost:8080/orders/${id}`, {
@@ -20,4 +21,4 @@ export function completeOrder(id: number) {
             console.error("red error", error)
         })
     )
-}
+  }

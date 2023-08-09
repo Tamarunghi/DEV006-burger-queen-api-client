@@ -38,14 +38,14 @@ const Login: React.FC<INavigate> = ({ navigate }) => {
           console.log("se rutea para  cocinero");
           break;
         case "administrador":
-          // setLogged(true);
+          //setLogged(true);
           // navigate("/administrador");
           console.log("Se rutea para administrador");
-          // Código a ejecutar si el rol es "administrador"
+          // Codigo a ejecutar si el rol es "administrador"
           break;
         default:
           console.log("soy default!");
-          // Código a ejecutar si el rol no coincide con ninguno de los casos anteriores
+          // Codigo a ejecutar si el rol no coincide con ninguno de los casos anteriores
           break;
       }
     } catch (error: any) {
