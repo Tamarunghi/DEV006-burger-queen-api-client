@@ -4,6 +4,15 @@ export default {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
+    screens: {
+      'sm': '640px',     // Small screens
+      'md': '820px',     // Medium screens (usado en el ejemplo)
+      'lg': '1024px',    // Large screens
+      'xl': '1280px',    // Extra large screens
+      '2xl': '1536px',   // 2x extra large screens
+      'hm': '1024px',     // Tu breakpoint personalizado
+      'tm': '1180px',     // Tu breakpoint personalizado
+    },
     extend: {
       colors: {
         fondo: '#C68E62',
@@ -21,7 +30,6 @@ export default {
         yellow: '#F9B317',
         plusButtom:'#C1D78F',
         minusButtom:'#FF8C8C',
-        lightRed:'#FF8C8C',
         buttonHover: '#E0FCA1',
         anotherYellow:'#FBC959',
       },

@@ -62,9 +62,11 @@ export const AddedToList: React.FC<IAddedToList> = ({
         </div>
         {/* ---CLIENT--- */}
         <div className="indent-4 min-h-[70px] w-[100%] col-start-1 col-end-4 flex justify-center items-center">
-          <div className="h-[66px] w-[100%] p-[1%] flex flex-row gap-1">
-            <p>Nombre:</p>
-            <p className="bg-skin h-[50%] w-[40%] rounded-5">{client}</p>
+          <div className="h-[66px] w-[100%] p-[1%] flex flex-row justify-evenly items-center gap-1">
+            <div>Nombre:</div>
+            <div className="bg-skin h-[50%] w-[40%] rounded-5">{client}</div>
+            <div>Mesa:</div>
+            <div className="bg-skin wh-[50%] w-[20%] rounded-5">mesa</div>
           </div>
         </div>
         {/* ---PRODUCT--- */}

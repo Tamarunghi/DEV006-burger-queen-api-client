@@ -15,13 +15,14 @@ const Login: React.FC<INavigate> = ({ navigate }) => {
     setError("");
     try {
       const data = await requestGet(user, password);
-      console.log(data);
+      console.log("Respuesta de la solicitud:", data);
       const token = data.accessToken;
-      console.log(token);
+      console.log("Token:", token);
       const role = data.user.role;
-      console.log(role);
+      console.log("Rol:", role);
+
       localStorage.setItem("userEmail", data.user.email);
-      localStorage.setItem("userId", data.user.id.toString());
+      localStorage.setItem("Role", data.user.role);
       localStorage.setItem("token", token);
       localStorage.setItem("role", data.user.role);
 
@@ -54,14 +55,14 @@ const Login: React.FC<INavigate> = ({ navigate }) => {
 
   return (
     <article className="w-[97vw] h-[97vh] flex flex-col justify-start">
-      <section className="z-1 w-[45vw] h-[45vh] p-1 justify-start items-start relative">
+      <section className="z-1 w-[45vw] h-[45vh] p-1 justify-start items-start hm:mt-[-18px]">
         <LogoGif />
       </section>
       <form
         onSubmit={handleLogin}
-        className="z-1 ml-[10%] flex flex-col justify-center items-center p-1 mt-[-9px]"
+        className="z-1 h-[382px] w-[500px] ml-[39%] flex flex-col justify-center items-center text-ce p-1 hm:mt-[-9px] hm:ml-[50%]"
       >
-        <label className="mb-4 text-center block text-gray-700  text-[3rem] font-bold mb-[1%]">
+        <label className="text-crema border-brownText mb-6 text-center block text-[3rem] font-bold mb-[1%] drop-shadow-[4px_4px_0.5px_#65362A]">
           Usuario
         </label>
         <input
@@ -72,7 +73,7 @@ const Login: React.FC<INavigate> = ({ navigate }) => {
           onChange={(e) => setUser(e.target.value)}
           style={{ fontSize: "1.5rem" }}
         />
-        <label className="mb-6 text-center block text-gray-700 text-[3rem] font-bold mb-[1%]">
+        <label className="text-crema border-brownText mb-6 text-center block text-[3rem] font-bold mb-[1%] drop-shadow-[4px_4px_0.5px_#65362A]">
           Contraseña
         </label>
         <input
