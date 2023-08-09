@@ -125,7 +125,7 @@ export const Waiter: React.FC = () => {
       userId: localStorage.getItem("userId"),
       client: customerName,
       products: orderItems,
-      status: "pendiente",
+      status: "Pendiente",
       dateEntry: dayjs().format("YYYY-MM-DD HH:mm:ss"),
     };
     console.log(orderData);

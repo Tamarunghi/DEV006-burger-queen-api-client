@@ -9,7 +9,7 @@ export function completeOrder(id: number) {
             'Authorization': 'Bearer ' + token
         },
         body: JSON.stringify({
-            "status": "completado",
+            "status": "Completado",
             "dateProcessed": dayjs().format("YYYY-MM-DD HH:mm:ss"),
         }),
     })

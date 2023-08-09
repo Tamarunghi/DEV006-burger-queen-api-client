@@ -1,19 +1,55 @@
-import { orderData } from "../Interfaces";
+import { IAddedToList } from "../Interfaces";
 import React, { useState } from "react";
 import { TimeCounter } from "./TimeCounter";
+import { completeOrder } from "../../02App/patchOrders";
+import { is } from "@babel/types";
 
-export const AddedToList: React.FC<orderData> = ({
+export const AddedToList: React.FC<IAddedToList> = ({
   client,
+  id,
   products,
+  status,
   dateEntry,
 }) => {
-  console.log("fecha", dateEntry);
+  const [buttonStatus, setButtonStatus] = useState(status); // no se vuelve a usar status
+  const [isCounting, setIsCounting] = useState(true);
+  const [selectedCheckboxes, setSelectedCheckboxes] = useState(
 
-  const [SendButton, setSendButton] = useState("Pendiente");
+    Array(products.length).fill(false)
+  );
+  const handleCheckboxChange = (productId: number) => {
+    console.log('Checkbox clicked for product ID:', productId);
+    const newSelectedCheckboxes = [...selectedCheckboxes];
+    newSelectedCheckboxes[productId] = !newSelectedCheckboxes[productId];
+    setSelectedCheckboxes(newSelectedCheckboxes);
+    localStorage.setItem(
+      "selectedCheckboxes",
+      JSON.stringify(newSelectedCheckboxes)
+    );
+  };
 
-  const handleSendButton = (type: string) => {
-    setSendButton(type);
-    console.log(SendButton)
+
+  React.useEffect(() => {
+    const storedSelectedCheckboxes = localStorage.getItem("selectedCheckboxes");
+    if (storedSelectedCheckboxes) {
+      setSelectedCheckboxes(JSON.parse(storedSelectedCheckboxes));
+    } else {
+      setSelectedCheckboxes(Array(products.length).fill(false));
+    }
+  }, []);
+
+  const handleSendButton = () => {
+    if (buttonStatus === "Pendiente") {
+      completeOrder(id)
+        .then((response) => {
+          setButtonStatus("Completado");
+          console.log("logrado");
+          return response;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
   };
 
   return (
@@ -23,20 +59,18 @@ export const AddedToList: React.FC<orderData> = ({
         <div className="indent-4 min-h-[70px] w-[100%] col-start-1 col-end-4 flex justify-center items-center">
           <div className="h-[66px] w-[100%] p-[1%] flex flex-row justify-evenly items-center gap-1">
             <p>Hora pedido:</p>
-            <p className="bg-skin h-[50%] w-[40%] rounded-5">{dateEntry}</p>
+            <div className="bg-skin h-[50%] w-[40%] rounded-5">{dateEntry}</div>
             <p>Tiempo:</p>
-            <p className="bg-skin wh-[50%] w-[20%] rounded-5">
-              <TimeCounter dateEntry={dateEntry} />
-            </p>
+            <div className="bg-skin wh-[50%] w-[20%] rounded-5">
+              <TimeCounter dateEntry={dateEntry} isCounting={isCounting} />
+            </div>
           </div>
         </div>
         {/* ---CLIENT--- */}
         <div className="indent-4 min-h-[70px] w-[100%] col-start-1 col-end-4 flex justify-center items-center">
-          <div className="h-[66px] w-[100%] p-[1%] flex flex-row justify-evenly items-center gap-1">
-            <div>Nombre:</div>
-            <div className="bg-skin h-[50%] w-[40%] rounded-5">{client}</div>
-            <div>Mesa:</div>
-            <div className="bg-skin wh-[50%] w-[20%] rounded-5">mesa</div>
+          <div className="h-[66px] w-[100%] p-[1%] flex flex-row gap-1">
+            <p>Nombre:</p>
+            <p className="bg-skin h-[50%] w-[40%] rounded-5">{client}</p>
           </div>
         </div>
         {/* ---PRODUCT--- */}
@@ -51,6 +85,8 @@ export const AddedToList: React.FC<orderData> = ({
                 type="checkbox"
                 id={`checkbox-${product.product.id}`}
                 className="w-8 h-8"
+                checked={selectedCheckboxes[product.product.id] || false}
+                onChange={() => handleCheckboxChange(product.product.id)}
               />
               <span className="ml-4">
                 ({product.qty}) {product.product.name}
@@ -61,18 +97,34 @@ export const AddedToList: React.FC<orderData> = ({
         {/* ---BUTTON--- */}
         <div className="col-end-3 col-end-4 flex justify-end items-center">
           <button
-            className={`h-[50px] w-[80%] text-greenText rounded-r-[25px] border-[1.5px] border-greenText ${
-              SendButton === "Pendiente"
+            value={buttonStatus}
+            className={`h-[50px] w-[80%]  rounded-r-[25px] border-[1.5px]  ${
+              buttonStatus === "Pendiente"
                 ? "bg-minusButtom text-redText border-redText"
-                : "bg-plusButtom" // No necesitas agregar ninguna clase si no es "Pendiente"
+                : "bg-plusButtom text-greenText border-greenText"
             }`}
             onClick={() => {
-              if (SendButton === "Pendiente") {
-                handleSendButton("Completado");
+
+              const notComplete= 
+                selectedCheckboxes
+                  .filter((_, iCheck) => 
+                    products.filter(({product}) => product.id === iCheck).length > 0
+                  )
+                  .some((isChecked) => !isChecked)
+              if (
+                buttonStatus === "Pendiente"
+                 && notComplete
+              ) {
+                alert(
+                  "Debe seleccionar todos los productos antes de completar el pedido."
+                );
+              } else {
+                setIsCounting(false);
+                handleSendButton();
               }
             }}
           >
-            {SendButton === "Pendiente" ? "Pendiente" : "Completado"}
+            {buttonStatus}
           </button>
         </div>
       </section>
