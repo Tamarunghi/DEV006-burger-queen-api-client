@@ -11,6 +11,27 @@ export const AddedToList: React.FC<IAddedToList> = ({
   dateEntry,
 }) => {
   const [buttonStatus, setButtonStatus] = useState(status);
+  const [selectedCheckboxes, setSelectedCheckboxes] = useState(
+    Array(products.length).fill(false)
+  );
+  const handleCheckboxChange = (productId: number) => {
+    const newSelectedCheckboxes = [...selectedCheckboxes];
+    newSelectedCheckboxes[productId] = !newSelectedCheckboxes[productId];
+    setSelectedCheckboxes(newSelectedCheckboxes);
+    localStorage.setItem(
+      "selectedCheckboxes",
+      JSON.stringify(newSelectedCheckboxes)
+    );
+  };
+  React.useEffect(() => {
+    const storedSelectedCheckboxes = localStorage.getItem("selectedCheckboxes");
+    if (storedSelectedCheckboxes) {
+      setSelectedCheckboxes(JSON.parse(storedSelectedCheckboxes));
+    } else {
+      setSelectedCheckboxes(Array(products.length).fill(false));
+    }
+  }, []);
+
   const handleSendButton = () => {
     if (buttonStatus === "Pendiente") {
       completeOrder(id)
@@ -58,6 +79,8 @@ export const AddedToList: React.FC<IAddedToList> = ({
                 type="checkbox"
                 id={`checkbox-${product.product.id}`}
                 className="w-8 h-8"
+                checked={selectedCheckboxes[product.product.id] || false}
+                onChange={() => handleCheckboxChange(product.product.id)}
               />
               <span className="ml-4">
                 ({product.qty}) {product.product.name}
@@ -74,7 +97,18 @@ export const AddedToList: React.FC<IAddedToList> = ({
                 ? "bg-minusButtom text-redText border-redText"
                 : "bg-plusButtom text-greenText border-greenText"
             }`}
-            onClick={handleSendButton}
+            onClick={() => {
+              if (
+                status === "Pendiente" &&
+                !selectedCheckboxes.some((isChecked) => isChecked)
+              ) {
+                alert(
+                  "Debe seleccionar al menos un checkbox antes de marcar como Pendiente."
+                );
+              } else {
+                handleSendButton();
+              }
+            }}
           >
             {buttonStatus}
           </button>
