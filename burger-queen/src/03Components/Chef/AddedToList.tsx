@@ -7,20 +7,22 @@ export const AddedToList: React.FC<IAddedToList> = ({
   client,
   id,
   products,
+  status,
   dateEntry,
 }) => {
-  const [SendButton, setSendButton] = useState("Pendiente");
-
-  const handleSendButton = (type: string) => {
-    completeOrder(id)
-      .then((response) => {
-        setSendButton(type);
-        console.log("logrado");
-        return response;
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+  const [buttonStatus, setButtonStatus] = useState(status);
+  const handleSendButton = () => {
+    if (buttonStatus === "Pendiente") {
+      completeOrder(id)
+        .then((response) => {
+          setButtonStatus("Completado");
+          console.log("logrado");
+          return response;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
   };
 
   return (
@@ -66,18 +68,15 @@ export const AddedToList: React.FC<IAddedToList> = ({
         {/* ---BUTTON--- */}
         <div className="col-end-3 col-end-4 flex justify-end items-center">
           <button
-            className={`h-[50px] w-[80%] text-greenText rounded-r-[25px] border-[1.5px] border-greenText ${
-              SendButton === "Pendiente"
+            value={status}
+            className={`h-[50px] w-[80%]  rounded-r-[25px] border-[1.5px]  ${
+              status === "Pendiente"
                 ? "bg-minusButtom text-redText border-redText"
-                : "bg-plusButtom"
+                : "bg-plusButtom text-greenText border-greenText"
             }`}
-            onClick={() => {
-              if (SendButton === "Pendiente") {
-                handleSendButton("Completado");
-              }
-            }}
+            onClick={handleSendButton}
           >
-            {SendButton === "Pendiente" ? "Pendiente" : "Completado"}
+            {buttonStatus}
           </button>
         </div>
       </section>

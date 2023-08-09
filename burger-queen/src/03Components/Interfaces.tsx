@@ -30,7 +30,6 @@ export interface orderItems {
 }
 
 export interface orderData {
-  id: number;
   userId: any;
   client: string;
   products: orderItems[];
@@ -45,5 +44,6 @@ export interface IAddedToList {
   id: number;
   client: string;
   products: orderItems[];
+  status: string;
   dateEntry: any;
 }
