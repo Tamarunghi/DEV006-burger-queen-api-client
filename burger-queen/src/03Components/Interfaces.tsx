@@ -38,9 +38,11 @@ export interface orderData {
 }
 export interface TimeCounterProps {
   dateEntry: string;
+  isCounting: boolean;
 }
 
 export interface IAddedToList {
+  userId: any;
   id: number;
   client: string;
   products: orderItems[];

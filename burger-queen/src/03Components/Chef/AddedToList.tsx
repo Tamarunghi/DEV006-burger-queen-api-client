@@ -10,11 +10,13 @@ export const AddedToList: React.FC<IAddedToList> = ({
   status,
   dateEntry,
 }) => {
-  const [buttonStatus, setButtonStatus] = useState(status);
+  const [buttonStatus, setButtonStatus] = useState(status); // no se vuelve a usar status
+  const [isCounting, setIsCounting] = useState(true);
   const [selectedCheckboxes, setSelectedCheckboxes] = useState(
     Array(products.length).fill(false)
   );
   const handleCheckboxChange = (productId: number) => {
+    console.log("Checkbox clicked for product ID:", productId);
     const newSelectedCheckboxes = [...selectedCheckboxes];
     newSelectedCheckboxes[productId] = !newSelectedCheckboxes[productId];
     setSelectedCheckboxes(newSelectedCheckboxes);
@@ -23,6 +25,7 @@ export const AddedToList: React.FC<IAddedToList> = ({
       JSON.stringify(newSelectedCheckboxes)
     );
   };
+
   React.useEffect(() => {
     const storedSelectedCheckboxes = localStorage.getItem("selectedCheckboxes");
     if (storedSelectedCheckboxes) {
@@ -56,7 +59,7 @@ export const AddedToList: React.FC<IAddedToList> = ({
             <div className="bg-skin h-[50%] w-[40%] rounded-5">{dateEntry}</div>
             <p>Tiempo:</p>
             <div className="bg-skin wh-[50%] w-[20%] rounded-5">
-              <TimeCounter dateEntry={dateEntry} />
+              <TimeCounter dateEntry={dateEntry} isCounting={isCounting} />
             </div>
           </div>
         </div>
@@ -91,21 +94,26 @@ export const AddedToList: React.FC<IAddedToList> = ({
         {/* ---BUTTON--- */}
         <div className="col-end-3 col-end-4 flex justify-end items-center">
           <button
-            value={status}
+            value={buttonStatus}
             className={`h-[50px] w-[80%]  rounded-r-[25px] border-[1.5px]  ${
-              status === "Pendiente"
+              buttonStatus === "Pendiente"
                 ? "bg-minusButtom text-redText border-redText"
                 : "bg-plusButtom text-greenText border-greenText"
             }`}
             onClick={() => {
-              if (
-                status === "Pendiente" &&
-                !selectedCheckboxes.some((isChecked) => isChecked)
-              ) {
+              const notComplete = selectedCheckboxes
+                .filter(
+                  (_, iCheck) =>
+                    products.filter(({ product }) => product.id === iCheck)
+                      .length > 0
+                )
+                .some((isChecked) => !isChecked);
+              if (buttonStatus === "Pendiente" && notComplete) {
                 alert(
-                  "Debe seleccionar al menos un checkbox antes de marcar como Pendiente."
+                  "Debe seleccionar todos los productos antes de completar el pedido."
                 );
               } else {
+                //setIsCounting(false);
                 handleSendButton();
               }
             }}

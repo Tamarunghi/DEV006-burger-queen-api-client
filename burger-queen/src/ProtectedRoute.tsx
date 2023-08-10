@@ -17,5 +17,17 @@ export const ProtectedRoute = ({
     return <Navigate to="/" />;
   }
 
+  if (!allowedRoles.includes(userRole)) {
+    if (userRole === "mesero") {
+      return <Navigate to="/waiter" />;
+    } else if (userRole === "cocina") {
+      return <Navigate to="/chef" />;
+      // } else if (userRole === "admi") {
+      //   return <Navigate to="/amdi" />;
+    } else {
+      return <Navigate to="/" />;
+    }
+  }
+
   return <>{children}</>;
 };
