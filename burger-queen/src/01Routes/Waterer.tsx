@@ -12,15 +12,12 @@ import { DeletePopup } from "../03Components/Waiter/DeletePopup";
 import { LogoPng } from "../03Components/logoComponent";
 import { Background } from "../03Components/Background";
 import { ICartItems, orderItems, orderData } from "../03Components/Interfaces";
-import { InformationToList } from "../03Components/Waiter/InformationToList";
-import { GetOrders } from "../02App/getOrders";
 
 export const Waiter: React.FC = () => {
   const [products, setProducts] = useState<any[]>([]);
   const [productType, setProductType] = useState("Desayuno");
   const [cartItems, setCartItems] = useState<ICartItems[]>([]);
   const [customerName, setCustomerName] = useState("");
-  const [orders, setOrders] = useState<any[]>([]);
   //const [customerTable, setcustomerTable] = useState("");
   useEffect(() => {
     GetProducts()
@@ -35,35 +32,11 @@ export const Waiter: React.FC = () => {
       .catch((error) => {
         console.error("Error fetching products", error);
       });
-
-    GetOrders()
-      .then((data) => {
-        setOrders(data); // Guarda las órdenes en el estado 'orders'
-      })
-      .catch((error) => {
-        console.error("Error fetching orders", error);
-      });
   }, []);
 
   const handleSelectProductType = (type: string) => {
-    if (type === "Pedidos") {
-      {
-        orders.map((order) => (
-          <InformationToList
-            id={order.id}
-            key={order.id}
-            client={order.client}
-            products={order.products}
-            dateEntry={order.dateEntry}
-            userId={order.userId}
-            status={order.status}
-          />
-        ));
-      }
-    }
     setProductType(type);
   };
-
   const handleAddToCart = (product: any) => {
     // Verifica si el producto ya está en el carrito
     const existingProduct = cartItems.find((item) => item.id === product.id);
@@ -213,7 +186,7 @@ export const Waiter: React.FC = () => {
                 ? "textTransform: uppercase"
                 : "bg-yellow" // Aplicamos estilo con bg-yellow si es el tipo de producto seleccionado
             }`}
-            onClick={() => handleSelectProductType("Pedidos")} // Manejador para seleccionar Pedidos
+            onClick={() => handleSelectProductType("Pedidos")} // Manejador para seleccionar Almuerzo
           >
             <h1>pedidos</h1>
           </div>
@@ -306,22 +279,6 @@ export const Waiter: React.FC = () => {
             ))}
             {/* ---Total--- */}
             <TotalAddedToCart cartItems={cartItems} />
-
-            {productType === "Pedidos" && (
-              <div>
-                {orders.map((order) => (
-                  <InformationToList
-                    id={order.id}
-                    key={order.id}
-                    client={order.client}
-                    products={order.products}
-                    dateEntry={order.dateEntry}
-                    userId={order.userId}
-                    status={order.status}
-                  />
-                ))}
-              </div>
-            )}
           </div>
 
           {/* ---Send Buttom--- */}
