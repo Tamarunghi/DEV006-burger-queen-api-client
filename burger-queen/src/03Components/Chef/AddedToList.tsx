@@ -12,29 +12,24 @@ export const AddedToList: React.FC<IAddedToList> = ({
 }) => {
   const [buttonStatus, setButtonStatus] = useState(status); // no se vuelve a usar status
   const [isCounting, setIsCounting] = useState(true);
-  const [selectedCheckboxes, setSelectedCheckboxes] = useState(
-    Array(products.length).fill(false)
-  );
-  const handleCheckboxChange = (productId: number) => {
-    console.log("Checkbox clicked for product ID:", productId);
-    const newSelectedCheckboxes = [...selectedCheckboxes];
-    newSelectedCheckboxes[productId] = !newSelectedCheckboxes[productId];
-    setSelectedCheckboxes(newSelectedCheckboxes);
-    localStorage.setItem(
-      "selectedCheckboxes",
-      JSON.stringify(newSelectedCheckboxes)
-    );
-  };
 
-  React.useEffect(() => {
-    const storedSelectedCheckboxes = localStorage.getItem("selectedCheckboxes");
-    if (storedSelectedCheckboxes) {
-      setSelectedCheckboxes(JSON.parse(storedSelectedCheckboxes));
+  const [selectedCheckboxes, setSelectedCheckboxes] = useState<number[]>([]);
+
+  const handleCheckboxChangeNew: React.ChangeEventHandler<HTMLInputElement> = (
+    e
+  ) => {
+    console.log(e.target);
+    const value = e.target.value;
+    const checked = e.target.checked;
+
+    if (checked) {
+      setSelectedCheckboxes((prevState) => [...prevState, Number(value)]);
     } else {
-      setSelectedCheckboxes(Array(products.length).fill(false));
+      setSelectedCheckboxes((prevState) =>
+        prevState.filter((productId) => productId !== Number(value))
+      );
     }
-  }, []);
-
+  };
   const handleSendButton = () => {
     if (buttonStatus === "Pendiente") {
       completeOrder(id)
@@ -75,15 +70,23 @@ export const AddedToList: React.FC<IAddedToList> = ({
           {products.map((product) => (
             <label
               className="mb-4 flex items-center"
-              key={product.product.id}
-              htmlFor={`checkbox-${product.product.id}`}
+              key={`${product.product.id}${id}`}
+              htmlFor={`checkbox-${product.product.id}${id}`}
             >
               <input
                 type="checkbox"
-                id={`checkbox-${product.product.id}`}
+                id={`checkbox-${product.product.id}${id}`}
+                value={product.product.id}
                 className="w-8 h-8"
-                checked={selectedCheckboxes[product.product.id] || false}
-                onChange={() => handleCheckboxChange(product.product.id)}
+                disabled={[status, buttonStatus].some(
+                  (value) => value === "Completado"
+                )}
+                checked={
+                  [status, buttonStatus].some((value) => value === "Completado")
+                    ? true
+                    : selectedCheckboxes.includes(product.product.id)
+                }
+                onChange={handleCheckboxChangeNew}
               />
               <span className="ml-4">
                 ({product.qty}) {product.product.name}
@@ -101,22 +104,17 @@ export const AddedToList: React.FC<IAddedToList> = ({
                 : "bg-plusButtom text-greenText border-greenText"
             }`}
             onClick={() => {
-              const notComplete = selectedCheckboxes
-                .filter(
-                  (_, iCheck) =>
-                    products.filter(({ product }) => product.id === iCheck)
-                      .length > 0
-                )
-                .some((isChecked) => !isChecked);
+              const notComplete = products.length !== selectedCheckboxes.length;
+
               if (buttonStatus === "Pendiente" && notComplete) {
                 alert(
                   "Debe seleccionar todos los productos antes de completar el pedido."
                 );
               } else {
-                //setIsCounting(false);
                 handleSendButton();
               }
             }}
+            disabled={buttonStatus === "Completado"}
           >
             {buttonStatus}
           </button>

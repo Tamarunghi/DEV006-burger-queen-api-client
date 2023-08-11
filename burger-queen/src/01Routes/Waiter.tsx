@@ -209,13 +209,6 @@ export const Waiter: React.FC = () => {
               onChange={(e) => handleSetValue(setCustomerName, e)}
               className="bg-skin h-[50%] w-[40%] rounded-5"
             ></input>
-            <h1>Mesa:</h1>
-            <input
-              type="number"
-              // value={customerTable}
-              // onChange={(e) => handleSetValue(setcustomerTable, e)}
-              className="bg-skin h-[50%] w-[20%] rounded-5"
-            ></input>
           </div>
 
           {/* ---Order Selection--- */}
