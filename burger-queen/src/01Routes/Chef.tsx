@@ -9,10 +9,14 @@ export const Chef: React.FC = () => {
   const [orders, setOrders] = useState<any[]>([]);
 
   useEffect(() => {
-    // En el efecto, obten las órdenes utilizando la función GetOrders
     GetOrders()
       .then((data) => {
-        setOrders(data); // Guarda las órdenes en el estado 'orders'
+        // se organiza los pedidos dependiendo el dateEntry
+        const sortedOrders = data.sort((a: any, b: any) =>
+          b.dateEntry.localeCompare(a.dateEntry)
+        );
+
+        setOrders(sortedOrders); // Guarda las órdenes en el estado 'orders'
       })
       .catch((error) => {
         console.error("Error fetching orders", error);
