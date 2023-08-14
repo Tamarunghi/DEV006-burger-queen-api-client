@@ -114,7 +114,6 @@ export const AddedToList: React.FC<IAddedToList> = ({
                 handleSendButton();
               }
             }}
-            disabled={buttonStatus === "Completado"}
           >
             {buttonStatus}
           </button>

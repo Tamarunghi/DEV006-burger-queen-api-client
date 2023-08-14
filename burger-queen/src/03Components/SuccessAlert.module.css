@@ -1,0 +1,23 @@
+/* SuccessAlert.module.css
+
+/* .custom-title {
+  transform: scale(1.5);
+  width: 150px;
+  padding-right: 0%;
+} */
+/* .custom-container {
+  width: 150px;
+  height: 20px;
+} */
+
+/* .custom-title {
+  font-size: 1.5rem; /* Tamaño del texto personalizado */
+/* display: flex;
+  align-items: center; /* Alinea verticalmente el contenido */
+/* gap: 10px; /* Espacio entre el icono y el texto */
+/* } */
+
+/* Estilos adicionales para el icono si es necesario */
+.custom-icon {
+  font-size: 2rem;
+}

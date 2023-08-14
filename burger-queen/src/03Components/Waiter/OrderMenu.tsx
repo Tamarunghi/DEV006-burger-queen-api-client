@@ -7,6 +7,7 @@ import { DeletePopup } from "./DeletePopup";
 import { OrderSelectionItem } from "./OrderSelectionItem";
 import { GetProducts } from "../../02App/getProduct";
 import Swal from "sweetalert2";
+import { SuccessAlert } from "../SuccessAlert";
 interface OrderMenuProps {
   productType: string;
 }
@@ -81,6 +82,7 @@ export const OrderMenu: React.FC<OrderMenuProps> = ({ productType }) => {
             const updatedCartItems = prevCartItems.filter(
               (item) => item.id !== productId
             );
+
             return updatedCartItems;
           });
         } else if (result.isDenied) {
@@ -102,23 +104,6 @@ export const OrderMenu: React.FC<OrderMenuProps> = ({ productType }) => {
   };
 
   const handleSendOrders = () => {
-    const Toast = Swal.mixin({
-      toast: true,
-      position: "top-end",
-      showConfirmButton: false,
-      timer: 3000,
-      timerProgressBar: true,
-      didOpen: (toast) => {
-        toast.addEventListener("mouseenter", Swal.stopTimer);
-        toast.addEventListener("mouseleave", Swal.resumeTimer);
-      },
-    });
-
-    Toast.fire({
-      icon: "success",
-      title: "Pedido enviado a cocina",
-    });
-
     const orderItems: orderItems[] = cartItems.map((item) => ({
       qty: item.clicks,
       product: {
@@ -147,6 +132,12 @@ export const OrderMenu: React.FC<OrderMenuProps> = ({ productType }) => {
         7;
         console.error("error perro", error);
       });
+    setCartItems([]);
+    setCustomerName("");
+    setIsNameComplete(false);
+    setIsCardSelected(false);
+
+    SuccessAlert();
   };
 
   return (

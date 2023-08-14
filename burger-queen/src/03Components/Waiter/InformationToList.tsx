@@ -19,7 +19,7 @@ export const InformationToList: React.FC<IAddedToList> = ({
   };
 
   return (
-    <main className=" h-[755px] w-[100%] bg-crema p-[20px] rounded-b-[25px] rounded-tl-[25px] overflow-auto hm:h-[545px]">
+    <main className=" h-auto w-[100%] bg-crema p-[15px] rounded-b-[25px] rounded-tl-[25px] overflow-auto hm:h-[545px]">
       <section className="bg-press h-auto w-[100%] text-[1.1rem] p-[20px] mb-[15px] text-darkBrown font-extrabold border-[0.1px] border-brownText rounded-25 flex flex-row shadow-notPressShadow opacity-70">
         <section className="h-[90%] w-[100%] m-[10px] grid grid-cols-3">
           {/* ---TIME--- */}

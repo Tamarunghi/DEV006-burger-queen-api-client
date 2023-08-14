@@ -13,7 +13,11 @@ export const Waiter: React.FC = () => {
   useEffect(() => {
     GetOrders()
       .then((data) => {
-        setOrders(data); // Guarda las órdenes en el estado 'orders'
+        const updateOrder = data.sort((a: any, b: any) =>
+          b.dateEntry.localeCompare(a.dateEntry)
+        );
+        setOrders(updateOrder);
+        // Guarda las órdenes en el estado 'orders'
       })
       .catch((error) => {
         console.error("Error fetching orders", error);
