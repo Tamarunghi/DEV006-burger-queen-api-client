@@ -5,7 +5,7 @@ export const SuccessAlert = () => {
     toast: true,
     position: "top-end",
     showConfirmButton: false,
-    timer: 3000,
+    timer: 2000,
     timerProgressBar: true,
     didOpen: (toast) => {
       toast.addEventListener("mouseenter", Swal.stopTimer);
@@ -17,8 +17,7 @@ export const SuccessAlert = () => {
     icon: "success",
     title: `<span style="font-size: 1.5rem;">Pedido enviado a cocina</span>`,
     customClass: {
-      //   title: styles["custom-title"], // Apply custom styles here
-      icon: styles["custom-icon"], //   container: styles["custom-toast"],
+      icon: styles["custom-icon"],
     },
   });
 };

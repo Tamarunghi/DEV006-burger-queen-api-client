@@ -12,9 +12,11 @@ export const InformationToList: React.FC<IAddedToList> = ({
 
   const handleSendButton = () => {
     if (buttonStatus === "Pendiente") {
-      console.log("pendiente");
+      setButtonStatus("En cocina");
+    } else if (buttonStatus === "Completado") {
+      setButtonStatus("Listo para entregar");
     } else {
-      console.log("completado");
+      console.log("se presento un error");
     }
   };
 

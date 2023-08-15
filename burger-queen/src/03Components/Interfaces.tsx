@@ -41,6 +41,10 @@ export interface TimeCounterProps {
   isCounting: boolean;
 }
 
+export interface TimeDifferenceProps {
+  dateProcessed: string;
+  dateEntry: string;
+}
 export interface IAddedToList {
   userId: any;
   id: number;
@@ -48,4 +52,5 @@ export interface IAddedToList {
   products: orderItems[];
   status: string;
   dateEntry: any;
+  dateProcessed: any;
 }

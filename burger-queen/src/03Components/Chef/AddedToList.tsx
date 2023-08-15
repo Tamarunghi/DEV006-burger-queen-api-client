@@ -2,6 +2,7 @@ import { IAddedToList } from "../Interfaces";
 import React, { useState } from "react";
 import { TimeCounter } from "./TimeCounter";
 import { completeOrder } from "../../02App/patchOrders";
+import { TimeDifference } from "./TimeDifference";
 
 export const AddedToList: React.FC<IAddedToList> = ({
   client,
@@ -9,6 +10,7 @@ export const AddedToList: React.FC<IAddedToList> = ({
   products,
   status,
   dateEntry,
+  dateProcessed,
 }) => {
   const [buttonStatus, setButtonStatus] = useState(status); // no se vuelve a usar status
   const [isCounting, setIsCounting] = useState(true);
@@ -54,7 +56,14 @@ export const AddedToList: React.FC<IAddedToList> = ({
             <div className="bg-skin h-[50%] w-[40%] rounded-5">{dateEntry}</div>
             <p>Tiempo:</p>
             <div className="bg-skin wh-[50%] w-[20%] rounded-5">
-              <TimeCounter dateEntry={dateEntry} isCounting={isCounting} />
+              {status.toLowerCase() === "completado" ? (
+                <TimeDifference
+                  dateEntry={dateEntry}
+                  dateProcessed={dateProcessed}
+                />
+              ) : (
+                <TimeCounter dateEntry={dateEntry} isCounting={isCounting} />
+              )}
             </div>
           </div>
         </div>
@@ -79,10 +88,12 @@ export const AddedToList: React.FC<IAddedToList> = ({
                 value={product.product.id}
                 className="w-8 h-8"
                 disabled={[status, buttonStatus].some(
-                  (value) => value === "Completado"
+                  (value) => value.toLowerCase() === "completado"
                 )}
                 checked={
-                  [status, buttonStatus].some((value) => value === "Completado")
+                  [status, buttonStatus].some(
+                    (value) => value.toLowerCase() === "completado"
+                  )
                     ? true
                     : selectedCheckboxes.includes(product.product.id)
                 }
