@@ -11,7 +11,8 @@ export const InformationToList: React.FC<IAddedToList> = ({
   const [buttonStatus, setButtonStatus] = useState(
     status === "Pendiente" ? "En preparación" : "Listo para entregar"
   );
-
+  const isDisabledButton =
+    buttonStatus === "En preparación" || buttonStatus === "Entregado";
   const buttonClasses =
     buttonStatus === "En preparación"
       ? "bg-yellow text-brownText border-darkBrown"
@@ -67,10 +68,9 @@ export const InformationToList: React.FC<IAddedToList> = ({
             value={buttonStatus}
             className={`h-[50px] w-[80%]  rounded-r-[25px] border-[1.5px] ${buttonClasses} `}
             onClick={handleSendButton}
-            // disabled={isButtonDisabled}
+            disabled={isDisabledButton}
           >
             {buttonStatus}
-            {/* {validateButtonStatus} */}
           </button>
         </div>
       </section>
