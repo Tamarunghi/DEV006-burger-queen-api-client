@@ -2,17 +2,21 @@ import React, { useEffect, useState } from "react";
 import { LogoPng } from "../03Components/logoComponent";
 import { Background } from "../03Components/Background";
 import { LoggedUserAndExist } from "../03Components/LoggedUserAndExist";
-import { AddedToList } from "../03Components/Chef/AddedToList";
 import { GetOrders } from "../02App/getOrders";
+import { AddedToList } from "../03Components/Chef/AddedToList";
 
 export const Chef: React.FC = () => {
   const [orders, setOrders] = useState<any[]>([]);
 
   useEffect(() => {
-    // En el efecto, obten las órdenes utilizando la función GetOrders
     GetOrders()
       .then((data) => {
-        setOrders(data); // Guarda las órdenes en el estado 'orders'
+        // se organiza los pedidos dependiendo el dateEntry
+        const sortedOrders = data.sort((a: any, b: any) =>
+          b.dateEntry.localeCompare(a.dateEntry)
+        );
+
+        setOrders(sortedOrders); // Guarda las órdenes en el estado 'orders'
       })
       .catch((error) => {
         console.error("Error fetching orders", error);
@@ -53,9 +57,14 @@ export const Chef: React.FC = () => {
         >
           {orders.map((order) => (
             <AddedToList
+              id={order.id}
               key={order.id}
               client={order.client}
               products={order.products}
+              dateEntry={order.dateEntry}
+              userId={order.userId}
+              status={order.status}
+              dateProcessed={order.dateProcessed}
             />
           ))}
         </section>
