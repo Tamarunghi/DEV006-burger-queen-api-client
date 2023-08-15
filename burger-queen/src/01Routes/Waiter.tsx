@@ -45,15 +45,15 @@ export const Waiter: React.FC = () => {
   };
 
   return (
-    <article className="h-[97vh] flex flex-col m-[20px]">
+    <article className="h-[97vh] hm:vw-[97vw] flex flex-col m-[20px]">
       {/* ---HEADER(LOGO + MESERO)--- */}
       <header className=" z-1 w-[100%] h-[20%] mb-[20px] flex items-center justify-between">
         <LogoPng />
-        <div className="w-[100%] h-[100%] flex flex-col items-end">
+        <div className="w-[100%] h-[100%] hm:[10%] flex flex-col items-end">
           <LoggedUserAndExist />
           <label
             id="waiterPg"
-            className="font-bold text-[90px] text-crema border-brownText drop-shadow-[4px_4px_0.5px_#65362A]"
+            className="font-bold text-[90px] text-crema border-brownText drop-shadow-[4px_4px_0.5px_#65362A] hm:text-[75px] hm:mt-[-17px]"
           >
             MESERO
           </label>
@@ -102,7 +102,7 @@ export const Waiter: React.FC = () => {
         {/* ---Order&Menu--- */}
         <section
           id="menuYCompra"
-          className=" h-[755px] w-[100%] bg-crema p-[20px] rounded-b-[25px] rounded-tl-[25px] overflow-auto"
+          className=" h-[755px] w-[100%] bg-crema p-[20px] rounded-b-[25px] rounded-tl-[25px] overflow-auto hm:h-[545px]"
         >
           {renderSelectedComponent()}
         </section>
