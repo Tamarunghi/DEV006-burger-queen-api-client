@@ -10,9 +10,10 @@ import Swal from "sweetalert2";
 import { SuccessAlert } from "../SuccessAlert";
 interface OrderMenuProps {
   productType: string;
+  onSendOrder?: () => void
 }
 
-export const OrderMenu: React.FC<OrderMenuProps> = ({ productType }) => {
+export const OrderMenu: React.FC<OrderMenuProps> = ({ productType, onSendOrder }) => {
   const [products, setProducts] = useState<any[]>([]);
   const [cartItems, setCartItems] = useState<ICartItems[]>([]);
   const [customerName, setCustomerName] = useState("");
@@ -126,6 +127,7 @@ export const OrderMenu: React.FC<OrderMenuProps> = ({ productType }) => {
     PostOrders(orderData)
       .then((response) => {
         console.log("se guardooo perro", response);
+        if (onSendOrder) onSendOrder()
         return response;
       })
       .catch((error) => {
