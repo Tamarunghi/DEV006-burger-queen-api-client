@@ -5,28 +5,45 @@ import { InformationToList } from "../03Components/Waiter/InformationToList";
 import { GetOrders } from "../02App/getOrders";
 import { OrderMenu } from "../03Components/Waiter/OrderMenu";
 import { useEffect, useState } from "react";
+type GetOrdersServiceArgs<TData = any> = {
+  options: {
+    onSuccess: (data: TData) => void;
+  };
+};
+type GetOrdersService = (args: GetOrdersServiceArgs) => void;
+const getOrdersService: GetOrdersService = ({ options }) => {
+  GetOrders()
+    .then((data) => {
+      const updateOrder = data.sort((a: any, b: any) =>
+        b.dateEntry.localeCompare(a.dateEntry)
+      );
+      if (options.onSuccess) options.onSuccess(updateOrder);
+      // Guarda las órdenes en el estado 'orders'
+    })
+    .catch((error) => {
+      console.error("Error fetching orders", error);
+    });
+};
 
 export const Waiter: React.FC = () => {
   const [productType, setProductType] = useState("Desayuno");
   const [orders, setOrders] = useState<any[]>([]);
 
   useEffect(() => {
-    GetOrders()
-      .then((data) => {
-        const updateOrder = data.sort((a: any, b: any) =>
-          b.dateEntry.localeCompare(a.dateEntry)
-        );
-        setOrders(updateOrder);
-        // Guarda las órdenes en el estado 'orders'
-      })
-      .catch((error) => {
-        console.error("Error fetching orders", error);
-      });
+    getOrdersService({ options: { onSuccess: (data) => setOrders(data) } });
   }, []);
 
+  const handleSendOrderCallback = () => {
+    getOrdersService({ options: { onSuccess: (data) => setOrders(data) } });
+  };
   const renderSelectedComponent = () => {
     if (productType === "Desayuno" || productType === "Almuerzo") {
-      return <OrderMenu productType={productType} />;
+      return (
+        <OrderMenu
+          productType={productType}
+          onSendOrder={handleSendOrderCallback}
+        />
+      );
     } else if (productType === "Pedidos") {
       return orders.map((order) => (
         <InformationToList
@@ -37,6 +54,7 @@ export const Waiter: React.FC = () => {
           userId={order.userId}
           status={order.status}
           id={order.id}
+          dateProcessed={order.dateProcessed}
         />
       ));
     } else {

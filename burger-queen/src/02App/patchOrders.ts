@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 
-export function completeOrder(id: number){
+export function completeOrder(id: number, status:string="Completado"){
     const token: string = localStorage.getItem("token")!;
     console.log(token);
     return(fetch(`http://localhost:8080/orders/${id}`,{
@@ -10,7 +10,7 @@ export function completeOrder(id: number){
         'Authorization': 'Bearer ' + token
               },
       body: JSON.stringify({
-        "status": "completado",
+        "status": status,
         "dateProcessed": dayjs().format("YYYY-MM-DD HH:mm:ss"),
       }),
       })

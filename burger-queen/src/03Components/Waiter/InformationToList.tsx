@@ -1,3 +1,4 @@
+import { completeOrder } from "../../02App/patchOrders";
 import { IAddedToList } from "../Interfaces";
 import React, { useState } from "react";
 
@@ -9,8 +10,28 @@ export const InformationToList: React.FC<IAddedToList> = ({
   dateEntry,
 }) => {
   const [buttonStatus, setButtonStatus] = useState(
-    status === "Pendiente" ? "En preparación" : "Listo para entregar"
+    status === "Pendiente"
+      ? "En preparación"
+      : status === "Completado"
+      ? "Listo para entregar"
+      : "Entregado"
   );
+
+  /*--- OTRA FORMA DE HACERLO ES CON UNA FUNCIÓN --- */
+  /*--- que actualize el texto de los botones dependiendo del status --- */
+  // const getButtonText = () => {
+  //   if (status === "Completado") {
+  //     return "Listo para entregar";
+  //   }
+  //   if (status === "Pendiente") {
+  //     return "En preparación";
+  //   }
+  //   if (status === "Entregado") {
+  //     return "Entregado";
+  //   }
+  //   return`AAA${status}`;
+  // };
+
   const isDisabledButton =
     buttonStatus === "En preparación" || buttonStatus === "Entregado";
   const buttonClasses =
@@ -22,7 +43,14 @@ export const InformationToList: React.FC<IAddedToList> = ({
 
   const handleSendButton = () => {
     if (buttonStatus === "Listo para entregar") {
-      setButtonStatus("Entregado");
+      completeOrder(id, "Entregado")
+        .then((response) => {
+          setButtonStatus("Entregado");
+          return response;
+        })
+        .catch((error) => {
+          console.error("Error al enviar la solicitud:", error);
+        });
     }
   };
 
@@ -71,6 +99,7 @@ export const InformationToList: React.FC<IAddedToList> = ({
             disabled={isDisabledButton}
           >
             {buttonStatus}
+            {/* {getButtonText()} */}
           </button>
         </div>
       </section>
