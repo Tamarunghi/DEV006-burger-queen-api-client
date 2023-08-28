@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { TimeCounter } from "./TimeCounter";
 import { completeOrder } from "../../02App/patchOrders";
 import { TimeDifference } from "./TimeDifference";
+import Swal, { SweetAlertResult } from "sweetalert2";
 
 export const AddedToList: React.FC<IAddedToList> = ({
   client,
@@ -118,9 +119,11 @@ export const AddedToList: React.FC<IAddedToList> = ({
               const notComplete = products.length !== selectedCheckboxes.length;
 
               if (buttonStatus === "Pendiente" && notComplete) {
-                alert(
-                  "Debe seleccionar todos los productos antes de completar el pedido."
-                );
+                Swal.fire({
+                  icon: "error",
+                  title: "Oops...",
+                  text: "Debe seleccionar todos los productos antes de completar el pedido.",
+                });
               } else {
                 handleSendButton();
               }
