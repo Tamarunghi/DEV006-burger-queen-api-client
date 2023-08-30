@@ -22,8 +22,8 @@ export const ProtectedRoute = ({
       return <Navigate to="/waiter" />;
     } else if (userRole === "cocina") {
       return <Navigate to="/chef" />;
-      // } else if (userRole === "admi") {
-      //   return <Navigate to="/amdi" />;
+    } else if (userRole === "administrador") {
+      return <Navigate to="/administrator" />;
     } else {
       return <Navigate to="/" />;
     }

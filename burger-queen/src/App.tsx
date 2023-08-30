@@ -10,7 +10,7 @@ import Login from "./01Routes/Login";
 import { Chef } from "./01Routes/Chef";
 import { Waiter } from "./01Routes/Waiter";
 import { ProtectedRoute } from "./ProtectedRoute";
-
+import { Administrator } from "./01Routes/Administrator";
 const NotFound = () => {
   return <Navigate to="/" />;
 };
@@ -35,6 +35,14 @@ const Myroute = () => {
         element={
           <ProtectedRoute logged={logged} allowedRoles={["cocina"]}>
             <Chef />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/administrator"
+        element={
+          <ProtectedRoute logged={logged} allowedRoles={["administrador"]}>
+            <Administrator />
           </ProtectedRoute>
         }
       />
