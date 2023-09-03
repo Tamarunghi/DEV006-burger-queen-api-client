@@ -1,3 +1,5 @@
+import Swal from "sweetalert2";
+import { deleteUsers } from "../../02App/deleteUser";
 import { GetUsers } from "../../02App/getUsers";
 import { patchUsers } from "../../02App/patchUsers";
 import add from "../../04Images/add.png";
@@ -23,6 +25,29 @@ export const Workers = () => {
   }, []);
   const handleEdit = (user: User): void => {
     setSelectedUser(user);
+  };
+  const handleDelete = (user: User): void => {
+    Swal.fire({
+      title: "Desea eliminar el usuario?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#FF8A8A",
+      cancelButtonColor: "#C1D78F",
+      confirmButtonText: "Eliminar",
+      cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("Eliminado", "El usuario ha sido eliminado.", "success");
+        deleteUsers(user.id)
+          .then((resolve) => {
+            console.log("eliminado");
+            return resolve;
+          })
+          .catch((error) => {
+            console.error("error", error);
+          });
+      }
+    });
   };
   return (
     <>
@@ -57,6 +82,7 @@ export const Workers = () => {
             <img
               src={trashCan}
               className="h-[50px] w-[40px] flex justify-center"
+              onClick={() => handleDelete(user)}
             />
           </div>
         </article>
