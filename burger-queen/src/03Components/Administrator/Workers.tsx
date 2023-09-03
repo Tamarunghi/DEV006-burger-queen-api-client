@@ -30,7 +30,10 @@ export const Workers = () => {
         <img src={add} className="h-[90px] w-[90px] " />
       </div>
       {users.map((user) => (
-        <article className="bg-press grid grid-cols-4 h-auto flex flex-col text-[1.1rem] p-[20px] mb-[25px] text-darkBrown font-extrabold border-[0.1px] border-brownText rounded-25  shadow-notPressShadow opacity-70">
+        <article
+          key={user.id}
+          className="bg-press grid grid-cols-4 h-auto flex flex-col text-[1.1rem] p-[20px] mb-[25px] text-darkBrown font-extrabold border-[0.1px] border-brownText rounded-25  shadow-notPressShadow opacity-70"
+        >
           <div className="text-xl col-span-2">
             <div>
               <p>

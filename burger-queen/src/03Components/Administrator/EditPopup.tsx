@@ -14,19 +14,19 @@ export const EditPopup: React.FC<EditPopupProps> = ({ user }) => {
         <div class="flex items-center justify-center mb-2">
           <span class="font-bold text-xl mr-2">ROL:</span>
           <select id="rol" class="swal2-input">
-            <option value="mesa">Mesero(a)</option>
-            <option value="cocina">Cocinero(a)</option>
-            <option value="administracion">Administrador(a)</option>
+            <option value="Mesero(a)" }>Mesero(a)</option>
+            <option value="Cocinero(a)">Cocinero(a)</option>
+            <option value="Administrador(a)">Administrador(a)</option>
           </select>
         </div>
         
         <div class="flex items-center justify-center">
           <span class="font-bold text-xl mr-2">EMAIL:</span>
-          <input id="email" class="text-xl" placeholder="Ingrese el correo" value="${user.email}">*
+          <input id="email" class="text-xl" placeholder="Ingrese el correo" value="${user.email}">
         </div>
         <div class="flex items-center justify-center">
           <span class="font-bold text-xl mr-2">CONTRASEÑA:</span>
-          <input id="contraseña" class="text-xl" placeholder="Ingresa la contraseña">*
+          <input id="contraseña" class="text-xl" placeholder="Ingresa la contraseña">
         </div>
       `;
 
