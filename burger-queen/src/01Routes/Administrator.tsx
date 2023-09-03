@@ -62,7 +62,7 @@ export const Administrator: React.FC = () => {
           className=" h-[755px] w-[100%] bg-crema p-[20px] rounded-b-[25px] rounded-tl-[25px] overflow-auto"
         >
           {/* ---Send Buttom--- */}
-          <Workers />
+          {selectType === "Trabajadores" ? <Workers /> : <div>hola</div>}
         </section>
       </main>
 

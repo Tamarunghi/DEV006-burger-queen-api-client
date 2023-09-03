@@ -1,72 +1,110 @@
-// import { IAddedToList } from "../Interfaces";
-// import React, { useState } from "react";
+import Swal from "sweetalert2";
+// import { patchUsers } from "../../02App/patchUsers";
+import { useEffect, useState } from "react";
+import { GetUsers } from "../../02App/getUsers";
+import { User } from "../Interfaces";
 
-// export const InformationToList: React.FC<IAddedToList> = ({
-//   client,
-//   id,
-//   products,
-//   status,
-//   dateEntry,
-// }) => {
-//   const buttonStatus =
-//     status === "Pendiente" ? "En preparación" : "Listo para entregar";
-//   // const [buttonStatus, setButtonStatus] = useState(status); // no se vuelve a usar status
+export const EditPopup: React.FC = () => {
+  // const [users, setUsers] = useState<User[]>([]);
+  // useEffect(() => {
+  //   GetUsers()
+  //     .then((data) => {
+  //       console.log("data", data);
+  //       setUsers(data);
+  //     })
+  //     .catch((error) => {
+  //       console.error("error", error);
+  //     });
+  // }, []);
 
-//   const buttonClasses =
-//     buttonStatus === "En preparación"
-//       ? "bg-yellow text-brownText border-darkBrown"
-//       : "bg-minusButtom text-redText border-redText";
+  try {
+    const content = document.createElement("div");
 
-//   const handleSendButton = () => {
-//     console.log("clickeado");
-//   };
+    content.innerHTML = `
+        <div class="flex items-center justify-center mb-2">
+          <span class="font-bold text-xl mr-2">ROL:</span>
+          <select id="rol" class="swal2-input">
+            <option value="mesa">Mesero(a)</option>
+            <option value="cocina">Cocinero(a)</option>
+            <option value="administracion">Administrador(a)</option>
+          </select>
+        </div>
+        
+        <div class="flex items-center justify-center">
+          <span class="font-bold text-xl mr-2">EMAIL:</span>
+          <input id="email" class="text-xl" placeholder="Ingrese el correo">*
+        </div>
+        <div class="flex items-center justify-center">
+          <span class="font-bold text-xl mr-2">CONTRASEÑA:</span>
+          <input id="contraseña" class="text-xl" placeholder="Ingresa la contraseña">*
+        </div>
+      `;
 
-//   return (
-//     <main className=" h-auto w-[100%] bg-crema p-[15px] rounded-b-[25px] rounded-tl-[25px] overflow-auto hm:h-[545px]">
-//       <section className="bg-press h-auto w-[100%] text-[1.1rem] p-[20px] mb-[15px] text-darkBrown font-extrabold border-[0.1px] border-brownText rounded-25 flex flex-row shadow-notPressShadow opacity-70">
-//         <section className="h-[90%] w-[100%] m-[10px] grid grid-cols-3">
-//           {/* ---TIME--- */}
-//           <div className="indent-4 min-h-[70px] w-[100%] col-start-1 col-end-4 flex justify-evenly items-center">
-//             <div className="h-[66px] w-[50%] p-[1%] flex flex-start justify-center">
-//               <p className="w-[190px]">Hora pedido:</p>
-//               <p className="bg-skin h-[50%] w-[250px] rounded-5">{dateEntry}</p>
-//             </div>
-//             {/* ---CLIENT--- */}
-//             {/* <div className="indent-4 min-h-[70px] w-[100%] col-start-1 col-end-4 flex justify-center items-center"> */}
-//             <div className="h-[66px] w-[40%] p-[1%] flex flex-row justify-center">
-//               <p>Nombre:</p>
-//               <p className="bg-skin h-[50%] w-[40%] rounded-5">{client}</p>
-//             </div>
-//             {/* </div> */}
-//           </div>
+    const rolInput = document.getElementById("rol") as HTMLSelectElement;
+    const emailInput = document.getElementById("email") as HTMLInputElement;
+    const contraseñaInput = document.getElementById(
+      "contraseña"
+    ) as HTMLInputElement;
+    const rol = rolInput.value;
+    const email = emailInput.value;
+    const contraseña = contraseñaInput.value;
 
-//           {/* ---PRODUCT--- */}
-//           <form className="col-start-1 col-end-3 flex flex-col">
-//             {products.map((product) => (
-//               <ul
-//                 className="mb-4 flex items-center"
-//                 key={`${product.product.id}${id}`}
-//               >
-//                 <li className="ml-4 list-disc">
-//                   ({product.qty}) {product.product.name}
-//                 </li>
-//               </ul>
-//             ))}
-//           </form>
-//           {/* ---BUTTON--- */}
-//           <div className="col-end-3 col-end-4 flex justify-end items-center">
-//             <button
-//               value={buttonStatus}
-//               className={`h-[50px] w-[80%]  rounded-r-[25px] border-[1.5px] ${buttonClasses} `}
-//               onClick={() => {
-//                 handleSendButton();
-//               }}
-//             >
-//               {buttonStatus}
-//             </button>
-//           </div>
-//         </section>
-//       </section>
-//     </main>
-//   );
-// };
+    Swal.fire({
+      html: content,
+      showCloseButton: true,
+      showCancelButton: true,
+      cancelButtonColor: "#C1D78F",
+      confirmButtonColor: "#FF8A8A",
+      confirmButtonText: "Editar",
+      focusConfirm: false,
+      preConfirm: () => {
+        if (rolInput && emailInput) {
+          if (rol && email && contraseña) {
+            return { rol, email, contraseña };
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: "Campos incompletos",
+              confirmButtonColor: "#C1D78F",
+            });
+          }
+        }
+        return null;
+      },
+    }).then((result) => {
+      if (result.isConfirmed && result.value) {
+        // const formData = result.value;
+        const toast = Swal.mixin({
+          toast: true,
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 1500,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener("mouseenter", Swal.stopTimer);
+            toast.addEventListener("mouseleave", Swal.resumeTimer);
+          },
+        });
+
+        toast.fire({
+          icon: "success",
+          title: `<span style="font-size: 1.5rem;">Editado</span>`,
+        });
+        console.log(result);
+        // users.map((user) => {
+        //   patchUsers(user.id, email, contraseña, rol)
+        //     .then((result) => {
+        //       return result;
+        //     })
+        //     .catch((error) => {
+        //       console.error("error", error);
+        //     });
+        // });
+      }
+    });
+  } catch (error) {
+    console.error("Error occurred:", error);
+  }
+
+  return null;
+};
