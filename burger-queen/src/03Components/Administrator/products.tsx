@@ -8,8 +8,6 @@ import trashCan from "../../04Images/trashCan.png";
 import { User } from "../Interfaces";
 import { EditPopup } from "./editPopup";
 import { useEffect, useState } from "react";
-import { addPopup } from "./addPopup";
-import { AddUsersPopup } from "./AddUsersPopup";
 
 export const Workers = () => {
   const [users, setUsers] = useState<User[]>([]);
@@ -25,11 +23,6 @@ export const Workers = () => {
         console.error("error", error);
       });
   }, []);
-
-  const handleAdd = () => {
-    console.log("agregar");
-    AddUsersPopup();
-  };
   const handleEdit = (user: User): void => {
     setSelectedUser(user);
   };
@@ -56,11 +49,10 @@ export const Workers = () => {
       }
     });
   };
-
   return (
     <>
       <div className="flex justify-center">
-        <img src={add} className="h-[90px] w-[90px]" onClick={handleAdd} />
+        <img src={add} className="h-[90px] w-[90px] " />
       </div>
       {users.map((user) => (
         <article

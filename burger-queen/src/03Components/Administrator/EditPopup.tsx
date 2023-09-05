@@ -14,8 +14,8 @@ export const EditPopup: React.FC<EditPopupProps> = ({ user }) => {
         <div class="flex items-center justify-center mb-2">
           <span class="font-bold text-xl mr-2">ROL:</span>
           <select id="rol" class="swal2-input">
-            <option value="Mesero(a)" }>Mesero(a)</option>
-            <option value="Cocinero(a)">Cocinero(a)</option>
+            <option value="mesero" }>Mesero(a)</option>
+            <option value="cocina">Cocinero(a)</option>
             <option value="Administrador(a)">Administrador(a)</option>
           </select>
         </div>
