@@ -6,7 +6,7 @@ import add from "../../04Images/add.png";
 import edit from "../../04Images/edit.png";
 import trashCan from "../../04Images/trashCan.png";
 import { User } from "../Interfaces";
-import { EditPopup } from "./editPopup";
+import { EditPopup } from "./workers/EditPopup";
 import { useEffect, useState } from "react";
 
 export const Workers = () => {

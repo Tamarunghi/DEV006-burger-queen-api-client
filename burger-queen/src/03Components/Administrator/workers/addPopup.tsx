@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2";
-import { postUsers } from "../../02App/postUsers";
+import { postUsers } from "../../../02App/postUsers";
 
 export const addPopup: React.FC = () => {
   const [formData, setFormData] = useState({

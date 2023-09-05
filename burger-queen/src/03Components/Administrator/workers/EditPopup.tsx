@@ -1,6 +1,6 @@
 import Swal from "sweetalert2";
-import { User } from "../Interfaces";
-import { patchUsers } from "../../02App/patchUsers"; // Asegúrate de importar la función de patchUsers
+import { User } from "../../Interfaces";
+import { patchUsers } from "../../../02App/patchUsers"; // Asegúrate de importar la función de patchUsers
 
 interface EditPopupProps {
   user: User;

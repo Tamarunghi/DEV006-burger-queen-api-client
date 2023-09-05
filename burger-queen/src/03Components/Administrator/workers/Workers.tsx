@@ -1,12 +1,12 @@
 import Swal from "sweetalert2";
-import { deleteUsers } from "../../02App/deleteUser";
-import { GetUsers } from "../../02App/getUsers";
-import { patchUsers } from "../../02App/patchUsers";
+import { deleteUsers } from "../../../02App/deleteUser";
+import { GetUsers } from "../../../02App/getUsers";
+import { patchUsers } from "../../../02App/patchUsers";
 import add from "../../04Images/add.png";
 import edit from "../../04Images/edit.png";
 import trashCan from "../../04Images/trashCan.png";
-import { User } from "../Interfaces";
-import { EditPopup } from "./editPopup";
+import { User } from "../../Interfaces";
+import { EditPopup } from "./EditPopup";
 import { useEffect, useState } from "react";
 import { addPopup } from "./addPopup";
 import { AddUsersPopup } from "./AddUsersPopup";
