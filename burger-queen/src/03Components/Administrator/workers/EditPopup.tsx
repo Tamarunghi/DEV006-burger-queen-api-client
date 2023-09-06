@@ -1,12 +1,15 @@
 import Swal from "sweetalert2";
 import { User } from "../../Interfaces";
 import { patchUsers } from "../../../02App/patchUsers"; // Asegúrate de importar la función de patchUsers
+import { GetUsers } from "../../../02App/getUsers";
+import { useEffect } from "react";
 
 interface EditPopupProps {
   user: User;
+  fetchUsers: any;
 }
 
-export const EditPopup: React.FC<EditPopupProps> = ({ user }) => {
+export const EditPopup: React.FC<EditPopupProps> = ({ user, fetchUsers }) => {
   try {
     const content = document.createElement("div");
 
@@ -59,6 +62,8 @@ export const EditPopup: React.FC<EditPopupProps> = ({ user }) => {
                   title: "Usuario editado con éxito",
                   confirmButtonColor: "#C1D78F",
                 });
+                fetchUsers();
+
                 return response;
 
                 // if (response && response.status === 200) {

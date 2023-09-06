@@ -1,7 +1,10 @@
 import Swal from "sweetalert2";
 import { postUsers } from "../../../02App/postUsers";
+interface AddPopupProps {
+  fetchUsers: () => void;
+}
 
-export async function AddUsersPopup() {
+export const AddUsersPopup: React.FC<AddPopupProps> = ({ fetchUsers }) => {
   try {
     const content = document.createElement("div");
 
@@ -53,6 +56,7 @@ export async function AddUsersPopup() {
                   title: "Usuario agregado con éxito",
                   confirmButtonColor: "#C1D78F",
                 });
+                fetchUsers();
                 return resolve;
               })
               .catch((error) => {
@@ -72,4 +76,5 @@ export async function AddUsersPopup() {
   } catch (error) {
     console.error("Error occurred:", error);
   }
-}
+  return null;
+};

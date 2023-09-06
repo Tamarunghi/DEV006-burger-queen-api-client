@@ -1,21 +1,19 @@
 import Swal from "sweetalert2";
 import { deleteUsers } from "../../../02App/deleteUser";
 import { GetUsers } from "../../../02App/getUsers";
-import { patchUsers } from "../../../02App/patchUsers";
-import add from "../../04Images/add.png";
-import edit from "../../04Images/edit.png";
-import trashCan from "../../04Images/trashCan.png";
+import add from "../../../04Images/add.png";
+import edit from "../../../04Images/edit.png";
+import trashCan from "../../../04Images/trashCan.png";
 import { User } from "../../Interfaces";
 import { EditPopup } from "./EditPopup";
 import { useEffect, useState } from "react";
-import { addPopup } from "./addPopup";
 import { AddUsersPopup } from "./AddUsersPopup";
 
 export const Workers = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
 
-  useEffect(() => {
+  const fetchUsers = () => {
     GetUsers()
       .then((data) => {
         console.log("data", data);
@@ -24,11 +22,22 @@ export const Workers = () => {
       .catch((error) => {
         console.error("error", error);
       });
+    console.log("se actuailzi");
+  };
+
+  useEffect(() => {
+    fetchUsers();
   }, []);
 
   const handleAdd = () => {
     console.log("agregar");
-    AddUsersPopup();
+    AddUsersPopup({ fetchUsers })
+      .then((resolve) => {
+        return resolve;
+      })
+      .catch((error) => {
+        console.error("se presento un error", error);
+      });
   };
   const handleEdit = (user: User): void => {
     setSelectedUser(user);
@@ -48,6 +57,7 @@ export const Workers = () => {
         deleteUsers(user.id)
           .then((resolve) => {
             console.log("eliminado");
+            fetchUsers();
             return resolve;
           })
           .catch((error) => {
@@ -95,7 +105,9 @@ export const Workers = () => {
           </div>
         </article>
       ))}
-      {selectedUser && <EditPopup user={selectedUser} />}
+      {selectedUser && (
+        <EditPopup user={selectedUser} fetchUsers={fetchUsers} />
+      )}
     </>
   );
 };
