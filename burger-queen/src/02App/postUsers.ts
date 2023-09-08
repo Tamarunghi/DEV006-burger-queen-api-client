@@ -16,7 +16,7 @@ export function postUsers(email:string, password:string, role:string){
       ),
       })
       .then(response=>{
-        return response.json();
+        return response;
       })
       .catch(error=>{
         console.error("red error",error)

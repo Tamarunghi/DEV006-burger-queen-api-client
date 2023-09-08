@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { LoggedUserAndExist } from "../03Components/LoggedUserAndExist";
 import { LogoPng } from "../03Components/logoComponent";
 import { Background } from "../03Components/Background";
-import { Workers } from "../03Components/Administrator/workers/Workers";
+import { Workers } from "../03Components/Administrator/Workers";
 export const Administrator: React.FC = () => {
   const [selectType, setSelectType] = useState("Trabajadores");
 

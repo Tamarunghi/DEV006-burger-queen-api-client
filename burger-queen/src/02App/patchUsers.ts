@@ -1,5 +1,5 @@
 
-
+import Swal from "sweetalert2";
 export function patchUsers(id: number, email:string, password: string, role:string){
     const token: string = localStorage.getItem("token")!;
     console.log(token);
@@ -17,7 +17,24 @@ export function patchUsers(id: number, email:string, password: string, role:stri
       }),
       })
       .then(response=>{
-        return response.json();
+        //  if (response.status === 200) {
+        //   Swal.fire({
+        //     icon: "success",
+        //     title: "Usuario editado con éxito",
+        //     confirmButtonColor: "#C1D78F",
+        //   });
+        //   console.log("exitoosoooo")
+                    
+        //    } else {
+                 
+        //             Swal.fire({
+        //               icon: "error",
+        //               title: "Error al editar el usuario",
+        //               confirmButtonColor: "#C1D78F",
+        //             });
+        //           }
+        // console.log("status",response.status)
+        return response;
       })
       .catch(error=>{
         console.error("red error",error)
