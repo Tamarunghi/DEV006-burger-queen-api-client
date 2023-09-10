@@ -60,3 +60,10 @@ export interface User {
   role: string;
   email: string;
 }
+
+export interface Product {
+  id: number;
+  name: string;
+  price: number;
+  type: string;
+}

@@ -1,17 +1,17 @@
 
-export function patchUsers(id: number, email:string, password: string, role:string){
+export function patchProducts(id: number, name:string, price: string, type:string){
     const token: string = localStorage.getItem("token")!;
     console.log(token);
-    return(fetch(`http://localhost:8080/users/${id}`,{
+    return(fetch(`http://localhost:8080/products/${id}`,{
          method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + token
               },
       body: JSON.stringify({
-        email: email,
-        password: password,
-        role: role,
+        name: name,
+        price: price,
+        type: type,
        
       }),
       })

@@ -21,6 +21,7 @@ export default {
         brownText: '#65362A',
         darkBrown: '#40160C',
         greenText: '#2A440B',
+        bggray: '#F7ECE2',
         redText: '#7A322E',
         darkGreen: '#162503',
         red: '#E40909',

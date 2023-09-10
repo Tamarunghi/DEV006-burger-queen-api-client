@@ -3,6 +3,7 @@ import { LoggedUserAndExist } from "../03Components/LoggedUserAndExist";
 import { LogoPng } from "../03Components/logoComponent";
 import { Background } from "../03Components/Background";
 import { Workers } from "../03Components/Administrator/Workers";
+import { Products } from "../03Components/Administrator/Products";
 export const Administrator: React.FC = () => {
   const [selectType, setSelectType] = useState("Trabajadores");
 
@@ -62,7 +63,7 @@ export const Administrator: React.FC = () => {
           className=" h-[755px] w-[100%] bg-crema p-[20px] rounded-b-[25px] rounded-tl-[25px] overflow-auto"
         >
           {/* ---Send Buttom--- */}
-          {selectType === "Trabajadores" ? <Workers /> : <div>hola</div>}
+          {selectType === "Trabajadores" ? <Workers /> : <Products />}
         </section>
       </main>
 

@@ -78,7 +78,7 @@ export const Workers = () => {
               // Realiza la solicitud POST aquí utilizando
               postUsers(email, contraseña, rol)
                 .then((resolve) => {
-                  if (resolve && resolve.status === 200) {
+                  if (resolve && resolve.status === 201) {
                     Swal.fire({
                       icon: "success",
                       title: "Usuario agregado con éxito",
