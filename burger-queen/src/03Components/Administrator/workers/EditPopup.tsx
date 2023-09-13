@@ -19,7 +19,7 @@ export const EditPopup: React.FC<EditPopupProps> = ({ user, fetchUsers }) => {
           <select id="rol" class="swal2-input">
             <option value="mesero" }>Mesero(a)</option>
             <option value="cocina">Cocinero(a)</option>
-            <option value="Administrador(a)">Administrador(a)</option>
+            <option value="administrador">Administrador(a)</option>
           </select>
         </div>
         
