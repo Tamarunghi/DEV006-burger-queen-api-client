@@ -47,7 +47,7 @@ export const Products = () => {
               
               <div class="flex items-center justify-center">
                 <span class="font-bold text-xl mr-2">PRODUCTO:</span>
-                <input id="producto" class="text-xl" placeholder="Ingrese el nombre de producto">
+                <input id="producto" class="text-xl"  maxlength="12" placeholder="Ingrese el nombre de producto">
               </div>
               <div class="flex items-center justify-center">
                 <span class="font-bold text-xl mr-2">PRECIO:</span>
