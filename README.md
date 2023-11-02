@@ -2,7 +2,7 @@
 
 ## Índice
 
-* [2. Descrición del producto](#2-Descripcióndelproducto)
+* [1. Descrición del producto](#2-Descripcióndelproducto)
 * [2. Credenciales](#2-Credenciales)
 
 
