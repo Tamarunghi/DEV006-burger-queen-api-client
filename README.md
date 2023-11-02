@@ -4,11 +4,7 @@
 
 * [1. Descripción del producto](#1-Descripción del producto)
 * [2. Credenciales](#2-Credenciales)
-* [3. Objetivos de aprendizaje](#3-objetivos-de-aprendizaje)
-* [4. Consideraciones](#4-consideraciones)
-* [5. Criterios de aceptación del proyecto](#5-criterios-de-aceptación-del-proyecto)
-* [6. Despliegue](#6-despliegue)
-* [7. Pistas / tips](#7-pistas--tips)
+
 
 ***
 
