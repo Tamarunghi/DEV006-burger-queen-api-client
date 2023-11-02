@@ -2,8 +2,6 @@ import Swal from "sweetalert2";
 
 import { GetProducts } from "../../02App/getProduct";
 import addProduct from "../../04Images/addProduct.png";
-import edit from "../../04Images/edit.png";
-import trashCan from "../../04Images/trashCan.png";
 import { IProduct, Product } from "../Interfaces";
 import { useEffect, useState } from "react";
 import { PostProducts } from "../../02App/postProducts";

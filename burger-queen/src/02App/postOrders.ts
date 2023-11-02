@@ -1,7 +1,7 @@
 export function PostOrders(orderData: object){
   const token: string = localStorage.getItem("token")!;
   console.log(token);
-  return(fetch("http://localhost:8080/orders",{
+  return(fetch("https://burger-queen-api-mock-h9bp.onrender.com/orders",{
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

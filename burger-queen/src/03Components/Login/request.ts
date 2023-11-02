@@ -16,7 +16,7 @@ async function requestGet(user: string, password: string): Promise<LoginResponse
   };
 
   try {
-    const response = await fetch("http://localhost:8080/login", {
+    const response = await fetch("https://burger-queen-api-mock-h9bp.onrender.com/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -1,7 +1,7 @@
 export function GetProducts(){
   const token: string = localStorage.getItem("token")!;
   console.log(token);
-  return(fetch("http://localhost:8080/products",{
+  return(fetch("https://burger-queen-api-mock-h9bp.onrender.com/products",{
     method: 'GET',
     headers: {
       'Authorization': 'Bearer ' + token

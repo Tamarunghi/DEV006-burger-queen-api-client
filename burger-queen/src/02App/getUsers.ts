@@ -1,7 +1,7 @@
 export function GetUsers(){
     const token: string = localStorage.getItem("token")!;
     console.log(token);
-    return(fetch("http://localhost:8080/users",{
+    return(fetch("https://burger-queen-api-mock-h9bp.onrender.com/users",{
       method: 'GET',
       headers: {
         'Authorization': 'Bearer ' + token

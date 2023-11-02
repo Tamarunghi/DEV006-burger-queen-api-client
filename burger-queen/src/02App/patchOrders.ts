@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 export function completeOrder(id: number, status:string="Completado"){
     const token: string = localStorage.getItem("token")!;
     console.log(token);
-    return(fetch(`http://localhost:8080/orders/${id}`,{
+    return(fetch(`https://burger-queen-api-mock-h9bp.onrender.com/orders/${id}`,{
          method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',

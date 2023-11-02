@@ -3,7 +3,7 @@
 export function deleteProduct(id: number){
     const token: string = localStorage.getItem("token")!;
     console.log(token);
-    return(fetch(`http://localhost:8080/products/${id}`,{
+    return(fetch(`https://burger-queen-api-mock-h9bp.onrender.com/products/${id}`,{
          method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',

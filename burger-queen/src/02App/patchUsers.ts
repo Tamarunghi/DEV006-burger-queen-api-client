@@ -2,7 +2,7 @@
 export function patchUsers(id: number, email:string, password: string, role:string){
     const token: string = localStorage.getItem("token")!;
     console.log(token);
-    return(fetch(`http://localhost:8080/users/${id}`,{
+    return(fetch(`https://burger-queen-api-mock-h9bp.onrender.com/users/${id}`,{
          method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
